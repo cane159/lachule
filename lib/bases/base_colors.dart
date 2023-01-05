@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'base_extensions.dart';
 
 class BaseColors {
-  static final Color primaryRed = "#C81E2C".toColor();
-  static final Color secondaryRed = "#FF6975".toColor();
-  static const Color white = Colors.white;
-  static final Color textPrimary = "#222D39".toColor();
-  static final Color textContent = "#5F6368".toColor();
-  static final Color tabTitle = "#7C8592".toColor();
-  static final Color btnDisabledPlaceholder = "#9FACBD".toColor();
-  static final Color bgImageInputDisabled = "#E9ECEF".toColor();
-  static final Color btnInput = "#F6F7FA".toColor();
-  static final Color actived = "#0D6EFD".toColor();
-  static final Color trueSuccess = "#2BC016".toColor();
-  static final Color falseError = "#E01E37".toColor();
+  static const Color primaryRed = Color(0xFFC81E2C);
+  static const Color secondaryRed = Color(0xFFFF6975);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color textPrimary = Color(0xFF222D39);
+  static const Color textContent = Color(0xFF5F6368);
+  static const Color tabTitle = Color(0xFF7C8592);
+  static const Color btnDisabledPlaceholder = Color(0xFF9FACBD);
+  static const Color bgImageInputDisabled = Color(0xFFE9ECEF);
+  static const Color btnInput = Color(0xFFF6F7FA);
+  static const Color actived = Color(0xFF0D6EFD);
+  static const Color trueSuccess = Color(0xFF2BC016);
+  static const Color falseError = Color(0xFFE01E37);
+  static const Color bgPrimary = Color(0xFFE5E5E5);
 }
