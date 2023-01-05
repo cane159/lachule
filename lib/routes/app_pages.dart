@@ -5,11 +5,11 @@ import 'package:lachule/views/splash_page.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAl = Routes.SPLASH;
+  static const INITIAl = AppRoutes.SPLASH;
 
   static final routes = [
     GetPage(
-      name: Routes.SPLASH, 
+      name: AppRoutes.SPLASH, 
       page: () => const SplashPage(),
       binding: SplashBinding(),
       transition:  Transition.fade,
