@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: appTheme,
       initialRoute: AppRoutes.SPLASH,
       getPages: AppPages.routes,
-      defaultTransition: Transition.native,
+      defaultTransition: Transition.fade,
       transitionDuration: const Duration(microseconds: 500),
     );
   }
