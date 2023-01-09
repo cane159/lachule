@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lachule/binding/first_menu_binding.dart';
+import 'package:lachule/binding/login_binding.dart';
 import 'package:lachule/binding/splash_binding.dart';
 import 'package:lachule/views/first_menu_page.dart';
+import 'package:lachule/views/login_page.dart';
 import 'package:lachule/views/splash_page.dart';
 part 'app_routes.dart';
 
@@ -20,6 +22,12 @@ class AppPages {
       name: AppRoutes.FIRSTMENU,
       page: () => const FirstMenuPage(),
       binding: FirstMenuBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.LOGIN,
+      page: () => const LoginPage(),
+      binding: LoginBinding(),
       transition: Transition.fadeIn,
     ),
   ];

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
-import 'package:lachule/widgets/button_theme_helper.dart';
+import 'package:lachule/widgets/button/button_theme_helper.dart';
 
-class PrimaryButtonView extends StatelessWidget {
-  const PrimaryButtonView({
+class OutlinedButtonView extends StatelessWidget {
+  const OutlinedButtonView({
     super.key,
     this.title,
     required this.onPressed,
@@ -13,9 +13,12 @@ class PrimaryButtonView extends StatelessWidget {
     this.icon,
     this.isDisable = false,
     this.height = ButtonThemeHelper.normalHeight,
+    this.isBorder = true,
     this.borderSide,
     this.textStyle,
     this.width,
+    this.backgroundColor,
+    this.borderColor,
   });
   final String? title;
   final VoidCallback onPressed;
@@ -24,9 +27,13 @@ class PrimaryButtonView extends StatelessWidget {
   final Widget? icon;
   final bool isDisable;
   final double height;
+
+  final bool isBorder;
   final BorderSide? borderSide;
   final TextStyle? textStyle;
   final double? width;
+  final Color? backgroundColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +47,6 @@ class PrimaryButtonView extends StatelessWidget {
           child: OutlinedButton(
             onPressed: onPressed,
             style: OutlinedButton.styleFrom(
-              foregroundColor: isDisable
-                  ? BaseColors.btnDisabledPlaceholder
-                  : BaseColors.primaryRed,
               fixedSize: icon != null ? Size(height, height) : null,
               minimumSize: icon != null ? Size(height, height) : null,
               padding: ButtonThemeHelper.padding(
@@ -53,41 +57,48 @@ class PrimaryButtonView extends StatelessWidget {
               ),
               backgroundColor: isDisable
                   ? BaseColors.btnDisabledPlaceholder
-                  : BaseColors.primaryRed,
+                  : backgroundColor ?? BaseColors.white,
               side: borderSide ??
-                  BorderSide(
-                    color: isDisable
-                        ? BaseColors.btnDisabledPlaceholder
-                        : BaseColors.primaryRed,
-                  ),
-              shape: const RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                side: BorderSide(
-                  color: BaseColors.primaryRed,
-                ),
-              ),
+                  (isBorder
+                      ? BorderSide(
+                          color: isDisable
+                              ? BaseColors.btnDisabledPlaceholder
+                              : borderColor ?? BaseColors.primaryRed,
+                        )
+                      : null),
+              shape: isBorder
+                  ? const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      side: BorderSide(
+                        color: BaseColors.primaryRed,
+                      ),
+                    )
+                  : null,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (prefixIcon != null) ...[
                   prefixIcon!,
-                  const SizedBox(width: 8)
+                  const SizedBox(width: 4)
                 ],
                 if (icon != null)
-                  icon!
+                  FittedBox(
+                    fit: BoxFit.cover,
+                    child: icon,
+                  )
                 else
                   Text(
                     title ?? '',
                     style: textStyle ??
                         const TextStyle(
                           fontSize: BaseSizes.fontH4,
-                          color: BaseColors.white,
+                          color: BaseColors.primaryRed,
                         ),
                   ),
                 if (suffixIcon != null) ...[
-                  const SizedBox(width: 8),
-                  suffixIcon!
+                  const SizedBox(width: 4),
+                  suffixIcon!,
                 ],
               ],
             ),

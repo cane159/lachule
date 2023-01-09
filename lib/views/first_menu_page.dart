@@ -6,25 +6,27 @@ import 'package:lachule/bases/base_sizes.dart';
 import 'package:lachule/controllers/first_menu_controller.dart';
 import 'package:lachule/routes/app_pages.dart';
 import 'package:lachule/widgets/divider_with_text.dart';
-import 'package:lachule/widgets/outline_button.dart';
-import 'package:lachule/widgets/primary_button.dart';
+import 'package:lachule/widgets/button/outline_button.dart';
+import 'package:lachule/widgets/button/primary_button.dart';
 
 class FirstMenuPage extends GetWidget<FirstMenuController> {
   const FirstMenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        body: SizedBox(
-          width: Get.width,
-          height: Get.height,
-          child: Stack(
-            children: <Widget>[
-              _animatedBg(),
-              _animatedLogo(context),
-              _bottomSheet(),
-            ],
+    return GestureDetector(
+      child: Obx(
+        () => Scaffold(
+          body: SizedBox(
+            width: Get.width,
+            height: Get.height,
+            child: Stack(
+              children: <Widget>[
+                _animatedBg(),
+                _animatedLogo(context),
+                _bottomSheet(),
+              ],
+            ),
           ),
         ),
       ),
@@ -84,7 +86,7 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
     );
   }
 
-  Widget _btnToRegisterButton() {
+  Widget _toRegisterButton() {
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -102,7 +104,7 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
     );
   }
 
-  Widget _btnSkipButton() {
+  Widget _skipButton() {
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -121,13 +123,13 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
     );
   }
 
-  Widget _btnToLoginButton() {
+  Widget _toLoginButton() {
     return SizedBox(
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
         child: PrimaryButtonView(
-          onPressed: () => {},
+          onPressed: () => {Get.toNamed(AppRoutes.LOGIN)},
           title: 'เข้าสู่ระบบ',
           textStyle: const TextStyle(
             fontSize: BaseSizes.fontH4,
@@ -171,12 +173,12 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
               top: false,
               child: Column(
                 children: <Widget>[
-                  _btnToLoginButton(),
+                  _toLoginButton(),
                   const DividerWithText(
                     title: 'หากยังไม่มีบัญชี โปรดกดสมัครใหม่',
                   ),
-                  _btnToRegisterButton(),
-                  _btnSkipButton(),
+                  _toRegisterButton(),
+                  _skipButton(),
                 ],
               ),
             ),
