@@ -4,7 +4,7 @@ import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
 
 class AppTextField extends StatefulWidget {
-  const AppTextField(
+  AppTextField(
     this.controller, {
     Key? key,
     this.labelText,
@@ -17,6 +17,7 @@ class AppTextField extends StatefulWidget {
     this.minLine = 1,
     this.textInputAction,
     this.readOnly = false,
+    this.isObscure = true,
   }) : super(
           key: key,
         );
@@ -31,6 +32,7 @@ class AppTextField extends StatefulWidget {
   final int minLine;
   final TextInputAction? textInputAction;
   final bool readOnly;
+  bool isObscure;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -39,11 +41,10 @@ class AppTextField extends StatefulWidget {
 class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
-    bool? isObscure = widget.canObscure != null ? true : null;
     void onToggleObscure() {
       setState(() {
-        isObscure = !isObscure!;
-        print('in onToggleObscure $isObscure');
+        widget.isObscure = !widget.isObscure!;
+        print('in onToggleObscure ${widget.isObscure}');
       });
     }
 
@@ -52,7 +53,7 @@ class _AppTextFieldState extends State<AppTextField> {
       children: [
         TextField(
           controller: widget.controller,
-          obscureText: isObscure ?? false,
+          obscureText: widget.isObscure ?? false,
           keyboardType: widget.textInputType,
           maxLength: widget.maxLength,
           maxLengthEnforcement:
@@ -83,25 +84,25 @@ class _AppTextFieldState extends State<AppTextField> {
                 const SizedBox(width: 8)
               ],
             ),
-            suffixIcon: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                if (widget.suffixIcon != null) ...[
-                  const SizedBox(width: 16),
-                  widget.suffixIcon!,
-                ],
-                if (widget.canObscure != null) ...[
-                  const SizedBox(width: 16),
-                  IconButton(
-                    onPressed: onToggleObscure,
-                    icon: isObscure! == true
+            suffixIcon: GestureDetector(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (widget.suffixIcon != null) ...[
+                    const SizedBox(width: 16),
+                    widget.suffixIcon!,
+                  ],
+                  if (widget.canObscure != null) ...[
+                    const SizedBox(width: 16),
+                    widget.isObscure == true
                         ? const Icon(Icons.visibility)
                         : const Icon(Icons.visibility_off),
-                  ),
+                  ],
+                  const SizedBox(width: 16)
                 ],
-                const SizedBox(width: 16)
-              ],
+              ),
+              onTap: () => onToggleObscure(),
             ),
           ),
           textInputAction: widget.textInputAction,

@@ -86,7 +86,7 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
     );
   }
 
-  Widget _btnToRegisterButton() {
+  Widget _toRegisterButton() {
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -104,7 +104,7 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
     );
   }
 
-  Widget _btnSkipButton() {
+  Widget _skipButton() {
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -123,7 +123,7 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
     );
   }
 
-  Widget _btnToLoginButton() {
+  Widget _toLoginButton() {
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -173,12 +173,12 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
               top: false,
               child: Column(
                 children: <Widget>[
-                  _btnToLoginButton(),
+                  _toLoginButton(),
                   const DividerWithText(
                     title: 'หากยังไม่มีบัญชี โปรดกดสมัครใหม่',
                   ),
-                  _btnToRegisterButton(),
-                  _btnSkipButton(),
+                  _toRegisterButton(),
+                  _skipButton(),
                 ],
               ),
             ),
