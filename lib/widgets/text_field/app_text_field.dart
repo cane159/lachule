@@ -43,8 +43,7 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     void onToggleObscure() {
       setState(() {
-        widget.isObscure = !widget.isObscure!;
-        print('in onToggleObscure ${widget.isObscure}');
+        widget.isObscure = !widget.isObscure;
       });
     }
 
@@ -53,7 +52,7 @@ class _AppTextFieldState extends State<AppTextField> {
       children: [
         TextField(
           controller: widget.controller,
-          obscureText: widget.isObscure ?? false,
+          obscureText: widget.canObscure != null ? widget.isObscure : false,
           keyboardType: widget.textInputType,
           maxLength: widget.maxLength,
           maxLengthEnforcement:

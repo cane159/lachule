@@ -11,6 +11,7 @@ class SplashPage extends GetWidget<SplashController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.setBuildContext(context);
     return Scaffold(
       body: SizedBox(
         width: Get.width,

@@ -3,6 +3,7 @@ class ImageAssets {
   static const splashBg = "assets/images/splash_bg.png";
   static const firstMenuBg = "assets/images/first_menu_bg.png";
   static const loginBg = "assets/images/login_bg.png";
+  static const userAppbar = "assets/images/user_appbar_image.png";
   ImageAssets._();
 }
 
@@ -10,5 +11,13 @@ class IconAssets {
   static const eye = "assets/icons/eye_icon.png";
   static const lock = "assets/icons/lock_icon.png";
   static const person = "assets/icons/person_icon.png";
+  static const bestSell = "assets/icons/best_sell_icon.png";
+  static const recommend = "assets/icons/recommend_icon.png";
+  static const promotion = "assets/icons/promotion_icon.png";
+  static const home = "assets/icons/home_icon.png";
+  static const message = "assets/icons/message_icon.png";
+  static const setting = "assets/icons/setting_icon.png";
+  static const shop = "assets/icons/shop_icon.png";
+  static const transport = "assets/icons/transport_icon.png";
   IconAssets._();
 }

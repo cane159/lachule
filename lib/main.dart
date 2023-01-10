@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lachule/bases/app_theme.dart';
+import 'package:lachule/binding/main_binding.dart';
 import 'package:lachule/routes/app_pages.dart';
 
 void main() {
@@ -16,10 +17,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: appTheme,
-      initialRoute: AppRoutes.SPLASH,
+      initialRoute: AppPages.INITIAl,
       getPages: AppPages.routes,
       defaultTransition: Transition.fade,
       transitionDuration: const Duration(microseconds: 500),
+      initialBinding: MainBinding(),
     );
   }
 }
