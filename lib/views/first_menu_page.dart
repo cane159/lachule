@@ -73,17 +73,37 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
   }
 
   Widget _animatedBg() {
-    return AnimatedOpacity(
-      opacity: FirstMenuController.state.value ? 0.0 : 1.0,
-      duration: const Duration(seconds: 1),
-      child: SizedBox(
-        width: Get.width,
-        height: Get.height,
-        child: Image.asset(
-          ImageAssets.firstMenuBg,
-          fit: BoxFit.cover,
+    return Stack(
+      children: [
+        AnimatedOpacity(
+          opacity: FirstMenuController.state.value ? 1.0 : 0.0,
+          duration: const Duration(seconds: 1),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Image.asset(
+                  ImageAssets.splashBg,
+                  fit: BoxFit.fitHeight,
+                  width: double.infinity,
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
+        AnimatedOpacity(
+          opacity: FirstMenuController.state.value ? 0.0 : 1.0,
+          duration: const Duration(seconds: 1),
+          child: SizedBox(
+            width: Get.width,
+            height: Get.height,
+            child: Image.asset(
+              ImageAssets.firstMenuBg,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
