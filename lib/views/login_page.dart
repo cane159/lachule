@@ -16,6 +16,7 @@ class LoginPage extends GetWidget<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.setBuildContext(context);
     return DismissibleKeyboard(
       child: SafeArea(
         child: Scaffold(
@@ -143,7 +144,7 @@ class LoginPage extends GetWidget<LoginController> {
     return SizedBox(
       width: double.infinity,
       child: PrimaryButtonView(
-        onPressed: () => {Get.toNamed(AppRoutes.HOME)},
+        onPressed: () => controller.pressLogin(),
         title: 'เข้าสู่ระบบ',
         textStyle: const TextStyle(
           fontSize: BaseSizes.fontH4,

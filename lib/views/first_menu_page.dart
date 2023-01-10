@@ -14,6 +14,7 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.setBuildContext(context);
     return GestureDetector(
       child: Obx(
         () => Scaffold(
