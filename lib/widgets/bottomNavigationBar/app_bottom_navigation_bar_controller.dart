@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
+import 'package:lachule/bases/base_controller.dart';
+import 'package:get/get.dart';
 
-class AppBottomnavigationBarController extends ChangeNotifier {
-  static int _selectIndex = 0;
+class AppBottomnavigationBarController extends BaseController {
+  var _selectIndex = 0.obs;
 
   // List
   final List<BottomNavigationBarItem> _navBarItem = [
@@ -62,10 +64,10 @@ class AppBottomnavigationBarController extends ChangeNotifier {
 
   // Getter
 
-  int get selectIndex => _selectIndex;
+  int get selectIndex => _selectIndex.value;
   List<BottomNavigationBarItem> get navBarItem => _navBarItem;
 
   void onTapped(int index) {
-    _selectIndex = index;
+    _selectIndex.value = index;
   }
 }
