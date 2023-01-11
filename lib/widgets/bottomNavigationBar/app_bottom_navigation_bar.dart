@@ -25,6 +25,7 @@ class AppBottomNavigationBar extends GetView<AppBottomnavigationBarController> {
         showUnselectedLabels: true,
         currentIndex: controller.selectIndex,
         onTap: (index) => controller.onTapped(index),
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }

@@ -3,7 +3,8 @@ import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
 
 ThemeData appTheme = ThemeData(
-        textTheme: textTheme,
+  textTheme: textTheme,
+  fontFamily: 'NotoSansThai',
 );
 
 TextTheme textTheme = const TextTheme(

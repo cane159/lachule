@@ -96,8 +96,8 @@ class HomePage extends GetView<HomeController> {
                           if (loadingProgress == null) return child;
                           return const Center(
                             child: SizedBox(
-                              width: double.infinity,
-                              height: double.infinity,
+                              width: 100,
+                              height: 100,
                               child: CircularProgressIndicator(),
                             ),
                           );

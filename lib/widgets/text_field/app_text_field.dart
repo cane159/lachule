@@ -72,6 +72,7 @@ class _AppTextFieldState extends State<AppTextField> {
             alignLabelWithHint: true,
             suffixIconConstraints: const BoxConstraints(minHeight: 16),
             prefixIconConstraints: const BoxConstraints(minHeight: 16),
+            constraints: const BoxConstraints(minHeight: 50),
             counterText: '',
             prefixIcon: Row(
               mainAxisSize: MainAxisSize.min,

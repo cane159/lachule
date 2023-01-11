@@ -79,6 +79,8 @@ class ItemCarousel extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Container(
+                            height: 142,
+                            width: 142,
                             color: BaseColors.bgImageInputDisabled,
                             child: Image.network(
                               data.image,
@@ -90,10 +92,10 @@ class ItemCarousel extends StatelessWidget {
                                 if (loadingProgress == null) return child;
                                 return const Center(
                                   child: SizedBox(
-                                    height: 142,
-                                    width: 142,
+                                    height: 100,
+                                    width: 100,
                                     child: CircularProgressIndicator(
-                                      strokeWidth: 8,
+                                      strokeWidth: 4,
                                     ),
                                   ),
                                 );
