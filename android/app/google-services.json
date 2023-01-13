@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "174464349872",
+    "project_id": "pushgears-dev",
+    "storage_bucket": "pushgears-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174464349872:android:5dab2b54db221432796d75",
+        "android_client_info": {
+          "package_name": "com.example.lachule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174464349872-k5a930u7g1mgclct8plo18klomateako.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC26kJrxf3bcJVcTsLScVtL00BWpHqXnuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174464349872-k5a930u7g1mgclct8plo18klomateako.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -84,7 +84,7 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
               children: [
                 Image.asset(
                   ImageAssets.splashBg,
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fitWidth,
                   width: double.infinity,
                 ),
               ],
@@ -94,12 +94,14 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
         AnimatedOpacity(
           opacity: FirstMenuController.state.value ? 0.0 : 1.0,
           duration: const Duration(seconds: 1),
-          child: SizedBox(
+          child: Container(
+            alignment: Alignment.topCenter,
             width: Get.width,
             height: Get.height,
             child: Image.asset(
               ImageAssets.firstMenuBg,
-              fit: BoxFit.cover,
+              width: double.infinity,
+              fit: BoxFit.fitWidth,
             ),
           ),
         ),
