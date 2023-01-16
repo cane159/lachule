@@ -10,22 +10,43 @@ class AppBottomNavigationBar extends GetView<AppBottomnavigationBarController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => BottomNavigationBar(
-        items: controller.navBarItem,
-        selectedItemColor: BaseColors.primaryRed,
-        unselectedItemColor: BaseColors.btnDisabledPlaceholder,
-        selectedLabelStyle: const TextStyle(
-          color: BaseColors.primaryRed,
-          fontSize: BaseSizes.fontH3,
+      () => Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              spreadRadius: 8,
+              blurRadius: 7,
+              offset: const Offset(0, -1),
+            ),
+          ],
         ),
-        unselectedLabelStyle: const TextStyle(
-          color: BaseColors.btnDisabledPlaceholder,
-          fontSize: BaseSizes.fontH3,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+          child: BottomNavigationBar(
+            items: controller.navBarItem,
+            selectedItemColor: BaseColors.primaryRed,
+            unselectedItemColor: BaseColors.btnDisabledPlaceholder,
+            selectedLabelStyle: const TextStyle(
+              color: BaseColors.primaryRed,
+              fontSize: BaseSizes.fontH3,
+            ),
+            unselectedLabelStyle: const TextStyle(
+              color: BaseColors.btnDisabledPlaceholder,
+              fontSize: BaseSizes.fontH3,
+            ),
+            showUnselectedLabels: true,
+            currentIndex: controller.selectIndex,
+            onTap: (index) => controller.onTapped(index),
+            type: BottomNavigationBarType.fixed,
+          ),
         ),
-        showUnselectedLabels: true,
-        currentIndex: controller.selectIndex,
-        onTap: (index) => controller.onTapped(index),
-        type: BottomNavigationBarType.fixed,
       ),
     );
   }
