@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:lachule/app.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:lachule/binding/global_binding.dart';
 import 'firebase_options.dart';
 
 Future<void> _firebaseMessageingBackgroundHandler(RemoteMessage message) async {
@@ -11,6 +12,7 @@ Future<void> _firebaseMessageingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GlobalBinding().init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

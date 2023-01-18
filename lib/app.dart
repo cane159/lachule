@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:lachule/bases/app_theme.dart';
 import 'package:lachule/binding/main_binding.dart';
 import 'package:lachule/routes/app_pages.dart';
+import 'package:lachule/service/app_service.dart';
+import 'package:lachule/service/notification_servide.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -19,6 +21,7 @@ class _AppState extends State<App> {
   String? mToken;
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  final NotificationService _notiService = Get.find();
 
   @override
   void initState() {
@@ -58,6 +61,16 @@ class _AppState extends State<App> {
         mToken = token;
         print('My token is ${mToken}');
       });
+      // AppService.call(
+      //   context: Get.context!,
+      //   request: _notiService.createDevice(deviceToken: token ?? ''),
+      //   onSuccess: (response) async {
+      //     print('================Success push device================');
+      //   },
+      //   onFail: (response) async {
+      //     print('================Fail push device================');
+      //   },
+      // );
       saveToken(token!);
     });
   }
