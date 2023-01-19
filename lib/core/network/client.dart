@@ -28,7 +28,7 @@ class Client {
       //dev
       //baseUrl: "http://83.118.28.49/dev/psgt/public/api/v1",
       //uat
-      baseUrl: "https://test.push-gears-mk2.appspot.com/",
+      baseUrl: "http://test.push-gears-mk2.appspot.com/",
       connectTimeout: CONNECT_TIMEOUT,
       receiveTimeout: RECEIVE_TIMEOUT,
     );
@@ -180,10 +180,6 @@ class Client {
         options: Options(
           method: method,
           headers: {
-            if (isMediaTypeAccept)
-              "Accept": isFormUrlEncoded
-                  ? 'application/json'
-                  : Headers.formUrlEncodedContentType,
             "Content-Type": isFormUrlEncoded
                 ? Headers.formUrlEncodedContentType
                 : 'application/json',
