@@ -7,7 +7,7 @@ class Config {
   static Config? _instance = Config._();
   static Config get instance => _instance ??= Config._();
   String _devEnv = DevEnvironment.dev;
-  Environment? _env;
+  //Environment? _env;
 
   String? app;
   String? pushgearsAppId;
@@ -22,7 +22,7 @@ class Config {
   Future<void> _initEnvironment({String? env}) async {
     _devEnv = env ?? DevEnvironment.dev;
     await _loadData(_devEnv);
-    _env = Environment.fromJson(dotenv.env);
+    //_env = Environment.fromJson(dotenv.env);
   }
 
   Future<void> _loadData(String env) async {
@@ -49,5 +49,5 @@ class Config {
   static const String keyPushgearsAppSecret = 'pushgears_app_secret';
   static const String keyPushgearsAppPrefix = 'pushgears_app_prefix';
   static String get devEnv => instance._devEnv;
-  static Environment get env => instance._env!;
+  //static Environment get env => instance._env!;
 }

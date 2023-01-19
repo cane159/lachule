@@ -1,13 +1,11 @@
-// ignore_for_file: constant_identifier_names
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
-import 'package:lachule/config/config.dart';
 import 'package:lachule/storage/app_prefs.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Client {
-  static const int CONNECT_TIMEOUT = 30 * 1000;
-  static const int RECEIVE_TIMEOUT = 30 * 1000;
+  static const int CONNECT_TIMEOUT = 35 * 1000;
+  static const int RECEIVE_TIMEOUT = 35 * 1000;
 
   static const String GET = 'get';
   static const String POST = 'post';
@@ -26,10 +24,11 @@ class Client {
     // set options
     _dio.options = BaseOptions(
       //pod
-      //baseUrl: "",
+      //baseUrl: "http://83.118.28.49/psgt/public/api/v1",
       //dev
-      baseUrl: Config.env.baseUrl,
+      //baseUrl: "http://83.118.28.49/dev/psgt/public/api/v1",
       //uat
+      baseUrl: "https://test.push-gears-mk2.appspot.com/",
       connectTimeout: CONNECT_TIMEOUT,
       receiveTimeout: RECEIVE_TIMEOUT,
     );
@@ -56,7 +55,7 @@ class Client {
     Map<String, dynamic>? headers,
     bool isAuth = false,
     bool isFormUrlEncoded = false,
-    bool isMediaTypeAccept = false,
+    bool isMediaTypeAccept = true,
   }) async {
     return _request(
       url,
@@ -166,14 +165,13 @@ class Client {
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     bool isAuth = false,
-    bool isFormUrlEncoded = true,
+    bool isFormUrlEncoded = false,
     bool isMediaTypeAccept = true,
   }) async {
     try {
-      final token =
-          isAuth ? _appPrefs.accessToken.value : _appPrefs.registerToken.value;
-      // final locale = _appPrefs.locale.value;
-      // final xApiKey = "iG7u0FEB2b7FY1uQSPKmaT73PVMAo7Ah";
+      final token = isAuth ? _appPrefs.accessToken.value : null;
+      final locale = _appPrefs.locale.value;
+      final xApiKey = "iG7u0FEB2b7FY1uQSPKmaT73PVMAo7Ah";
 
       Response response = await _dio.request(
         url,
@@ -189,10 +187,10 @@ class Client {
             "Content-Type": isFormUrlEncoded
                 ? Headers.formUrlEncodedContentType
                 : 'application/json',
-            // 'x-api-key': xApiKey,
-            if (token != null) 'Authorization': "Bearer $token",
-            // if (locale != null) 'locale': locale,
-            // if (headers != null) ...headers,
+            'x-api-key': xApiKey,
+            if (token != null) 'Authorization': "Bearer " + token,
+            if (locale != null) 'locale': locale,
+            if (headers != null) ...headers,
           },
         ),
         cancelToken: cancelToken,

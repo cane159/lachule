@@ -61,16 +61,19 @@ class _AppState extends State<App> {
         mToken = token;
         print('My token is ${mToken}');
       });
-      // AppService.call(
-      //   context: Get.context!,
-      //   request: _notiService.createDevice(deviceToken: token ?? ''),
-      //   onSuccess: (response) async {
-      //     print('================Success push device================');
-      //   },
-      //   onFail: (response) async {
-      //     print('================Fail push device================');
-      //   },
-      // );
+      AppService.call(
+        context: Get.context!,
+        request: _notiService.createDevice(
+          userID: 'pushgears_dev_1234',
+          deviceToken: token ?? '',
+        ),
+        onSuccess: (response) async {
+          print('================Success push device================');
+        },
+        onFail: (response) async {
+          print('================Fail push device================');
+        },
+      );
       saveToken(token!);
     });
   }
