@@ -1,27 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:lachule/bases/app_theme.dart';
-import 'package:lachule/binding/main_binding.dart';
-import 'package:lachule/routes/app_pages.dart';
+import 'package:lachule/app.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:lachule/binding/global_binding.dart';
+import 'firebase_options.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+Future<void> _firebaseMessageingBackgroundHandler(RemoteMessage message) async {
+  print('Handling a background message ${message.messageId}');
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      theme: appTheme,
-      initialRoute: AppPages.INITIAl,
-      getPages: AppPages.routes,
-      defaultTransition: Transition.fade,
-      transitionDuration: const Duration(microseconds: 500),
-      initialBinding: MainBinding(),
-    );
-  }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GlobalBinding().init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseMessaging.instance.getInitialMessage();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessageingBackgroundHandler);
+  runApp(const App());
 }

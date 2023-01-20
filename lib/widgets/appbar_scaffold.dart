@@ -27,6 +27,8 @@ class AppBarScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBody: true,
         body: body,
         appBar: AppBar(
           leadingWidth: 51,
@@ -59,6 +61,6 @@ class AppBarScaffold extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: AppBottomNavigationBar(),
+        bottomNavigationBar: const AppBottomNavigationBar(),
       );
 }

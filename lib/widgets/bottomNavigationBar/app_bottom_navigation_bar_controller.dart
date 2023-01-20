@@ -4,9 +4,10 @@ import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_controller.dart';
 import 'package:get/get.dart';
+import 'package:lachule/routes/app_pages.dart';
 
 class AppBottomnavigationBarController extends BaseController {
-  var _selectIndex = 0.obs;
+  final _selectIndex = 0.obs;
 
   // List
   final List<BottomNavigationBarItem> _navBarItem = [
@@ -69,5 +70,13 @@ class AppBottomnavigationBarController extends BaseController {
 
   void onTapped(int index) {
     _selectIndex.value = index;
+
+    // TODO : impremention list value app route
+    if (index == 0) {
+      Get.offAndToNamed(AppRoutes.HOME);
+    }
+    if (index == 3) {
+      Get.offAndToNamed(AppRoutes.NOTIFICATION);
+    }
   }
 }

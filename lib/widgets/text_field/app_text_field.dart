@@ -79,28 +79,34 @@ class _AppTextFieldState extends State<AppTextField> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 if (widget.prefixIcon != null) ...[
-                  widget.prefixIcon!,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: widget.prefixIcon!,
+                  ),
                 ],
                 const SizedBox(width: 8)
               ],
             ),
             suffixIcon: GestureDetector(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  if (widget.suffixIcon != null) ...[
-                    const SizedBox(width: 16),
-                    widget.suffixIcon!,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    if (widget.suffixIcon != null) ...[
+                      const SizedBox(width: 16),
+                      widget.suffixIcon!,
+                    ],
+                    if (widget.canObscure != null) ...[
+                      const SizedBox(width: 16),
+                      widget.isObscure == true
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off),
+                    ],
+                    const SizedBox(width: 16)
                   ],
-                  if (widget.canObscure != null) ...[
-                    const SizedBox(width: 16),
-                    widget.isObscure == true
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                  ],
-                  const SizedBox(width: 16)
-                ],
+                ),
               ),
               onTap: () => onToggleObscure(),
             ),
