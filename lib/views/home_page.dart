@@ -24,18 +24,20 @@ class HomePage extends GetView<HomeController> {
             actions: <Widget>[
               Image.asset(ImageAssets.userAppbar),
             ],
-            body: SingleChildScrollView(
-              child: Stack(
-                children: [
-                  _imageCarouselBg(),
-                  _appbarBg(),
-                  Column(
-                    children: <Widget>[
-                      _imageCarousel(context),
-                      _goodsSection(),
-                    ],
-                  ),
-                ],
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Stack(
+                  children: [
+                    _imageCarouselBg(),
+                    _appbarBg(),
+                    Column(
+                      children: <Widget>[
+                        _imageCarousel(context),
+                        _goodsSection(),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

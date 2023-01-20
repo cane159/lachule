@@ -35,11 +35,11 @@ class AppBottomNavigationBar extends GetView<AppBottomnavigationBarController> {
             unselectedItemColor: BaseColors.btnDisabledPlaceholder,
             selectedLabelStyle: const TextStyle(
               color: BaseColors.primaryRed,
-              fontSize: BaseSizes.fontH3,
+              fontSize: BaseSizes.fontBody2,
             ),
             unselectedLabelStyle: const TextStyle(
               color: BaseColors.btnDisabledPlaceholder,
-              fontSize: BaseSizes.fontH3,
+              fontSize: 10,
             ),
             showUnselectedLabels: true,
             currentIndex: controller.selectIndex,

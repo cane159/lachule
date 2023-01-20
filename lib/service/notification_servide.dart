@@ -26,4 +26,15 @@ class NotificationService {
       rethrow;
     }
   }
+
+  Future<PushGearResponse> getHistory() async {
+    try {
+      final response = await _client.get(
+        '/push_message/?user=pushgears_dev_1234',
+      );
+      return PushGearResponse.fromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
