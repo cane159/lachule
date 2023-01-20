@@ -19,5 +19,8 @@ class IconAssets {
   static const setting = "assets/icons/setting_icon.png";
   static const shop = "assets/icons/shop_icon.png";
   static const transport = "assets/icons/transport_icon.png";
+  static const colorsWatch = "assets/icons/colorswatch_icon.png";
+  static const bagHappy = "assets/icons/baghappy_icon.png";
+  static const moneySend = "assets/icons/moneysend_icon.png";
   IconAssets._();
 }

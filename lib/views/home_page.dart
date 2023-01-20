@@ -163,6 +163,8 @@ class HomePage extends GetView<HomeController> {
             header: 'สินค้าขายดี',
             leadingIcon: IconAssets.bestSell,
             carouselItem: controller.bestSellGoodsList,
+            onPressed: () => controller.pressProduct(),
+            pressItem: () => controller.pressProduct(),
           ),
           ItemCarousel(
             header: 'สินค้าแนะนำ',

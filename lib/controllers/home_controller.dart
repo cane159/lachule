@@ -3,6 +3,7 @@ import 'package:lachule/bases/base_controller.dart';
 import 'package:lachule/models/best_sell_goods_model.dart';
 import 'package:lachule/models/promotion_model.dart';
 import 'package:lachule/models/recommend_goods_medel.dart';
+import 'package:lachule/routes/app_pages.dart';
 
 class HomeController extends BaseController {
   @override
@@ -432,4 +433,8 @@ class HomeController extends BaseController {
   List<PromotionModel> get promotionList => _promotionList;
   List<BestSellGoodsModel> get bestSellGoodsList => _bestSellGoodsList;
   List<RecommendGoodsModel> get recommendGoodsList => _recommendGoodsList;
+
+  void pressProduct() {
+    Get.toNamed(AppRoutes.PRODUCTDETAIL);
+  }
 }
