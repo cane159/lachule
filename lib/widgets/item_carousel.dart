@@ -10,6 +10,7 @@ class ItemCarousel extends StatelessWidget {
     this.header,
     this.leadingIcon,
     this.onPressed,
+    this.pressItem,
     required this.carouselItem,
     this.options,
   });
@@ -17,6 +18,7 @@ class ItemCarousel extends StatelessWidget {
   final String? header;
   final String? leadingIcon;
   final VoidCallback? onPressed;
+  final VoidCallback? pressItem;
   final List carouselItem;
   final CarouselOptions? options;
 
@@ -68,66 +70,84 @@ class ItemCarousel extends StatelessWidget {
         ),
         SizedBox(
           width: double.infinity,
-          child: CarouselSlider(
-            items: carouselItem
-                .map(
-                  (data) => SizedBox(
-                    width: 142,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Container(
-                            height: 142,
-                            width: 142,
-                            color: BaseColors.bgImageInputDisabled,
-                            child: Image.network(
-                              data.image,
+          child: ElevatedButton(
+            onPressed: pressItem,
+            style: ButtonStyle(
+              elevation: MaterialStateProperty.all(0),
+              backgroundColor: MaterialStateProperty.all(Colors.transparent),
+            ),
+            child: CarouselSlider(
+              items: carouselItem
+                  .map(
+                    (data) => SizedBox(
+                      width: 142,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
                               height: 142,
                               width: 142,
-                              fit: BoxFit.fitHeight,
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return const Center(
-                                  child: SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 4,
+                              color: BaseColors.bgImageInputDisabled,
+                              child: Image.network(
+                                data.image,
+                                height: 142,
+                                width: 142,
+                                fit: BoxFit.fitHeight,
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return const Center(
+                                    child: SizedBox(
+                                      height: 50,
+                                      width: 50,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 4,
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const Center(
+                                    child: SizedBox(
+                                      height: 50,
+                                      width: 50,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 4,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 9,
-                        ),
-                        Text(
-                          data.title,
-                          style: const TextStyle(
-                            color: BaseColors.textPrimary,
-                            fontSize: BaseSizes.fontBody1,
-                            height: 1.4,
+                          const SizedBox(
+                            height: 9,
                           ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
+                          Text(
+                            data.title,
+                            style: const TextStyle(
+                              color: BaseColors.textPrimary,
+                              fontSize: BaseSizes.fontBody1,
+                              height: 1.4,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
                     ),
+                  )
+                  .toList(),
+              options: options ??
+                  CarouselOptions(
+                    viewportFraction: 0.4,
+                    enableInfiniteScroll: false,
+                    padEnds: false,
                   ),
-                )
-                .toList(),
-            options: options ??
-                CarouselOptions(
-                  viewportFraction: 0.4,
-                  enableInfiniteScroll: false,
-                  padEnds: false,
-                ),
+            ),
           ),
         )
       ],

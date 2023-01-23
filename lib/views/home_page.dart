@@ -104,6 +104,17 @@ class HomePage extends GetView<HomeController> {
                             ),
                           );
                         },
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Center(
+                            child: SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 4,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   )
@@ -163,6 +174,8 @@ class HomePage extends GetView<HomeController> {
             header: 'สินค้าขายดี',
             leadingIcon: IconAssets.bestSell,
             carouselItem: controller.bestSellGoodsList,
+            onPressed: () => controller.pressProduct(),
+            pressItem: () => controller.pressProduct(),
           ),
           ItemCarousel(
             header: 'สินค้าแนะนำ',
