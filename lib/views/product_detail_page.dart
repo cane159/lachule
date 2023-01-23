@@ -5,17 +5,22 @@ import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
 import 'package:lachule/controllers/product_detail_controller.dart';
 import 'package:lachule/widgets/button/go_back_button.dart';
+import 'package:lachule/widgets/button/outline_button.dart';
+import 'package:lachule/widgets/button/primary_button.dart';
 
 class ProductDetailPage extends GetView<ProductDetailController> {
   const ProductDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: BaseColors.btnInput,
-      appBar: _appbar(),
-      body: SingleChildScrollView(
-        child: _bodyContent(),
+    return Obx(
+      () => Scaffold(
+        backgroundColor: BaseColors.btnInput,
+        appBar: _appbar(),
+        body: SingleChildScrollView(
+          child: _bodyContent(context),
+        ),
+        bottomNavigationBar: _bottomNavBar(),
       ),
     );
   }
@@ -44,39 +49,65 @@ class ProductDetailPage extends GetView<ProductDetailController> {
   }
 
   Widget _bottomNavBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 22,
-        vertical: 14,
+    return ClipRRect(
+      borderRadius: const BorderRadius.vertical(
+        top: Radius.circular(20),
       ),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 22,
+          vertical: 14,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            spreadRadius: 8,
-            blurRadius: 7,
-            offset: const Offset(0, -1),
+        decoration: BoxDecoration(
+          color: BaseColors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
-        ],
-      ),
-      child: Row(
-        children: [
-          OutlinedButton(
-            onPressed: () => {},
-            child: Row(
-              children: [],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              spreadRadius: 8,
+              blurRadius: 7,
+              offset: const Offset(0, -1),
             ),
-          )
-        ],
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: OutlinedButtonView(
+                onPressed: () => {},
+                title: 'ใส่ตะกร้าสินค้า',
+                prefixIcon: Image.asset(
+                  IconAssets.bagHappy,
+                ),
+                borderColor: BaseColors.btnDisabledPlaceholder,
+                textStyle: const TextStyle(
+                  fontSize: BaseSizes.fontH4,
+                  color: BaseColors.textPrimary,
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 11,
+            ),
+            Expanded(
+              child: PrimaryButtonView(
+                onPressed: () => {},
+                title: 'ซื้อสินค้า',
+                prefixIcon: Image.asset(
+                  IconAssets.moneySend,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _bodyContent() {
+  Widget _bodyContent(BuildContext context) {
     return Column(
       children: <Widget>[
         Row(
@@ -89,12 +120,23 @@ class ProductDetailPage extends GetView<ProductDetailController> {
               width: 275,
               height: 275,
               child: Image.network(
-                'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1674432000&Signature=psRgkwlmJd9jsqnI3ozvK820Frd-sAnrwnxZiDa-zBMyZBmpjIoukz7z8k3nDH7qnB~pwm2mZudo5fHdAUgRosDTlI6cISsGogEMODKBrMdeYkPJC~-yJ8KmWp~cgoMywa1AUbcj3MK7G8myEdLOgsH7ICdBiKekkLwm3K8aMqASSI0OskYioQvXWBpYRSBD6Ugd5Emygpx186QycvvmFWp0JtAskRW3kHRKkMxZ8h1fVZcnUVzadZjiNDTuppmT3imiuSVgprK4I1DOwRAPzHMiL96ZohMsk5HgS7hRyEWvr2o05IgRydH~bOIYFACbWwRaZLEZfAiJf4bTTB~DiA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+                controller.produceDetail.image,
                 height: 142,
                 width: 142,
                 fit: BoxFit.fitWidth,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
+                  return const Center(
+                    child: SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 4,
+                      ),
+                    ),
+                  );
+                },
+                errorBuilder: (context, error, stackTrace) {
                   return const Center(
                     child: SizedBox(
                       height: 50,
@@ -125,10 +167,10 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                 child: Column(
                   children: [
                     Row(
-                      children: const [
+                      children: [
                         Text(
-                          'นาโน แอคเน่ ครีม จีพีโฟร์จี',
-                          style: TextStyle(
+                          controller.produceDetail.title,
+                          style: const TextStyle(
                             color: BaseColors.textPrimary,
                             fontSize: 21,
                           ),
@@ -155,7 +197,9 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                         ),
                       ],
                     ),
-                    const Divider(),
+                    const Divider(
+                      thickness: 1.5,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
@@ -177,17 +221,17 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
-                          '฿ 1,600.00',
-                          style: TextStyle(
+                          '฿ ${controller.productPrice}',
+                          style: const TextStyle(
                             color: BaseColors.textPrimary,
                             fontSize: 24,
                           ),
                         ),
                         Text(
-                          '50',
-                          style: TextStyle(
+                          controller.produceDetail.point.toString(),
+                          style: const TextStyle(
                             color: BaseColors.textPrimary,
                             fontSize: 24,
                           ),
@@ -197,11 +241,167 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                   ],
                 ),
               ),
-              const Divider(),
+              const Divider(
+                thickness: 1.5,
+              ),
+              _descriptionBar(),
+              if (controller.descriptionIndex == 0) ...[
+                _descriptionBody(),
+              ] else if (controller.descriptionIndex == 1) ...[
+                _specificationsBody(),
+              ] else if (controller.descriptionIndex == 2) ...[
+                _howToUseBody(),
+              ]
             ],
           ),
         ),
       ],
+    );
+  }
+
+  Widget _descriptionBar() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: BaseColors.white,
+              elevation: 0,
+            ),
+            onPressed: () => controller.pressDescription(0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 3,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: controller.descriptionIndex == 0
+                    ? BaseColors.primaryRed
+                    : BaseColors.white,
+              ),
+              child: Text(
+                'รายละเอียด',
+                style: TextStyle(
+                  fontSize: BaseSizes.fontBody1,
+                  color: controller.descriptionIndex == 0
+                      ? BaseColors.white
+                      : BaseColors.btnDisabledPlaceholder,
+                ),
+                maxLines: 1,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: BaseColors.white,
+              elevation: 0,
+            ),
+            onPressed: () => controller.pressDescription(1),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 3,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: controller.descriptionIndex == 1
+                    ? BaseColors.primaryRed
+                    : BaseColors.white,
+              ),
+              child: Text(
+                'ข้อมูลจำเพาะ',
+                style: TextStyle(
+                  fontSize: BaseSizes.fontBody1,
+                  color: controller.descriptionIndex == 1
+                      ? BaseColors.white
+                      : BaseColors.btnDisabledPlaceholder,
+                ),
+                maxLines: 1,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: BaseColors.white,
+              elevation: 0,
+            ),
+            onPressed: () => controller.pressDescription(2),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 3,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: controller.descriptionIndex == 2
+                    ? BaseColors.primaryRed
+                    : BaseColors.white,
+              ),
+              child: Text(
+                'วิธีใช้งาน',
+                style: TextStyle(
+                  fontSize: BaseSizes.fontBody1,
+                  color: controller.descriptionIndex == 2
+                      ? BaseColors.white
+                      : BaseColors.btnDisabledPlaceholder,
+                ),
+                maxLines: 1,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _descriptionBody() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 22,
+      ),
+      child: Text(
+        controller.produceDetail.description,
+        style: const TextStyle(
+          fontSize: BaseSizes.fontBody1,
+          color: BaseColors.textPrimary,
+        ),
+        textAlign: TextAlign.justify,
+      ),
+    );
+  }
+
+  Widget _specificationsBody() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 22,
+      ),
+      child: Text(
+        controller.produceDetail.specifications,
+        style: const TextStyle(
+          fontSize: BaseSizes.fontBody1,
+          color: BaseColors.textPrimary,
+        ),
+        textAlign: TextAlign.justify,
+      ),
+    );
+  }
+
+  Widget _howToUseBody() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 22,
+      ),
+      child: Text(
+        controller.produceDetail.howToUse,
+        style: const TextStyle(
+          fontSize: BaseSizes.fontBody1,
+          color: BaseColors.textPrimary,
+        ),
+        textAlign: TextAlign.justify,
+      ),
     );
   }
 }

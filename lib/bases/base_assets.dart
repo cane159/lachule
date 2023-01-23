@@ -18,6 +18,10 @@ class IconAssets {
   static const message = "assets/icons/message_icon.png";
   static const setting = "assets/icons/setting_icon.png";
   static const shop = "assets/icons/shop_icon.png";
+  static const homeFill = "assets/icons/home_icon_fill.png";
+  static const messageFill = "assets/icons/message_icon_fill.png";
+  static const settingFill = "assets/icons/setting_icon_fill.png";
+  static const shopFill = "assets/icons/shop_icon_fill.png";
   static const transport = "assets/icons/transport_icon.png";
   static const colorsWatch = "assets/icons/colorswatch_icon.png";
   static const bagHappy = "assets/icons/baghappy_icon.png";
