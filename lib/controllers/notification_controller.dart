@@ -9,7 +9,7 @@ class NotificationController extends BaseController {
   @override
   void onInit() {
     // TODO: implement onInit
-    startLoading();
+    //startLoading();
     // AppService.call(
     //   context: Get.context!,
     //   request: _notiService.getHistory(),
@@ -21,8 +21,13 @@ class NotificationController extends BaseController {
     //   },
     // );
     //stopLoad();
+    print('object');
     super.onInit();
   }
 
   void _fetchNotiHistory() {}
+
+  void test() {
+    print("test");
+  }
 }

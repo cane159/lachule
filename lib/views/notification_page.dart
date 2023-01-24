@@ -10,6 +10,7 @@ class NotificationPage extends GetView<NotificationController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.setBuildContext(context);
     return Scaffold(
       body: SafeArea(
         child: Stack(
