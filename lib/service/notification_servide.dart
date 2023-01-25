@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:lachule/core/network/client.dart';
 import 'package:lachule/models/app_response.dart';
+import 'package:lachule/models/pushgear_history.dart';
 import 'package:lachule/models/pushgear_response.dart';
 
 class NotificationService {
@@ -27,12 +28,12 @@ class NotificationService {
     }
   }
 
-  Future<PushGearResponse> getHistory() async {
+  Future<PushgearsHistory> getHistory() async {
     try {
       final response = await _client.get(
         '/push_message/?user=pushgears_dev_1234',
       );
-      return PushGearResponse.fromJson(response);
+      return PushgearsHistory.fromJson(response);
     } catch (e) {
       rethrow;
     }

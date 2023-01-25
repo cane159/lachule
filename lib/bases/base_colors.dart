@@ -14,4 +14,5 @@ class BaseColors {
   static const Color trueSuccess = Color(0xFF2BC016);
   static const Color falseError = Color(0xFFE01E37);
   static const Color bgPrimary = Color(0xFFF5F7FA);
+  static const Color borderColor = Color(0xFFDEDEDE);
 }

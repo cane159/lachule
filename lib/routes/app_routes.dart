@@ -5,6 +5,7 @@ abstract class AppRoutes {
   static const String FIRSTMENU = '/first_menu';
   static const String LOGIN = '/login';
   static const String HOME = '/home';
+  static const String HOMEPAGEVIEW = '/home_page_view';
   static const String NOTIFICATION = '/notification';
   static const String PRODUCTDETAIL = '/product_detail';
 }
