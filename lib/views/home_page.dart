@@ -161,6 +161,7 @@ class HomePage extends GetView<HomeController> {
             header: 'โปรโมชั่น',
             leadingIcon: IconAssets.promotion,
             carouselItem: controller.promotionList,
+            pressItem: () => controller.pressPromotion(),
           ),
           ItemCarousel(
             header: 'สินค้าขายดี',
