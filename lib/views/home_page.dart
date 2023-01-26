@@ -19,26 +19,18 @@ class HomePage extends GetView<HomeController> {
     return Obx(
       () => DismissibleKeyboard(
         child: SafeArea(
-          child: AppBarScaffold(
-            title: 'คุณ${controller.userFirstName} ${controller.userLastName}',
-            actions: <Widget>[
-              Image.asset(ImageAssets.userAppbar),
-            ],
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    _imageCarouselBg(),
-                    _appbarBg(),
-                    Column(
-                      children: <Widget>[
-                        _imageCarousel(context),
-                        _goodsSection(),
-                      ],
-                    ),
+          child: SingleChildScrollView(
+            child: Stack(
+              children: [
+                _imageBg(),
+                _appbarBg(),
+                Column(
+                  children: <Widget>[
+                    _imageCarousel(context),
+                    _goodsSection(),
                   ],
                 ),
-              ),
+              ],
             ),
           ),
         ),
@@ -57,7 +49,7 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
-  Widget _imageCarouselBg() {
+  Widget _imageBg() {
     return Image.asset(
       ImageAssets.splashBg,
       fit: BoxFit.fitWidth,

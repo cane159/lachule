@@ -4,6 +4,9 @@ class ImageAssets {
   static const firstMenuBg = "assets/images/first_menu_bg.png";
   static const loginBg = "assets/images/login_bg.png";
   static const userAppbar = "assets/images/user_appbar_image.png";
+  static const meassageUnRead = "assets/images/meassage_unread.png";
+  static const meassageRead = "assets/images/meassage_read.png";
+
   ImageAssets._();
 }
 
@@ -26,5 +29,6 @@ class IconAssets {
   static const colorsWatch = "assets/icons/colorswatch_icon.png";
   static const bagHappy = "assets/icons/baghappy_icon.png";
   static const moneySend = "assets/icons/moneysend_icon.png";
+  static const clock = "assets/icons/clock.png";
   IconAssets._();
 }

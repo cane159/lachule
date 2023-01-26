@@ -13,6 +13,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.setBuildContext(context);
     return Obx(
       () => Scaffold(
         backgroundColor: BaseColors.btnInput,

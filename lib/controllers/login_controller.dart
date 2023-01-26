@@ -9,7 +9,7 @@ class LoginController extends BaseController {
   TextEditingController passwordController = TextEditingController();
 
   void pressLogin() {
-    Get.offAllNamed(AppRoutes.HOME);
+    Get.offAllNamed(AppRoutes.HOMEPAGEVIEW);
     startLoading();
   }
 }

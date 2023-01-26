@@ -9,6 +9,7 @@ class ProductDetailController extends BaseController {
   @override
   void onInit() {
     // TODO: implement onInit
+    print('object');
     _priceIntl();
     super.onInit();
   }
