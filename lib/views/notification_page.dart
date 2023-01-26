@@ -65,113 +65,130 @@ class NotificationPage extends GetView<NotificationController> {
   }
 
   Widget _bottomSheet(BuildContext context) {
-    return Container(
-      width: Get.width,
-      padding: const EdgeInsets.fromLTRB(23, 23, 23, 0),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(
-            20,
+    return Stack(
+      children: [
+        Container(
+          height: Get.height / 2,
+          width: Get.width,
+          padding: const EdgeInsets.fromLTRB(23, 23, 23, 0),
+          decoration: const BoxDecoration(
+            color: BaseColors.white,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(
+                20,
+              ),
+            ),
           ),
         ),
-        color: BaseColors.white,
-      ),
-      child: Column(
-        children: controller.notificationListData
-            .map(
-              (data) => Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          DateFormat('dd/MM/yyy').format(
-                            DateTime.parse(data.createDate!),
-                          ),
-                          style: const TextStyle(
-                            fontSize: BaseSizes.fontH4,
-                            color: BaseColors.textPrimary,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.only(bottom: 10),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: BaseColors.borderColor,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        Image.asset(
-                          data.readed == true
-                              ? ImageAssets.meassageRead
-                              : ImageAssets.meassageUnRead,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.contain,
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+        Container(
+          width: Get.width,
+          padding: const EdgeInsets.fromLTRB(23, 23, 23, 0),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(
+                20,
+              ),
+            ),
+            color: BaseColors.white,
+          ),
+          child: Column(
+            children: controller.notificationListData
+                .map(
+                  (data) => Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Row(
                           children: <Widget>[
                             Text(
-                              '${data.title}',
+                              DateFormat('dd/MM/yyy').format(
+                                DateTime.parse(data.createDate!),
+                              ),
                               style: const TextStyle(
-                                fontSize: BaseSizes.fontBody1,
+                                fontSize: BaseSizes.fontH4,
                                 color: BaseColors.textPrimary,
                               ),
-                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: BaseColors.borderColor,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            Image.asset(
+                              data.readed == true
+                                  ? ImageAssets.meassageRead
+                                  : ImageAssets.meassageUnRead,
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.contain,
                             ),
-                            Text(
-                              '${data.body}',
-                              style: const TextStyle(
-                                fontSize: BaseSizes.fontBody1,
-                                color: BaseColors.tabTitle,
-                              ),
-                              overflow: TextOverflow.ellipsis,
+                            const SizedBox(
+                              width: 20,
                             ),
-                            Row(
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Image.asset(
-                                  IconAssets.clock,
-                                  width: 12,
-                                  height: 12,
-                                  fit: BoxFit.fitWidth,
-                                ),
-                                const SizedBox(
-                                  width: 8,
+                                Text(
+                                  '${data.title}',
+                                  style: const TextStyle(
+                                    fontSize: BaseSizes.fontBody1,
+                                    color: BaseColors.textPrimary,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  DateFormat('dd/MM/yyy').format(
-                                    DateTime.parse(data.createDate!),
-                                  ),
+                                  '${data.body}',
                                   style: const TextStyle(
-                                    fontSize: 11,
+                                    fontSize: BaseSizes.fontBody1,
                                     color: BaseColors.tabTitle,
                                   ),
                                   overflow: TextOverflow.ellipsis,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Image.asset(
+                                      IconAssets.clock,
+                                      width: 12,
+                                      height: 12,
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      DateFormat('dd/MM/yyy').format(
+                                        DateTime.parse(data.createDate!),
+                                      ),
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        color: BaseColors.tabTitle,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
-            .toList(),
-      ),
+                      )
+                    ],
+                  ),
+                )
+                .toList(),
+          ),
+        ),
+      ],
     );
   }
 }
