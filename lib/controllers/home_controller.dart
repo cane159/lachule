@@ -437,4 +437,8 @@ class HomeController extends BaseController {
   void pressProduct() {
     Get.toNamed(AppRoutes.PRODUCTDETAIL);
   }
+
+  void pressPromotion() {
+    Get.toNamed(AppRoutes.PROMOTIONDETAIL);
+  }
 }

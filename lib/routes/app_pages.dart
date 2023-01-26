@@ -6,6 +6,7 @@ import 'package:lachule/binding/home_page_view_binding.dart';
 import 'package:lachule/binding/login_binding.dart';
 import 'package:lachule/binding/notification_binding.dart';
 import 'package:lachule/binding/product_detail_binding.dart';
+import 'package:lachule/binding/promotion_detail_binding.dart';
 import 'package:lachule/binding/splash_binding.dart';
 import 'package:lachule/views/first_menu_page.dart';
 import 'package:lachule/views/home_page.dart';
@@ -13,6 +14,7 @@ import 'package:lachule/views/home_page_view.dart';
 import 'package:lachule/views/login_page.dart';
 import 'package:lachule/views/notification_page.dart';
 import 'package:lachule/views/product_detail_page.dart';
+import 'package:lachule/views/promotion_detail_page.dart';
 import 'package:lachule/views/splash_page.dart';
 part 'app_routes.dart';
 
@@ -61,6 +63,12 @@ class AppPages {
       name: AppRoutes.HOMEPAGEVIEW,
       page: () => const HomePageView(),
       binding: HomePageViewBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.PROMOTIONDETAIL,
+      page: () => const PromotionDetailPage(),
+      binding: PromotionDetailBinding(),
       transition: Transition.fadeIn,
     ),
   ];

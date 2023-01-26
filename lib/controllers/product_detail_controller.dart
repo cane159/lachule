@@ -15,7 +15,7 @@ class ProductDetailController extends BaseController {
   }
 
   late String _productPrice;
-  var _descriptionIndex = 0.obs;
+  final _descriptionIndex = 0.obs;
 
   final ProductDetailModel _produceDetail = ProductDetailModel(
     id: '1',
