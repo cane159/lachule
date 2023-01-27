@@ -46,6 +46,17 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           ),
         ],
       ),
+      actions: [
+        IconButton(
+          onPressed: () => controller.pressedCart(),
+          icon: Image.asset(
+            IconAssets.bagHappy,
+            width: 24,
+            height: 24,
+            fit: BoxFit.fitWidth,
+          ),
+        ),
+      ],
     );
   }
 
@@ -154,10 +165,11 @@ class ProductDetailPage extends GetView<ProductDetailController> {
         ),
         Container(
           decoration: const BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-              color: BaseColors.white),
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(20),
+            ),
+            color: BaseColors.white,
+          ),
           child: Column(
             children: <Widget>[
               Padding(
