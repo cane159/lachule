@@ -164,8 +164,9 @@ class CartPage extends GetView<CartController> {
                                   child: Row(
                                     children: <Widget>[
                                       IconButton(
-                                        onPressed: () =>
-                                            {}, // TODO : wait for connect API
+                                        onPressed: () => controller.cartMinus(
+                                            controller.cartItem.indexOf(
+                                                data)), // TODO : wait for connect API
                                         icon: Image.asset(
                                           IconAssets.minus,
                                           width: 28,
@@ -175,12 +176,13 @@ class CartPage extends GetView<CartController> {
                                       SizedBox(
                                         height: 48,
                                         width: 44,
-                                        child:
-                                            _goodsAmountTextField(context, 0),
+                                        child: _goodsAmountTextField(
+                                            controller.cartItem.indexOf(data)),
                                       ),
                                       IconButton(
-                                        onPressed: () =>
-                                            {}, // TODO : wait for connect API
+                                        onPressed: () => controller.cartPlus(
+                                            controller.cartItem.indexOf(
+                                                data)), // TODO : wait for connect API
                                         icon: Image.asset(
                                           IconAssets.plus,
                                           width: 28,
@@ -315,7 +317,6 @@ class CartPage extends GetView<CartController> {
                           ),
                         ),
                         Text(
-                          //'฿ ${controller.formatCurrency.format(data.price * data.amount.value)}'
                           '฿ ${controller.formatCurrency.format(controller.cartItem.fold(0.00, (double sum, data) => sum + (data.amount.value * data.price.value)))}',
                           style: const TextStyle(
                             color: BaseColors.primaryRed,
@@ -334,12 +335,14 @@ class CartPage extends GetView<CartController> {
     );
   }
 
-  Widget _goodsAmountTextField(BuildContext context, int index) {
+  Widget _goodsAmountTextField(int index) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextFormField(
-          initialValue: controller.cartItem[index].amount.toString(),
+        TextField(
+          //initialValue: controller.cartItem[index].amount.value.toString(),
+          controller: TextEditingController(
+              text: controller.cartItem[index].amount.value.toString()),
           minLines: 1,
           maxLines: 1,
           keyboardType: TextInputType.number,
