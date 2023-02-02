@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lachule/binding/cart_binding.dart';
 import 'package:lachule/binding/first_menu_binding.dart';
 import 'package:lachule/binding/home_binding.dart';
 import 'package:lachule/binding/home_page_view_binding.dart';
@@ -8,6 +9,7 @@ import 'package:lachule/binding/notification_binding.dart';
 import 'package:lachule/binding/product_detail_binding.dart';
 import 'package:lachule/binding/promotion_detail_binding.dart';
 import 'package:lachule/binding/splash_binding.dart';
+import 'package:lachule/views/cart_page.dart';
 import 'package:lachule/views/first_menu_page.dart';
 import 'package:lachule/views/home_page.dart';
 import 'package:lachule/views/home_page_view.dart';
@@ -69,6 +71,12 @@ class AppPages {
       name: AppRoutes.PROMOTIONDETAIL,
       page: () => const PromotionDetailPage(),
       binding: PromotionDetailBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.CART,
+      page: () => const CartPage(),
+      binding: CartBinding(),
       transition: Transition.fadeIn,
     ),
   ];

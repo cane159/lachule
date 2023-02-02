@@ -30,5 +30,9 @@ class IconAssets {
   static const bagHappy = "assets/icons/baghappy_icon.png";
   static const moneySend = "assets/icons/moneysend_icon.png";
   static const clock = "assets/icons/clock.png";
+  static const minus = "assets/icons/minus_icon.png";
+  static const plus = "assets/icons/plus_icon.png";
+  static const trashCan = "assets/icons/trash_can_icon.png";
+  static const locationTick = "assets/icons/locationtick_icon.png";
   IconAssets._();
 }

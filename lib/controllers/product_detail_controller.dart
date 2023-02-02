@@ -2,9 +2,10 @@ import 'package:lachule/bases/base_controller.dart';
 import 'package:lachule/models/product_detail_model.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:lachule/routes/app_pages.dart';
 
 class ProductDetailController extends BaseController {
-  final formatCurrency = new NumberFormat("#,##0.00", "th_TH");
+  final formatCurrency = NumberFormat("#,##0.00", "th_TH");
 
   @override
   void onInit() {
@@ -44,5 +45,9 @@ class ProductDetailController extends BaseController {
 
   void _priceIntl() {
     _productPrice = formatCurrency.format(_produceDetail.price);
+  }
+
+  void pressedCart() {
+    Get.toNamed(AppRoutes.CART);
   }
 }
