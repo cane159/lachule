@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lachule/binding/cart_binding.dart';
+import 'package:lachule/binding/detail_privilege_binding.dart';
 import 'package:lachule/binding/first_menu_binding.dart';
 import 'package:lachule/binding/home_binding.dart';
 import 'package:lachule/binding/home_page_view_binding.dart';
@@ -17,6 +18,7 @@ import 'package:lachule/views/login_page.dart';
 import 'package:lachule/views/notification_page.dart';
 import 'package:lachule/views/product_detail_page.dart';
 import 'package:lachule/views/promotion_detail_page.dart';
+import 'package:lachule/views/register/detail_privilege_page.dart';
 import 'package:lachule/views/splash_page.dart';
 part 'app_routes.dart';
 
@@ -77,6 +79,12 @@ class AppPages {
       name: AppRoutes.CART,
       page: () => const CartPage(),
       binding: CartBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.DETAILPRIVILEGE,
+      page: () => const DetailPrivilegePage(),
+      binding: DetailPrivilegeBinding(),
       transition: Transition.fadeIn,
     ),
   ];

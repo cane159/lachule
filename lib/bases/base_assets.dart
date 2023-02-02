@@ -6,6 +6,7 @@ class ImageAssets {
   static const userAppbar = "assets/images/user_appbar_image.png";
   static const meassageUnRead = "assets/images/meassage_unread.png";
   static const meassageRead = "assets/images/meassage_read.png";
+  static const vipCard = "assets/images/vip_card.png";
 
   ImageAssets._();
 }
