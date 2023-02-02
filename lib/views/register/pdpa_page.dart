@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
-import 'package:lachule/controllers/terms_of_service_controller.dart';
-import 'package:lachule/routes/app_pages.dart';
+import 'package:lachule/controllers/pdpa_controller.dart';
 import 'package:lachule/widgets/button/button_theme_helper.dart';
 import 'package:lachule/widgets/button/go_back_button.dart';
 import 'package:lachule/widgets/button/primary_button.dart';
 
-class TermsOfServicePage extends GetView<TermsOfServiceController> {
-  const TermsOfServicePage({super.key});
+class PDPAPage extends GetView<PDPAController> {
+  const PDPAPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +69,7 @@ class TermsOfServicePage extends GetView<TermsOfServiceController> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: const [
           Text(
-            'ข้อตกลง และเงื่อนไขการให้บริการ',
+            'นโยบาย (PDPA)',
             style: TextStyle(
               color: BaseColors.textPrimary,
               fontSize: 21,
@@ -124,7 +123,7 @@ class TermsOfServicePage extends GetView<TermsOfServiceController> {
                   onChanged: (value) => controller.isPressedAccept(value!),
                 ),
                 const Text(
-                  'ฉันอ่านข้อตกลง และเงื่อนไขการให้บริการแล้ว',
+                  'ฉันอ่านนโยบาย (PDPA) แล้ว',
                   style: TextStyle(
                     fontSize: BaseSizes.fontBody1,
                     color: BaseColors.textPrimary,
@@ -140,7 +139,7 @@ class TermsOfServicePage extends GetView<TermsOfServiceController> {
                 Expanded(
                   child: PrimaryButtonView(
                     isDisable: !controller.isAccept,
-                    onPressed: () => Get.toNamed(AppRoutes.PDPA),
+                    onPressed: () => {},
                     title: 'ยอมรับ',
                   ),
                 ),
