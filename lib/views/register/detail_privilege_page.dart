@@ -4,6 +4,7 @@ import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
 import 'package:lachule/controllers/detail_privilege_controller.dart';
+import 'package:lachule/routes/app_pages.dart';
 import 'package:lachule/widgets/button/go_back_button.dart';
 import 'package:lachule/widgets/button/primary_button.dart';
 
@@ -12,6 +13,7 @@ class DetailPrivilegePage extends GetView<DetailPrivilegeController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.setBuildContext(context);
     return Scaffold(
       appBar: _appbar(),
       body: SafeArea(
@@ -128,7 +130,7 @@ class DetailPrivilegePage extends GetView<DetailPrivilegeController> {
           children: [
             Expanded(
               child: PrimaryButtonView(
-                onPressed: () => {},
+                onPressed: () => Get.toNamed(AppRoutes.TERMSOFSERVICE),
                 title: 'สมัครสมาชิก',
               ),
             ),
