@@ -5,6 +5,7 @@ import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
 import 'package:lachule/controllers/terms_of_service_controller.dart';
 import 'package:lachule/routes/app_pages.dart';
+import 'package:lachule/widgets/app_check_box.dart';
 import 'package:lachule/widgets/button/button_theme_helper.dart';
 import 'package:lachule/widgets/button/go_back_button.dart';
 import 'package:lachule/widgets/button/primary_button.dart';
@@ -114,14 +115,12 @@ class TermsOfServicePage extends GetView<TermsOfServiceController> {
           children: [
             Row(
               children: [
-                Checkbox(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
+                Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: AppCheckBox(
+                    value: controller.isAccept,
+                    onChanged: (value) => controller.isPressedAccept(value!),
                   ),
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.all(BaseColors.actived),
-                  value: controller.isAccept,
-                  onChanged: (value) => controller.isPressedAccept(value!),
                 ),
                 const Text(
                   'ฉันอ่านข้อตกลง และเงื่อนไขการให้บริการแล้ว',

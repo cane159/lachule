@@ -35,5 +35,11 @@ class IconAssets {
   static const plus = "assets/icons/plus_icon.png";
   static const trashCan = "assets/icons/trash_can_icon.png";
   static const locationTick = "assets/icons/locationtick_icon.png";
+  static const briefCase = "assets/icons/briefcase_icon.png";
+  static const personalCard = "assets/icons/personalcard_icon.png";
+  static const walleTadd1 = "assets/icons/walletadd1_icon.png";
+  static const homeHashtag = "assets/icons/homehashtag_icon.png";
+  static const arrowDown = "assets/icons/arrow_down_icon.png";
+  static const close = "assets/icons/close_icon.png";
   IconAssets._();
 }

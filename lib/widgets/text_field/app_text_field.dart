@@ -17,7 +17,10 @@ class AppTextField extends StatefulWidget {
     this.minLine = 1,
     this.textInputAction,
     this.readOnly = false,
+    this.enabled = true,
     this.isObscure = true,
+    this.hintText,
+    this.validator,
   }) : super(
           key: key,
         );
@@ -32,7 +35,10 @@ class AppTextField extends StatefulWidget {
   final int minLine;
   final TextInputAction? textInputAction;
   final bool readOnly;
+  final bool enabled;
   bool isObscure;
+  final String? hintText;
+  final String? Function(String?)? validator;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -50,7 +56,7 @@ class _AppTextFieldState extends State<AppTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextField(
+        TextFormField(
           controller: widget.controller,
           obscureText: widget.canObscure != null ? widget.isObscure : false,
           keyboardType: widget.textInputType,
@@ -61,7 +67,14 @@ class _AppTextFieldState extends State<AppTextField> {
           minLines: widget.minLine,
           onChanged: (value) => widget.controller,
           readOnly: widget.readOnly,
+          enabled: widget.enabled,
           decoration: InputDecoration(
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: BaseColors.textContent),
+            ),
+            focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: BaseColors.bgImageInputDisabled),
+            ),
             label: Text(
               widget.labelText ?? '',
               style: const TextStyle(
@@ -112,6 +125,20 @@ class _AppTextFieldState extends State<AppTextField> {
             ),
           ),
           textInputAction: widget.textInputAction,
+          validator: widget.validator,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Text(
+              widget.hintText ?? '',
+              style: const TextStyle(
+                color: BaseColors.btnDisabledPlaceholder,
+                fontSize: 11,
+              ),
+            ),
+          ],
         ),
       ],
     );

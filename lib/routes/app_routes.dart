@@ -15,4 +15,5 @@ abstract class AppRoutes {
   static const String DETAILPRIVILEGE = '/detail_privilege';
   static const String TERMSOFSERVICE = '/terms_of_service';
   static const String PDPA = '/pdpa';
+  static const String REGISTERPAGEVIEW = '/register_page_view';
 }
