@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
-import 'package:lachule/controllers/register/benefit_information_controller.dart';
+import 'package:lachule/controllers/register/register_page_view_controller.dart';
 import 'package:lachule/widgets/bottom_sheet_select_menu.dart';
 import 'package:lachule/widgets/button/primary_button.dart';
 import 'package:lachule/widgets/dismissible_keyboard.dart';
 import 'package:lachule/widgets/register_app_scaffold.dart';
 import 'package:lachule/widgets/text_field/app_text_field.dart';
 
-class BenefitInformationPage extends GetView<BenefitInformationController> {
+class BenefitInformationPage extends GetView<RegisterPageViewController> {
   BenefitInformationPage({super.key, required this.pageViewController});
 
   final PageController pageViewController;
@@ -21,7 +21,7 @@ class BenefitInformationPage extends GetView<BenefitInformationController> {
     return Obx(
       () => DismissibleKeyboard(
         child: RegisterAppScaffold(
-          onGoBack: () => controller.onTapped(2, pageViewController),
+          onGoBack: () => controller.onTapped(1, pageViewController),
           initialPage: 3,
           child: Form(
             key: _formKey,

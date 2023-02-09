@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
-import 'package:lachule/controllers/register/applicant_information_controller.dart';
+import 'package:lachule/controllers/register/register_page_view_controller.dart';
 import 'package:lachule/widgets/bottom_sheet_select_menu.dart';
 import 'package:lachule/widgets/button/primary_button.dart';
 import 'package:lachule/widgets/dismissible_keyboard.dart';
 import 'package:lachule/widgets/register_app_scaffold.dart';
 import 'package:lachule/widgets/text_field/app_text_field.dart';
 
-class ApplicantInformationPage extends GetView<ApplicantInformationController> {
+class ApplicantInformationPage extends GetView<RegisterPageViewController> {
   ApplicantInformationPage({super.key, required this.pageViewController});
 
   final PageController pageViewController;

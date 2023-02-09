@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lachule/bases/base_controller.dart';
+import 'package:lachule/models/bank.dart';
+import 'package:lachule/models/bank_account_type.dart';
 import 'package:lachule/models/district.dart';
+import 'package:lachule/models/gender.dart';
+import 'package:lachule/models/prefix.dart';
 import 'package:lachule/models/province.dart';
 import 'package:lachule/models/sub_district.dart';
 
@@ -10,6 +14,80 @@ class RegisterPageViewController extends BaseController {
   // Register page view variable
   final PageController pageController = PageController();
   final _currentIndex = 0.obs;
+  final RxList<PrefixModel> _prefixList = [
+    PrefixModel(
+      id: '1',
+      name: 'นาย',
+    ),
+    PrefixModel(
+      id: '2',
+      name: 'นาง',
+    ),
+    PrefixModel(
+      id: '3',
+      name: 'นางสาว',
+    ),
+    PrefixModel(
+      id: '4',
+      name: 'ไม่ระบุ',
+    ),
+  ].obs;
+
+  final RxList<GenderModel> _genderList = [
+    GenderModel(
+      id: '1',
+      name: 'ชาย',
+    ),
+    GenderModel(
+      id: '2',
+      name: 'หญิง',
+    ),
+    GenderModel(
+      id: '3',
+      name: 'ไม่ระบุ',
+    ),
+  ].obs;
+
+  // Getter
+  List<PrefixModel> get prefixList => _prefixList;
+  List<GenderModel> get genderList => _genderList;
+  final RxList<BankModel> _bankList = [
+    BankModel(
+      id: '1',
+      name: 'ธนาคาร 1',
+    ),
+    BankModel(
+      id: '2',
+      name: 'ธนาคาร 2',
+    ),
+    BankModel(
+      id: '3',
+      name: 'ธนาคาร 3',
+    ),
+    BankModel(
+      id: '4',
+      name: 'ธนาคาร 4',
+    ),
+  ].obs;
+
+  final RxList<BankAccountTypeModel> _bankAccountTypeList = [
+    BankAccountTypeModel(
+      id: '1',
+      name: 'ประเภท 1',
+    ),
+    BankAccountTypeModel(
+      id: '2',
+      name: 'ประเภท 2',
+    ),
+    BankAccountTypeModel(
+      id: '3',
+      name: 'ประเภท 3',
+    ),
+  ].obs;
+
+  // Getter
+  List<BankModel> get bankList => _bankList;
+  List<BankAccountTypeModel> get bankAccountTypeList => _bankAccountTypeList;
   final RxList<ProvinceModel> _provinceList = [
     ProvinceModel(
       id: '1',
@@ -153,6 +231,16 @@ class RegisterPageViewController extends BaseController {
   TextEditingController userHouseAlley = TextEditingController();
   TextEditingController userHouseZipCode = TextEditingController();
 
+  // User address variable
+  final isHourseAddress = false.obs;
+  final RxString userProvince = ''.obs;
+  final RxString userDistrict = ''.obs;
+  final RxString userSubDistrict = ''.obs;
+  TextEditingController userLiveHouseNumber = TextEditingController();
+  TextEditingController userVillageOrProject = TextEditingController();
+  TextEditingController userAlley = TextEditingController();
+  TextEditingController userZipCode = TextEditingController();
+
   // Register page view getter
   int get currentIndex => _currentIndex.value;
   List<ProvinceModel> get provinceList => _provinceList;
@@ -164,11 +252,18 @@ class RegisterPageViewController extends BaseController {
     pageViewController.jumpToPage(index);
   }
 
-  onSelectBottomSheet(String value, RxString toChangeValue) {
+  void pressReferralCode(bool value) {
+    isReferralCode.value = value;
+    if (value == true) {
+      referralCode.value = const TextEditingValue(text: '1234');
+    }
+  }
+
+  void onSelectBottomSheet(String value, RxString toChangeValue) {
     toChangeValue.value = value;
   }
 
-  datePicker() async {
+  Future<void> datePicker() async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -185,5 +280,26 @@ class RegisterPageViewController extends BaseController {
           formattedDate); //formatted date output using intl package =>  2021-03-16
       userBirthDate.text = formattedDate;
     } else {}
+  }
+
+  void pressUserAddress(bool value) {
+    isHourseAddress.value = value;
+    if (value == true) {
+      userProvince.value = userHouseProvince.value;
+      userDistrict.value = userHouseDistrict.value;
+      userSubDistrict.value = userHouseSubDistrict.value;
+      userLiveHouseNumber = userHouseNumber;
+      userVillageOrProject = userHouseVillageOrProject;
+      userAlley = userHouseAlley;
+      userZipCode = userHouseZipCode;
+    } else {
+      userProvince.value = '';
+      userDistrict.value = '';
+      userSubDistrict.value = '';
+      userLiveHouseNumber.text = '';
+      userVillageOrProject.text = '';
+      userAlley.text = '';
+      userZipCode.text = '';
+    }
   }
 }

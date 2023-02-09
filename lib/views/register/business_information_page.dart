@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
-import 'package:lachule/controllers/register/business_information_controller.dart';
+import 'package:lachule/controllers/register/register_page_view_controller.dart';
 import 'package:lachule/widgets/app_check_box.dart';
 import 'package:lachule/widgets/button/primary_button.dart';
 import 'package:lachule/widgets/dismissible_keyboard.dart';
 import 'package:lachule/widgets/register_app_scaffold.dart';
 import 'package:lachule/widgets/text_field/app_text_field.dart';
 
-class BusinessInformationPage extends GetView<BusinessInformationController> {
+class BusinessInformationPage extends GetView<RegisterPageViewController> {
   BusinessInformationPage({super.key, required this.pageViewController});
 
   final PageController pageViewController;
@@ -92,6 +92,7 @@ class BusinessInformationPage extends GetView<BusinessInformationController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
+                      print(controller.referralCode.text),
                       if (controller.isReferralCode.value == true)
                         {controller.onTapped(1, pageViewController)}
                       else if (_formKey.currentState!.validate())

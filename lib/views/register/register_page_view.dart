@@ -5,6 +5,7 @@ import 'package:lachule/views/register/applicant_information_page.dart';
 import 'package:lachule/views/register/benefit_information_page.dart';
 import 'package:lachule/views/register/business_information_page.dart';
 import 'package:lachule/views/register/house_address_page.dart';
+import 'package:lachule/views/register/user_address_page.dart';
 
 class RegisterPageView extends GetView<RegisterPageViewController> {
   const RegisterPageView({super.key});
@@ -28,6 +29,9 @@ class RegisterPageView extends GetView<RegisterPageViewController> {
             pageViewController: controller.pageController,
           ),
           HouseAddressPage(
+            pageViewController: controller.pageController,
+          ),
+          UserAddressPage(
             pageViewController: controller.pageController,
           ),
         ],

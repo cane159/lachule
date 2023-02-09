@@ -3,15 +3,19 @@ import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
+import 'package:lachule/controllers/register/benefit_information_controller.dart';
+import 'package:lachule/controllers/register/house_address_controller.dart';
 import 'package:lachule/controllers/register/register_page_view_controller.dart';
+import 'package:lachule/controllers/register/user_address_controller.dart';
+import 'package:lachule/widgets/app_check_box.dart';
 import 'package:lachule/widgets/bottom_sheet_select_menu.dart';
 import 'package:lachule/widgets/button/primary_button.dart';
 import 'package:lachule/widgets/dismissible_keyboard.dart';
 import 'package:lachule/widgets/register_app_scaffold.dart';
 import 'package:lachule/widgets/text_field/app_text_field.dart';
 
-class HouseAddressPage extends GetView<RegisterPageViewController> {
-  HouseAddressPage({super.key, required this.pageViewController});
+class UserAddressPage extends GetView<RegisterPageViewController> {
+  UserAddressPage({super.key, required this.pageViewController});
 
   final PageController pageViewController;
   final _formKey = GlobalKey<FormState>();
@@ -21,8 +25,8 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
     return Obx(
       () => DismissibleKeyboard(
         child: RegisterAppScaffold(
-          onGoBack: () => controller.onTapped(2, pageViewController),
-          initialPage: 4,
+          onGoBack: () => controller.onTapped(3, pageViewController),
+          initialPage: 5,
           child: Form(
             key: _formKey,
             child: Column(
@@ -30,7 +34,7 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                 Row(
                   children: <Widget>[
                     Image.asset(
-                      IconAssets.homeHashtag,
+                      IconAssets.locationTick,
                       width: 20,
                       fit: BoxFit.fitWidth,
                     ),
@@ -38,7 +42,7 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                       width: 9,
                     ),
                     const Text(
-                      'ที่อยู่ตามทะเบียนบ้าน',
+                      'ที่อยู่ปัจจุบัน',
                       style: TextStyle(
                         color: BaseColors.textPrimary,
                         fontSize: BaseSizes.fontH4,
@@ -46,8 +50,34 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                     )
                   ],
                 ),
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 12, 0),
+                      child: AppCheckBox(
+                        value: controller.isHourseAddress.value,
+                        onChanged: (value) => {
+                          controller.pressUserAddress(value!),
+                        },
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 21.0),
+                      child: Text(
+                        'ใช้ตามที่อยู่ตามทะเบียนบ้าน',
+                        style: TextStyle(
+                          fontSize: BaseSizes.fontBody1,
+                          color: BaseColors.textPrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
                 AppTextField(
-                  controller.userHouseNumber,
+                  controller.userLiveHouseNumber,
                   labelText: 'บ้านเลขที่ *',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -57,11 +87,11 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                   },
                 ),
                 AppTextField(
-                  controller.userHouseVillageOrProject,
+                  controller.userVillageOrProject,
                   labelText: 'หมู่บ้าน / โครงการ',
                 ),
                 AppTextField(
-                  controller.userHouseAlley,
+                  controller.userAlley,
                   labelText: 'ซอย *',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -75,44 +105,42 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                   label: 'จังหวัด *',
                   onPressed: (value) => {
                     controller.onSelectBottomSheet(
-                        value, controller.userHouseProvince),
-                    controller.userHouseDistrict.value = '',
-                    controller.userHouseSubDistrict.value = '',
+                        value, controller.userProvince),
+                    controller.userDistrict.value = '',
+                    controller.userSubDistrict.value = '',
                   },
                   listObject: controller.provinceList,
-                  initialValue: controller.userHouseProvince.value,
+                  initialValue: controller.userProvince.value,
                 ),
                 BottomSheetSelectMenu(
                   title: 'อำเภอ / เขต',
                   label: 'อำเภอ / เขต *',
-                  isDisable:
-                      controller.userHouseProvince.value == '' ? true : false,
+                  isDisable: controller.userProvince.value == '' ? true : false,
                   onPressed: (value) => {
                     controller.onSelectBottomSheet(
-                        value, controller.userHouseDistrict),
-                    controller.userHouseSubDistrict.value = '',
+                        value, controller.userDistrict),
+                    controller.userSubDistrict.value = '',
                   },
                   listObject: controller.districtList,
-                  initialValue: controller.userHouseDistrict.value,
+                  initialValue: controller.userDistrict.value,
                 ),
                 BottomSheetSelectMenu(
                   title: 'ตำบล / แขวง',
                   label: 'ตำบล / แขวง *',
-                  isDisable:
-                      controller.userHouseDistrict.value == '' ? true : false,
+                  isDisable: controller.userDistrict.value == '' ? true : false,
                   onPressed: (value) => {
                     controller.onSelectBottomSheet(
-                        value, controller.userHouseSubDistrict),
-                    controller.userHouseZipCode.text = controller
+                        value, controller.userSubDistrict),
+                    controller.userZipCode.text = controller
                         .subDistrictList[controller.subDistrictList
                             .indexWhere((element) => element.id == value)]
                         .zipCode,
                   },
                   listObject: controller.subDistrictList,
-                  initialValue: controller.userHouseSubDistrict.value,
+                  initialValue: controller.userSubDistrict.value,
                 ),
                 AppTextField(
-                  controller.userHouseZipCode,
+                  controller.userZipCode,
                   labelText: 'รหัสไปรษณีย์ *',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -128,7 +156,7 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                   child: PrimaryButtonView(
                     onPressed: () => {
                       if (_formKey.currentState!.validate())
-                        {controller.onTapped(4, pageViewController)}
+                        {controller.onTapped(5, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),

@@ -4,6 +4,7 @@ import 'package:lachule/controllers/register/benefit_information_controller.dart
 import 'package:lachule/controllers/register/business_information_controller.dart';
 import 'package:lachule/controllers/register/house_address_controller.dart';
 import 'package:lachule/controllers/register/register_page_view_controller.dart';
+import 'package:lachule/controllers/register/user_address_controller.dart';
 
 class RegisterPageViewBinding extends Bindings {
   @override
@@ -13,5 +14,6 @@ class RegisterPageViewBinding extends Bindings {
     Get.lazyPut(() => ApplicantInformationController());
     Get.lazyPut(() => BenefitInformationController());
     Get.lazyPut(() => HouseAddressController());
+    Get.lazyPut(() => UserAddressController());
   }
 }
