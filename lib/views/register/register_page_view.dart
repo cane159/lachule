@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lachule/controllers/register/register_page_view_controller.dart';
 import 'package:lachule/views/register/applicant_information_page.dart';
+import 'package:lachule/views/register/benefit_information_page.dart';
 import 'package:lachule/views/register/business_information_page.dart';
+import 'package:lachule/views/register/house_address_page.dart';
 
 class RegisterPageView extends GetView<RegisterPageViewController> {
   const RegisterPageView({super.key});
@@ -20,6 +22,12 @@ class RegisterPageView extends GetView<RegisterPageViewController> {
             pageViewController: controller.pageController,
           ),
           ApplicantInformationPage(
+            pageViewController: controller.pageController,
+          ),
+          BenefitInformationPage(
+            pageViewController: controller.pageController,
+          ),
+          HouseAddressPage(
             pageViewController: controller.pageController,
           ),
         ],

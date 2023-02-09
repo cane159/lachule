@@ -21,6 +21,7 @@ class BusinessInformationPage extends GetView<BusinessInformationController> {
     return Obx(
       () => DismissibleKeyboard(
         child: RegisterAppScaffold(
+          initialPage: 1,
           child: Form(
             key: _formKey,
             child: Column(
@@ -91,7 +92,9 @@ class BusinessInformationPage extends GetView<BusinessInformationController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
-                      if (_formKey.currentState!.validate())
+                      if (controller.isReferralCode.value == true)
+                        {controller.onTapped(1, pageViewController)}
+                      else if (_formKey.currentState!.validate())
                         {controller.onTapped(1, pageViewController)}
                     },
                     title: 'ถัดไป',

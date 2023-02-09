@@ -64,7 +64,7 @@ class ApplicantInformationPage extends GetView<ApplicantInformationController> {
                 ),
                 AppTextField(
                   controller.userFullName,
-                  labelText: 'ชื่อ - นามสกุล',
+                  labelText: 'ชื่อ - นามสกุล *',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'กรุณากรอกข้อมูล';
@@ -144,12 +144,6 @@ class ApplicantInformationPage extends GetView<ApplicantInformationController> {
                 AppTextField(
                   controller.userLineId,
                   labelText: 'ไลน์ ไอดี',
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'กรุณากรอกข้อมูล';
-                    }
-                    return null;
-                  },
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 20),
@@ -157,9 +151,7 @@ class ApplicantInformationPage extends GetView<ApplicantInformationController> {
                   child: PrimaryButtonView(
                     onPressed: () => {
                       if (_formKey.currentState!.validate())
-                        {
-                          controller.pageController.jumpToPage(2),
-                        }
+                        {controller.onTapped(2, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),

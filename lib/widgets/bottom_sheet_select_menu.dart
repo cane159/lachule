@@ -13,6 +13,7 @@ class BottomSheetSelectMenu extends StatelessWidget {
     required this.listObject,
     required this.onPressed,
     required this.initialValue,
+    this.isDisable = false,
   });
 
   final String title;
@@ -20,6 +21,7 @@ class BottomSheetSelectMenu extends StatelessWidget {
   final List listObject;
   Function(String value) onPressed;
   final String initialValue;
+  final bool isDisable;
 
   @override
   Widget build(BuildContext context) {
@@ -30,120 +32,134 @@ class BottomSheetSelectMenu extends StatelessWidget {
           bottom: BorderSide(width: 1),
         ),
       ),
-      child: ElevatedButton(
-        onPressed: () => {
-          Get.bottomSheet(
-            Container(
-              padding: const EdgeInsets.all(20),
-              height: Get.height * 0.8,
-              width: Get.width,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ),
-                color: BaseColors.white,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          color: BaseColors.textPrimary,
-                          fontSize: BaseSizes.fontH4,
+      child: IgnorePointer(
+        ignoring: isDisable,
+        child: ElevatedButton(
+          onPressed: () => {
+            Get.bottomSheet(
+              SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      height: Get.height * 0.5,
+                      width: Get.width,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
                         ),
+                        color: BaseColors.white,
                       ),
-                      IconButton(
-                        onPressed: () => Get.back(),
-                        icon: Image.asset(
-                          IconAssets.close,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: listObject
-                        .map(
-                          (data) => Container(
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  width: 1,
-                                  color: BaseColors.bgImageInputDisabled,
-                                ),
-                              ),
-                            ),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                backgroundColor: Colors.transparent,
-                                shadowColor: Colors.transparent,
-                                foregroundColor: Colors.transparent,
-                                elevation: 0,
-                              ),
-                              onPressed: () => {
-                                onPressed(data.id),
-                                Get.back(),
-                              },
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    data.name ?? '',
-                                    style: const TextStyle(
-                                      color: BaseColors.textContent,
-                                      fontSize: BaseSizes.fontBody1,
-                                    ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  title,
+                                  style: const TextStyle(
+                                    color: BaseColors.textPrimary,
+                                    fontSize: BaseSizes.fontH4,
                                   ),
-                                  initialValue == data.id
-                                      ? const Icon(
-                                          Icons.check_rounded,
-                                          color: BaseColors.actived,
-                                        )
-                                      : Container(),
-                                ],
-                              ),
+                                ),
+                                IconButton(
+                                  onPressed: () => Get.back(),
+                                  icon: Image.asset(
+                                    IconAssets.close,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        )
-                        .toList(),
-                  )
-                ],
+                            Column(
+                              children: listObject
+                                  .map(
+                                    (data) => Container(
+                                      decoration: const BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            width: 1,
+                                            color:
+                                                BaseColors.bgImageInputDisabled,
+                                          ),
+                                        ),
+                                      ),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          shadowColor: Colors.transparent,
+                                          foregroundColor: Colors.transparent,
+                                          elevation: 0,
+                                        ),
+                                        onPressed: () => {
+                                          onPressed(data.id),
+                                          Get.back(),
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              data.name ?? '',
+                                              style: const TextStyle(
+                                                color: BaseColors.textContent,
+                                                fontSize: BaseSizes.fontBody1,
+                                              ),
+                                            ),
+                                            initialValue == data.id
+                                                ? const Icon(
+                                                    Icons.check_rounded,
+                                                    color: BaseColors.actived,
+                                                  )
+                                                : Container(),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              isScrollControlled: true,
             ),
+          },
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.all(8),
+            elevation: 0,
+            backgroundColor: BaseColors.white,
+            minimumSize: const Size(double.infinity, 50),
           ),
-        },
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.all(8),
-          elevation: 0,
-          backgroundColor: BaseColors.white,
-          minimumSize: const Size(double.infinity, 50),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              initialValue != ''
-                  ? listObject[listObject
-                          .indexWhere((element) => element.id == initialValue)]
-                      .name
-                  : label,
-              style: TextStyle(
-                color: initialValue != ''
-                    ? BaseColors.textPrimary
-                    : BaseColors.btnDisabledPlaceholder,
-                fontSize: BaseSizes.fontH4,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                initialValue != ''
+                    ? listObject[listObject.indexWhere(
+                            (element) => element.id == initialValue)]
+                        .name
+                    : label,
+                style: TextStyle(
+                  color: initialValue != ''
+                      ? BaseColors.textPrimary
+                      : BaseColors.btnDisabledPlaceholder,
+                  fontSize: BaseSizes.fontH4,
+                ),
               ),
-            ),
-            Image.asset(
-              IconAssets.arrowDown,
-              width: 13.75,
-              fit: BoxFit.fitWidth,
-            ),
-          ],
+              Image.asset(
+                IconAssets.arrowDown,
+                width: 13.75,
+                fit: BoxFit.fitWidth,
+              ),
+            ],
+          ),
         ),
       ),
     );
