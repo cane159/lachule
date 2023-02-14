@@ -8,11 +8,13 @@ class PaymentGatewayPage extends GetView<PaymentGatewayController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.setBuildContext(context);
     return Scaffold(
       backgroundColor: BaseColors.btnInput,
       appBar: _appBar(),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text(
               'Payment Gateway 2C2P \n ┐(￣ヘ￣)┌',
