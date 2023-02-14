@@ -115,7 +115,7 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
         child: OutlinedButtonView(
-          onPressed: () => {},
+          onPressed: () => Get.toNamed(AppRoutes.DETAILPRIVILEGE),
           title: 'สมัครสมาชิกใหม่',
           textStyle: const TextStyle(
             fontSize: BaseSizes.fontH4,

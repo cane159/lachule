@@ -83,6 +83,7 @@ class PrimaryButtonView extends StatelessWidget {
                         const TextStyle(
                           fontSize: BaseSizes.fontH4,
                           color: BaseColors.white,
+                          fontWeight: FontWeight.bold,
                         ),
                   ),
                 if (suffixIcon != null) ...[

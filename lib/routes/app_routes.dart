@@ -12,4 +12,12 @@ abstract class AppRoutes {
   static const String PRODUCTDETAIL = '/product_detail';
   static const String PROMOTIONDETAIL = '/promotion_detail';
   static const String CART = '/cart';
+  static const String DETAILPRIVILEGE = '/detail_privilege';
+  static const String TERMSOFSERVICE = '/terms_of_service';
+  static const String PDPA = '/pdpa';
+  static const String REGISTERPAGEVIEW = '/register_page_view';
+  static const String REGISTEROTP = '/register_otp';
+  static const String REGISTERPAYMENT = '/register_payment';
+  static const String REGISTERPAYMENTGATEWAY = '/register_payment_gateway';
+  static const String REGISTERSUCCESS = '/register_success';
 }

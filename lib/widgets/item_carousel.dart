@@ -143,7 +143,7 @@ class ItemCarousel extends StatelessWidget {
                   .toList(),
               options: options ??
                   CarouselOptions(
-                    viewportFraction: 0.4,
+                    viewportFraction: 0.45,
                     enableInfiniteScroll: false,
                     padEnds: false,
                   ),
