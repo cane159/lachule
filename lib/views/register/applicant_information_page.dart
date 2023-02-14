@@ -150,8 +150,10 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
-                      if (_formKey.currentState!.validate())
-                        {controller.onTapped(2, pageViewController)}
+                      controller.onTapped(2, pageViewController),
+
+                      // if (_formKey.currentState!.validate())
+                      //   {controller.onTapped(2, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),

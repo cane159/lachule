@@ -7,7 +7,8 @@ class ImageAssets {
   static const meassageUnRead = "assets/images/meassage_unread.png";
   static const meassageRead = "assets/images/meassage_read.png";
   static const vipCard = "assets/images/vip_card.png";
-
+  static const fadeOutBg = "assets/images/fade_out_bg.png";
+  static const successBg = "assets/images/sucess_bg.png";
   ImageAssets._();
 }
 
@@ -41,5 +42,10 @@ class IconAssets {
   static const homeHashtag = "assets/icons/homehashtag_icon.png";
   static const arrowDown = "assets/icons/arrow_down_icon.png";
   static const close = "assets/icons/close_icon.png";
+  static const bitcoinCard = "assets/icons/bitcoincard_icon.png";
+  static const attachCircle = "assets/icons/attachcircle_icon.png";
+  static const userTick = "assets/icons/usertick_icon.png";
+  static const attachFile = "assets/icons/attach_file_icon.png";
+  static const check = "assets/icons/check_icon.png";
   IconAssets._();
 }

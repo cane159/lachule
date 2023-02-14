@@ -5,12 +5,18 @@ import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/widgets/button/go_back_button.dart';
 
 class RegisterAppScaffold extends StatelessWidget {
-  const RegisterAppScaffold(
-      {super.key, this.initialPage = 1, required this.child, this.onGoBack});
+  const RegisterAppScaffold({
+    super.key,
+    this.initialPage = 1,
+    required this.child,
+    this.onGoBack,
+    this.bottomNavigationBar,
+  });
 
   final int initialPage;
   final Widget child;
   final VoidCallback? onGoBack;
+  final Widget? bottomNavigationBar;
 
   @override
   Widget build(BuildContext context) {
@@ -28,28 +34,43 @@ class RegisterAppScaffold extends StatelessWidget {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Row(
-                        children: [
-                          initialPage == 1
-                              ? const GoBackbutton()
-                              : IconButton(
-                                  onPressed: onGoBack,
-                                  icon: const Icon(
-                                      Icons.arrow_back_ios_new_rounded),
-                                  color: BaseColors.textPrimary,
+                    onGoBack != null
+                        ? Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Row(
+                              children: [
+                                initialPage == 1
+                                    ? const GoBackbutton()
+                                    : IconButton(
+                                        onPressed: onGoBack,
+                                        icon: const Icon(
+                                            Icons.arrow_back_ios_new_rounded),
+                                        color: BaseColors.textPrimary,
+                                      ),
+                                const Text(
+                                  'สมัครสมาชิก',
+                                  style: TextStyle(
+                                    color: BaseColors.textPrimary,
+                                    fontSize: 21,
+                                  ),
                                 ),
-                          const Text(
-                            'สมัครสมาชิก',
-                            style: TextStyle(
-                              color: BaseColors.textPrimary,
-                              fontSize: 21,
+                              ],
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Row(
+                              children: const [
+                                Text(
+                                  'สมัครสมาชิก',
+                                  style: TextStyle(
+                                    color: BaseColors.textPrimary,
+                                    fontSize: 21,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
                     Expanded(
                       child: Container(
                         decoration: const BoxDecoration(
@@ -99,6 +120,7 @@ class RegisterAppScaffold extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }

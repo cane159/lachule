@@ -1,5 +1,8 @@
+import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:lachule/bases/base_controller.dart';
 import 'package:lachule/models/bank.dart';
@@ -9,9 +12,11 @@ import 'package:lachule/models/gender.dart';
 import 'package:lachule/models/prefix.dart';
 import 'package:lachule/models/province.dart';
 import 'package:lachule/models/sub_district.dart';
+import 'package:lachule/routes/app_pages.dart';
 
 class RegisterPageViewController extends BaseController {
   // Register page view variable
+  final _imagePicker = ImagePicker();
   final PageController pageController = PageController();
   final _currentIndex = 0.obs;
   final RxList<PrefixModel> _prefixList = [
@@ -241,6 +246,12 @@ class RegisterPageViewController extends BaseController {
   TextEditingController userAlley = TextEditingController();
   TextEditingController userZipCode = TextEditingController();
 
+  // Document variable
+  XFile? idCardImage;
+  final RxString idCardImagePath = ''.obs;
+  XFile? bookBankImage;
+  final RxString bookBankImagePath = ''.obs;
+
   // Register page view getter
   int get currentIndex => _currentIndex.value;
   List<ProvinceModel> get provinceList => _provinceList;
@@ -250,6 +261,10 @@ class RegisterPageViewController extends BaseController {
   void onTapped(int index, PageController pageViewController) {
     _currentIndex.value = index;
     pageViewController.jumpToPage(index);
+  }
+
+  void onTappedDocumentPage() {
+    Get.toNamed(AppRoutes.REGISTEROTP);
   }
 
   void pressReferralCode(bool value) {
@@ -288,11 +303,12 @@ class RegisterPageViewController extends BaseController {
       userProvince.value = userHouseProvince.value;
       userDistrict.value = userHouseDistrict.value;
       userSubDistrict.value = userHouseSubDistrict.value;
-      userLiveHouseNumber = userHouseNumber;
-      userVillageOrProject = userHouseVillageOrProject;
-      userAlley = userHouseAlley;
-      userZipCode = userHouseZipCode;
-    } else {
+      userLiveHouseNumber.text = userHouseNumber.text;
+      userVillageOrProject.text = userHouseVillageOrProject.text;
+      userAlley.text = userHouseAlley.text;
+      userZipCode.text = userHouseZipCode.text;
+    }
+    if (value == false) {
       userProvince.value = '';
       userDistrict.value = '';
       userSubDistrict.value = '';
@@ -301,5 +317,60 @@ class RegisterPageViewController extends BaseController {
       userAlley.text = '';
       userZipCode.text = '';
     }
+  }
+
+  static String getFileSizeString({required int bytes, int decimals = 0}) {
+    if (bytes <= 0) return "0 Bytes";
+    const suffixes = [" Bytes", " KB", " MB", " GB", " TB"];
+    var i = (log(bytes) / log(1024)).floor();
+    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + suffixes[i];
+  }
+
+  Future<void> getImageIdCardFromGallery() async {
+    final pickedFile = await _imagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      idCardImage = pickedFile;
+      idCardImagePath.value = pickedFile.path;
+      Get.back();
+      print(pickedFile.path);
+    } else {}
+  }
+
+  Future<void> getImageIdCardFromCamera() async {
+    final pickedFile = await _imagePicker.pickImage(
+      source: ImageSource.camera,
+    );
+    if (pickedFile != null) {
+      idCardImage = pickedFile;
+      idCardImagePath.value = pickedFile.path;
+      Get.back();
+      print(pickedFile.path);
+    } else {}
+  }
+
+  Future<void> getImageBookBankFromGallery() async {
+    final pickedFile = await _imagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      bookBankImage = pickedFile;
+      bookBankImagePath.value = pickedFile.path;
+      Get.back();
+      print(pickedFile.path);
+    } else {}
+  }
+
+  Future<void> getImageBookBankFromCamera() async {
+    final pickedFile = await _imagePicker.pickImage(
+      source: ImageSource.camera,
+    );
+    if (pickedFile != null) {
+      bookBankImage = pickedFile;
+      bookBankImagePath.value = pickedFile.path;
+      Get.back();
+      print(pickedFile.path);
+    } else {}
   }
 }

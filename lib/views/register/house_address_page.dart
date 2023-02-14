@@ -127,8 +127,9 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
-                      if (_formKey.currentState!.validate())
-                        {controller.onTapped(4, pageViewController)}
+                      controller.onTapped(4, pageViewController),
+                      // if (_formKey.currentState!.validate())
+                      //   {controller.onTapped(4, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),

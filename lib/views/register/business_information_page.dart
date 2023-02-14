@@ -92,11 +92,12 @@ class BusinessInformationPage extends GetView<RegisterPageViewController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
+                      controller.onTapped(1, pageViewController),
                       print(controller.referralCode.text),
-                      if (controller.isReferralCode.value == true)
-                        {controller.onTapped(1, pageViewController)}
-                      else if (_formKey.currentState!.validate())
-                        {controller.onTapped(1, pageViewController)}
+                      // if (controller.isReferralCode.value == true)
+                      //   {controller.onTapped(1, pageViewController)}
+                      // else if (_formKey.currentState!.validate())
+                      //   {controller.onTapped(1, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),
