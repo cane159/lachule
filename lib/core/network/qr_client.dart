@@ -1,9 +1,11 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lachule/storage/app_prefs.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class Client {
+class QRClient {
   static const int CONNECT_TIMEOUT = 35 * 1000;
   static const int RECEIVE_TIMEOUT = 35 * 1000;
 
@@ -18,17 +20,12 @@ class Client {
   final AppPrefs _appPrefs = Get.find();
 
   /// dio new instants
-  Client() {
+  QRClient() {
     _dio = Dio();
 
     // set options
     _dio.options = BaseOptions(
-      //pod
-      //baseUrl: "http://83.118.28.49/psgt/public/api/v1",
-      //dev
-      //baseUrl: "http://83.118.28.49/dev/psgt/public/api/v1",
-      //uat
-      baseUrl: "http://test.push-gears-mk2.appspot.com/",
+      baseUrl: "https://sandbox-pgw.2c2p.com/",
       connectTimeout: CONNECT_TIMEOUT,
       receiveTimeout: RECEIVE_TIMEOUT,
     );

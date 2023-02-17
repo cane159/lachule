@@ -49,19 +49,64 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                 BottomSheetSelectMenu(
                   title: 'เลือกคำนำหน้าชื่อ',
                   label: 'คำนำหน้าชื่อ *',
-                  onPressed: (value) => controller.onSelectBottomSheet(
-                      value, controller.userPrefix),
+                  onPressed: (value) => {
+                    controller.isUserprefix.value = false,
+                    controller.onSelectBottomSheet(
+                      value,
+                      controller.userPrefix,
+                    ),
+                  },
                   listObject: controller.prefixList,
                   initialValue: controller.userPrefix.value,
+                  borderColor: controller.isUserprefix.value == true
+                      ? Colors.red[600]
+                      : BaseColors.textContent,
                 ),
+                // BottomSheetSelectMenu userPrefix validator
+                controller.isUserprefix.value == true
+                    ? Row(
+                        children: [
+                          Text(
+                            'กรุณากรอกข้อมูล',
+                            style: TextStyle(
+                              color: Colors.red[600],
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )
+                        ],
+                      )
+                    : Container(),
                 BottomSheetSelectMenu(
+                  margin: EdgeInsets.zero,
                   title: 'เลือกเพศ',
                   label: 'เพศ *',
-                  onPressed: (value) => controller.onSelectBottomSheet(
-                      value, controller.userGender),
+                  onPressed: (value) => {
+                    controller.isUserGender.value = false,
+                    controller.onSelectBottomSheet(
+                        value, controller.userGender),
+                  },
                   listObject: controller.genderList,
                   initialValue: controller.userGender.value,
+                  borderColor: controller.isUserGender.value == true
+                      ? Colors.red[600]
+                      : BaseColors.textContent,
                 ),
+                // BottomSheetSelectMenu userGender validator
+                controller.isUserGender.value == true
+                    ? Row(
+                        children: [
+                          Text(
+                            'กรุณากรอกข้อมูล',
+                            style: TextStyle(
+                              color: Colors.red[600],
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )
+                        ],
+                      )
+                    : Container(),
                 AppTextField(
                   controller.userFullName,
                   labelText: 'ชื่อ - นามสกุล *',
@@ -103,6 +148,12 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                       ),
                     ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'กรุณากรอกข้อมูล';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 5,
@@ -150,10 +201,17 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
-                      controller.onTapped(2, pageViewController),
-
-                      // if (_formKey.currentState!.validate())
-                      //   {controller.onTapped(2, pageViewController)}
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                      if (controller.userPrefix.value == '')
+                        {
+                          controller.isUserprefix.value = true,
+                        },
+                      if (controller.userGender.value == '')
+                        {
+                          controller.isUserGender.value = true,
+                        },
+                      if (_formKey.currentState!.validate())
+                        {controller.onTapped(2, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),

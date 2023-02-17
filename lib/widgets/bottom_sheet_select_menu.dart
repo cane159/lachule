@@ -14,6 +14,8 @@ class BottomSheetSelectMenu extends StatelessWidget {
     required this.onPressed,
     required this.initialValue,
     this.isDisable = false,
+    this.margin,
+    this.borderColor,
   });
 
   final String title;
@@ -22,14 +24,19 @@ class BottomSheetSelectMenu extends StatelessWidget {
   Function(String value) onPressed;
   final String initialValue;
   final bool isDisable;
+  final EdgeInsetsGeometry? margin;
+  Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 20),
-      decoration: const BoxDecoration(
+      margin: margin ?? const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(width: 1),
+          bottom: BorderSide(
+            width: 1,
+            color: borderColor ?? BaseColors.textContent,
+          ),
         ),
       ),
       child: IgnorePointer(

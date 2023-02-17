@@ -19,8 +19,9 @@ class AppTextField extends StatefulWidget {
     this.readOnly = false,
     this.enabled = true,
     this.isObscure = true,
-    this.hintText,
     this.validator,
+    this.autovalidateMode,
+    this.inputFormatters,
   }) : super(
           key: key,
         );
@@ -37,8 +38,9 @@ class AppTextField extends StatefulWidget {
   final bool readOnly;
   final bool enabled;
   bool isObscure;
-  final String? hintText;
   final String? Function(String?)? validator;
+  final AutovalidateMode? autovalidateMode;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -68,6 +70,7 @@ class _AppTextFieldState extends State<AppTextField> {
           onChanged: (value) => widget.controller,
           readOnly: widget.readOnly,
           enabled: widget.enabled,
+          inputFormatters: widget.inputFormatters,
           decoration: InputDecoration(
             enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: BaseColors.textContent),
@@ -126,19 +129,7 @@ class _AppTextFieldState extends State<AppTextField> {
           ),
           textInputAction: widget.textInputAction,
           validator: widget.validator,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Text(
-              widget.hintText ?? '',
-              style: const TextStyle(
-                color: BaseColors.btnDisabledPlaceholder,
-                fontSize: 11,
-              ),
-            ),
-          ],
+          autovalidateMode: widget.autovalidateMode,
         ),
       ],
     );

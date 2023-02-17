@@ -155,9 +155,9 @@ class UserAddressPage extends GetView<RegisterPageViewController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
-                      controller.onTapped(5, pageViewController),
-                      // if (_formKey.currentState!.validate())
-                      //   {controller.onTapped(5, pageViewController)}
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                      if (_formKey.currentState!.validate())
+                        {controller.onTapped(5, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),

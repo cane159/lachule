@@ -77,4 +77,8 @@ class HomePageViewController extends BaseController {
     _selectIndex.value = index;
     pageController.jumpToPage(index);
   }
+
+  void pressedCart() {
+    Get.toNamed(AppRoutes.CART);
+  }
 }

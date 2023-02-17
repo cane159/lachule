@@ -205,6 +205,7 @@ class RegisterPageViewController extends BaseController {
   ].obs;
 
   // Business information page varaible
+  final isReferralCodeError = false.obs;
   final isReferralCode = false.obs;
   TextEditingController referralCode = TextEditingController();
   TextEditingController referralName = TextEditingController();
@@ -212,6 +213,8 @@ class RegisterPageViewController extends BaseController {
   // Applicate information variable
   final RxString userPrefix = ''.obs;
   final RxString userGender = ''.obs;
+  final isUserprefix = false.obs;
+  final isUserGender = false.obs;
   TextEditingController userFullName = TextEditingController();
   TextEditingController userBirthDate = TextEditingController();
   TextEditingController userNationality = TextEditingController();
@@ -259,8 +262,17 @@ class RegisterPageViewController extends BaseController {
   List<SubDistrictModel> get subDistrictList => _subDistrictList;
 
   void onTapped(int index, PageController pageViewController) {
-    _currentIndex.value = index;
-    pageViewController.jumpToPage(index);
+    if (userPrefix.value == '') {
+      isUserprefix.value = true;
+    }
+    if (userGender.value == '') {
+      isUserGender.value = true;
+    } else {
+      isUserprefix.value = false;
+      isUserGender.value = false;
+      _currentIndex.value = index;
+      pageViewController.jumpToPage(index);
+    }
   }
 
   void onTappedDocumentPage() {
@@ -285,6 +297,7 @@ class RegisterPageViewController extends BaseController {
       firstDate: DateTime(DateTime.now().year - 100),
       //DateTime.now() - not to allow to choose before today.
       lastDate: DateTime(DateTime.now().year + 1),
+      //locale: const Locale('th', 'TH'),
     );
 
     if (pickedDate != null) {

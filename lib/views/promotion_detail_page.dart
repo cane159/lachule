@@ -15,11 +15,26 @@ class PromotionDetailPage extends GetView<PromotionDetailController> {
   Widget build(BuildContext context) {
     controller.setBuildContext(context);
     return Scaffold(
-      appBar: _appbar(),
-      body: SingleChildScrollView(
-        child: _bodyContent(context),
+      //appBar: _appbar(),
+      body: Stack(
+        children: [
+          _imageBg(),
+          SafeArea(
+            child: SingleChildScrollView(
+              child: _bodyContent(context),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: _bottomNavBar(),
+    );
+  }
+
+  Widget _imageBg() {
+    return Image.asset(
+      ImageAssets.splashBg,
+      fit: BoxFit.fitWidth,
+      width: double.infinity,
     );
   }
 
@@ -46,9 +61,28 @@ class PromotionDetailPage extends GetView<PromotionDetailController> {
     );
   }
 
+  Widget _gobackButton() {
+    return Padding(
+      padding: const EdgeInsets.all(22.0),
+      child: Row(
+        children: const [
+          GoBackbutton(),
+          Text(
+            'รายละเอียด',
+            style: TextStyle(
+              color: BaseColors.textPrimary,
+              fontSize: 21,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _bodyContent(BuildContext context) {
     return Column(
       children: <Widget>[
+        _gobackButton(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

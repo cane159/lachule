@@ -190,47 +190,53 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          IconAssets.colorsWatch,
-                          width: 14,
-                          height: 14,
-                          fit: BoxFit.fitWidth,
-                        ),
-                        const SizedBox(
-                          width: 7,
-                        ),
-                        const Text(
-                          'ผลิตภัณฑ์ทำความสะอาด',
-                          style: TextStyle(
-                            color: BaseColors.secondaryRed,
-                            fontSize: 12,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            IconAssets.colorsWatch,
+                            width: 14,
+                            height: 14,
+                            fit: BoxFit.fitWidth,
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            width: 7,
+                          ),
+                          const Text(
+                            'ผลิตภัณฑ์ทำความสะอาด',
+                            style: TextStyle(
+                              color: BaseColors.secondaryRed,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const Divider(
                       thickness: 1.5,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          'ราาคา',
-                          style: TextStyle(
-                            color: BaseColors.tabTitle,
-                            fontSize: BaseSizes.fontH4,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text(
+                            'ราาคา',
+                            style: TextStyle(
+                              color: BaseColors.tabTitle,
+                              fontSize: BaseSizes.fontH4,
+                            ),
                           ),
-                        ),
-                        Text(
-                          'คะแนนสะสม',
-                          style: TextStyle(
-                            color: BaseColors.tabTitle,
-                            fontSize: BaseSizes.fontH4,
+                          Text(
+                            'คะแนนสะสม',
+                            style: TextStyle(
+                              color: BaseColors.tabTitle,
+                              fontSize: BaseSizes.fontH4,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -282,6 +288,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
             style: ElevatedButton.styleFrom(
               backgroundColor: BaseColors.white,
               elevation: 0,
+              padding: EdgeInsets.zero,
             ),
             onPressed: () => controller.pressDescription(0),
             child: Container(
@@ -311,6 +318,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
             style: ElevatedButton.styleFrom(
               backgroundColor: BaseColors.white,
               elevation: 0,
+              padding: EdgeInsets.zero,
             ),
             onPressed: () => controller.pressDescription(1),
             child: Container(
@@ -340,6 +348,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
             style: ElevatedButton.styleFrom(
               backgroundColor: BaseColors.white,
               elevation: 0,
+              padding: EdgeInsets.zero,
             ),
             onPressed: () => controller.pressDescription(2),
             child: Container(
@@ -381,7 +390,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           fontSize: BaseSizes.fontBody1,
           color: BaseColors.textPrimary,
         ),
-        textAlign: TextAlign.justify,
+        textAlign: TextAlign.left,
       ),
     );
   }
@@ -397,7 +406,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           fontSize: BaseSizes.fontBody1,
           color: BaseColors.textPrimary,
         ),
-        textAlign: TextAlign.justify,
+        textAlign: TextAlign.left,
       ),
     );
   }
@@ -413,7 +422,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           fontSize: BaseSizes.fontBody1,
           color: BaseColors.textPrimary,
         ),
-        textAlign: TextAlign.justify,
+        textAlign: TextAlign.left,
       ),
     );
   }

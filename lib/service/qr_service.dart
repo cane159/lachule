@@ -1,26 +1,41 @@
 import 'package:get/get.dart';
 import 'package:lachule/core/network/noti_client.dart';
+import 'package:lachule/core/network/qr_client.dart';
 import 'package:lachule/models/app_response.dart';
 import 'package:lachule/models/pushgear_history.dart';
 import 'package:lachule/models/pushgear_response.dart';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
-class NotificationService {
-  final NotiClient _client = Get.find();
+class QRService {
+  final QRClient _client = Get.find();
 
-  Future<PushGearResponse> createDevice({
+  String hs256() {
+    final jwt = JWT(
+      {
+        "merchantID": "JT04",
+        "invoiceNo": "1523953661",
+        "description": "item 1",
+        "amount": 10.00,
+        "currencyCode": "SGD",
+        "paymentChannel": ["THQR"]
+      },
+    );
+    return jwt.sign(
+      SecretKey(
+          'CD229682D3297390B9F66FF4020B758F4A5E625AF4992E5D75D311D6458B38E2'),
+    );
+  }
+
+  Future<PushGearResponse> getPaymentToken({
     required String userID,
     required String deviceToken,
   }) async {
     try {
       final response = await _client.post(
-        '/application_user/$userID/add_device/',
+        '/payment/4.1/paymentToken',
         data: {
-          'app_id': '36f2b310-5f15-11ed-81ad-5fded184eaa2-0A4lB0TT1pyGJuMe',
-          'app_secret':
-              'NhKiDpEDdFi1TbHmWn5jdSiV6C29y9igHXqoAlAbfueTQtbC87OPo5Ly3YGjaxCx',
-          'device_token': deviceToken,
+          'payload': hs256(),
         },
-        // isAuth: true,
       );
       return PushGearResponse.fromJson(response);
     } catch (e) {

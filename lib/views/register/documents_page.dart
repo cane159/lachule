@@ -499,9 +499,9 @@ class DocumentPage extends GetView<RegisterPageViewController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
-                      controller.onTappedDocumentPage(),
-                      // if (_formKey.currentState!.validate())
-                      //   {controller.onTapped(6, pageViewController)}
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                      if (_formKey.currentState!.validate())
+                        {controller.onTapped(6, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),

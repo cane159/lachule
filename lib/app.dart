@@ -135,6 +135,7 @@ class _AppState extends State<App> {
       defaultTransition: Transition.fade,
       transitionDuration: const Duration(microseconds: 500),
       initialBinding: MainBinding(),
+      locale: const Locale('th', 'TH'),
     );
   }
 }

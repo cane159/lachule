@@ -42,6 +42,16 @@ class HomePageView extends GetView<HomePageViewController> {
       centerTitle: false,
       automaticallyImplyLeading: false,
       actions: <Widget>[
+        IconButton(
+          onPressed: () => controller.pressedCart(),
+          icon: Image.asset(
+            IconAssets.bagHappy,
+            width: 24,
+            height: 24,
+            fit: BoxFit.fitWidth,
+            color: BaseColors.white,
+          ),
+        ),
         Image.asset(ImageAssets.userAppbar),
       ],
       title: Row(
