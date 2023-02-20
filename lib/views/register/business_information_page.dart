@@ -116,9 +116,9 @@ class BusinessInformationPage extends GetView<RegisterPageViewController> {
                     onPressed: () => {
                       FocusManager.instance.primaryFocus?.unfocus(),
                       if (controller.isReferralCode.value == true)
-                        {controller.onTapped(1, pageViewController)}
+                        {controller.onTappedBusiness(1, pageViewController)}
                       else if (_formKey.currentState!.validate())
-                        {controller.onTapped(1, pageViewController)}
+                        {controller.onTappedBusiness(1, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),

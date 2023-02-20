@@ -48,12 +48,36 @@ class BenefitInformationPage extends GetView<RegisterPageViewController> {
                 ),
                 BottomSheetSelectMenu(
                   title: 'เลือกธนาคาร',
+                  margin: const EdgeInsets.only(top: 15),
                   label: 'ธนาคาร *',
-                  onPressed: (value) => controller.onSelectBottomSheet(
-                      value, controller.userBank),
+                  onPressed: (value) => {
+                    controller.isUserBank.value = false,
+                    controller.onSelectBottomSheet(value, controller.userBank),
+                  },
+                  borderColor: controller.isUserBank.value == true
+                      ? Colors.red[600]
+                      : BaseColors.textContent,
                   listObject: controller.bankList,
                   initialValue: controller.userBank.value,
                 ),
+                // BottomSheetSelectMenu userBank validator
+                controller.isUserBank.value == true
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'กรุณากรอกข้อมูล',
+                              style: TextStyle(
+                                color: Colors.red[600],
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : Container(),
                 AppTextField(
                   controller.userBankBranch,
                   labelText: 'สาขา *',
@@ -63,15 +87,41 @@ class BenefitInformationPage extends GetView<RegisterPageViewController> {
                     }
                     return null;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 BottomSheetSelectMenu(
                   title: 'เลือกประเภทบัญชี',
+                  margin: const EdgeInsets.only(top: 15),
                   label: 'ประเภทบัญชี *',
-                  onPressed: (value) => controller.onSelectBottomSheet(
-                      value, controller.userBankAccountType),
+                  onPressed: (value) => {
+                    controller.isUserBankAccountType.value = false,
+                    controller.onSelectBottomSheet(
+                        value, controller.userBankAccountType),
+                  },
+                  borderColor: controller.isUserBankAccountType.value == true
+                      ? Colors.red[600]
+                      : BaseColors.textContent,
                   listObject: controller.bankAccountTypeList,
                   initialValue: controller.userBankAccountType.value,
                 ),
+                // BottomSheetSelectMenu userBankAccountType validator
+                controller.isUserBankAccountType.value == true
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'กรุณากรอกข้อมูล',
+                              style: TextStyle(
+                                color: Colors.red[600],
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : Container(),
                 AppTextField(
                   controller.userBankAccountNumber,
                   labelText: 'เลขบัญชี *',
@@ -81,6 +131,7 @@ class BenefitInformationPage extends GetView<RegisterPageViewController> {
                     }
                     return null;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 AppTextField(
                   controller.userBankAccountName,
@@ -91,6 +142,7 @@ class BenefitInformationPage extends GetView<RegisterPageViewController> {
                     }
                     return null;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 20),
@@ -98,8 +150,18 @@ class BenefitInformationPage extends GetView<RegisterPageViewController> {
                   child: PrimaryButtonView(
                     onPressed: () => {
                       FocusManager.instance.primaryFocus?.unfocus(),
+                      if (controller.userBank.value == '')
+                        {
+                          controller.isUserBank.value = true,
+                        },
+                      if (controller.userBankAccountType.value == '')
+                        {
+                          controller.isUserBankAccountType.value = true,
+                        },
                       if (_formKey.currentState!.validate())
-                        {controller.onTapped(3, pageViewController)}
+                        {
+                          controller.onTappedBenefit(3, pageViewController),
+                        }
                     },
                     title: 'ถัดไป',
                   ),

@@ -226,6 +226,8 @@ class RegisterPageViewController extends BaseController {
   // Benefit information variable
   final RxString userBank = ''.obs;
   final RxString userBankAccountType = ''.obs;
+  final isUserBank = false.obs;
+  final isUserBankAccountType = false.obs;
   TextEditingController userBankBranch = TextEditingController();
   TextEditingController userBankAccountNumber = TextEditingController();
   TextEditingController userBankAccountName = TextEditingController();
@@ -234,6 +236,9 @@ class RegisterPageViewController extends BaseController {
   final RxString userHouseProvince = ''.obs;
   final RxString userHouseDistrict = ''.obs;
   final RxString userHouseSubDistrict = ''.obs;
+  final isUserHouseProvince = false.obs;
+  final isUserHouseDistrict = false.obs;
+  final isUserHouseSubDistrict = false.obs;
   TextEditingController userHouseNumber = TextEditingController();
   TextEditingController userHouseVillageOrProject = TextEditingController();
   TextEditingController userHouseAlley = TextEditingController();
@@ -244,6 +249,9 @@ class RegisterPageViewController extends BaseController {
   final RxString userProvince = ''.obs;
   final RxString userDistrict = ''.obs;
   final RxString userSubDistrict = ''.obs;
+  final isUserProvince = false.obs;
+  final isUserDistrict = false.obs;
+  final isUserSubDistrict = false.obs;
   TextEditingController userLiveHouseNumber = TextEditingController();
   TextEditingController userVillageOrProject = TextEditingController();
   TextEditingController userAlley = TextEditingController();
@@ -252,8 +260,10 @@ class RegisterPageViewController extends BaseController {
   // Document variable
   XFile? idCardImage;
   final RxString idCardImagePath = ''.obs;
+  final isIdcardImage = false.obs;
   XFile? bookBankImage;
   final RxString bookBankImagePath = ''.obs;
+  final isBookBankImage = false.obs;
 
   // Register page view getter
   int get currentIndex => _currentIndex.value;
@@ -262,6 +272,11 @@ class RegisterPageViewController extends BaseController {
   List<SubDistrictModel> get subDistrictList => _subDistrictList;
 
   void onTapped(int index, PageController pageViewController) {
+    _currentIndex.value = index;
+    pageViewController.jumpToPage(index);
+  }
+
+  void onTappedApplicant(int index, PageController pageViewController) {
     if (userPrefix.value == '') {
       isUserprefix.value = true;
     }
@@ -273,6 +288,57 @@ class RegisterPageViewController extends BaseController {
       _currentIndex.value = index;
       pageViewController.jumpToPage(index);
     }
+  }
+
+  void onTappedBenefit(int index, PageController pageViewController) {
+    if (userBank.value == '') {
+      isUserBank.value = true;
+    }
+    if (userBankAccountType.value == '') {
+      isUserBankAccountType.value = true;
+    } else {
+      isUserBank.value = false;
+      isUserBankAccountType.value = false;
+      _currentIndex.value = index;
+      pageViewController.jumpToPage(index);
+    }
+  }
+
+  void onTappedHourseAddress(int index, PageController pageViewController) {
+    if (userHouseProvince.value == '') {
+      isUserHouseProvince.value = true;
+    } else if (userHouseDistrict.value == '') {
+      isUserHouseDistrict.value = true;
+    } else if (userHouseSubDistrict.value == '') {
+      isUserHouseSubDistrict.value = true;
+    } else {
+      isUserHouseProvince.value = false;
+      isUserHouseDistrict.value = false;
+      isUserHouseSubDistrict.value = false;
+      _currentIndex.value = index;
+      pageViewController.jumpToPage(index);
+    }
+  }
+
+  void onTappedUserAddress(int index, PageController pageViewController) {
+    if (userProvince.value == '') {
+      isUserProvince.value = true;
+    } else if (userDistrict.value == '') {
+      isUserDistrict.value = true;
+    } else if (userSubDistrict.value == '') {
+      isUserSubDistrict.value = true;
+    } else {
+      isUserProvince.value = false;
+      isUserDistrict.value = false;
+      isUserSubDistrict.value = false;
+      _currentIndex.value = index;
+      pageViewController.jumpToPage(index);
+    }
+  }
+
+  void onTappedBusiness(int index, PageController pageViewController) {
+    _currentIndex.value = index;
+    pageViewController.jumpToPage(index);
   }
 
   void onTappedDocumentPage() {
@@ -344,6 +410,7 @@ class RegisterPageViewController extends BaseController {
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
+      isIdcardImage.value = false;
       idCardImage = pickedFile;
       idCardImagePath.value = pickedFile.path;
       Get.back();
@@ -356,6 +423,7 @@ class RegisterPageViewController extends BaseController {
       source: ImageSource.camera,
     );
     if (pickedFile != null) {
+      isIdcardImage.value = false;
       idCardImage = pickedFile;
       idCardImagePath.value = pickedFile.path;
       Get.back();
@@ -368,6 +436,7 @@ class RegisterPageViewController extends BaseController {
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
+      isBookBankImage.value = false;
       bookBankImage = pickedFile;
       bookBankImagePath.value = pickedFile.path;
       Get.back();
@@ -380,6 +449,7 @@ class RegisterPageViewController extends BaseController {
       source: ImageSource.camera,
     );
     if (pickedFile != null) {
+      isBookBankImage.value = false;
       bookBankImage = pickedFile;
       bookBankImagePath.value = pickedFile.path;
       Get.back();

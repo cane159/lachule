@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
@@ -94,17 +95,20 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                 ),
                 // BottomSheetSelectMenu userGender validator
                 controller.isUserGender.value == true
-                    ? Row(
-                        children: [
-                          Text(
-                            'กรุณากรอกข้อมูล',
-                            style: TextStyle(
-                              color: Colors.red[600],
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          )
-                        ],
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'กรุณากรอกข้อมูล',
+                              style: TextStyle(
+                                color: Colors.red[600],
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
+                        ),
                       )
                     : Container(),
                 AppTextField(
@@ -116,6 +120,7 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                     }
                     return null;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 TextFormField(
                   controller: controller.userBirthDate,
@@ -148,6 +153,7 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                       ),
                     ),
                   ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'กรุณากรอกข้อมูล';
@@ -167,6 +173,7 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                     }
                     return null;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 AppTextField(
                   controller.userIdCard,
@@ -177,6 +184,7 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                     }
                     return null;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 AppTextField(
                   controller.userHomePhone,
@@ -185,12 +193,17 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                 AppTextField(
                   controller.userPhoneNumber,
                   labelText: 'โทรศัพท์มือถือ *',
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'กรุณากรอกข้อมูล';
                     }
                     return null;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  textInputType: TextInputType.phone,
                 ),
                 AppTextField(
                   controller.userLineId,
@@ -211,7 +224,9 @@ class ApplicantInformationPage extends GetView<RegisterPageViewController> {
                           controller.isUserGender.value = true,
                         },
                       if (_formKey.currentState!.validate())
-                        {controller.onTapped(2, pageViewController)}
+                        {
+                          controller.onTappedApplicant(2, pageViewController),
+                        }
                     },
                     title: 'ถัดไป',
                   ),
