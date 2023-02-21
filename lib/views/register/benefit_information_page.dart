@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
@@ -125,6 +126,10 @@ class BenefitInformationPage extends GetView<RegisterPageViewController> {
                 AppTextField(
                   controller.userBankAccountNumber,
                   labelText: 'เลขบัญชี *',
+                  textInputType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'กรุณากรอกข้อมูล';

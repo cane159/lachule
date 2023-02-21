@@ -97,7 +97,7 @@ class DocumentPage extends GetView<RegisterPageViewController> {
                             ),
                             GestureDetector(
                               onTap: () =>
-                                  controller.getImageIdCardFromGallery(),
+                                  {controller.getImageIdCardFromGallery()},
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 10,

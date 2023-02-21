@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:lachule/bases/base_assets.dart';
+import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_controller.dart';
+import 'package:lachule/bases/base_sizes.dart';
 import 'package:lachule/models/bank.dart';
 import 'package:lachule/models/bank_account_type.dart';
 import 'package:lachule/models/district.dart';
@@ -13,6 +16,7 @@ import 'package:lachule/models/prefix.dart';
 import 'package:lachule/models/province.dart';
 import 'package:lachule/models/sub_district.dart';
 import 'package:lachule/routes/app_pages.dart';
+import 'package:lachule/widgets/button/outline_button.dart';
 
 class RegisterPageViewController extends BaseController {
   // Register page view variable
@@ -258,6 +262,7 @@ class RegisterPageViewController extends BaseController {
   TextEditingController userZipCode = TextEditingController();
 
   // Document variable
+  late RxObjectMixin _pickImageError;
   XFile? idCardImage;
   final RxString idCardImagePath = ''.obs;
   final isIdcardImage = false.obs;
@@ -405,55 +410,147 @@ class RegisterPageViewController extends BaseController {
     return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + suffixes[i];
   }
 
-  Future<void> getImageIdCardFromGallery() async {
-    final pickedFile = await _imagePicker.pickImage(
-      source: ImageSource.gallery,
+  Future<dynamic> _imagePickerError() {
+    return Get.bottomSheet(
+      Container(
+        padding: const EdgeInsets.fromLTRB(20, 35, 20, 20),
+        width: Get.width,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+          color: BaseColors.white,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              IconAssets.closeCircle,
+              width: 60,
+              fit: BoxFit.fitWidth,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.0),
+              child: Text(
+                'อัปโหลดไม่สำเร็จ',
+                style: TextStyle(
+                  color: BaseColors.falseError,
+                  fontSize: 21,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: Text(
+                'ไฟล์ที่อัพโหลดอาจไม่ตรงกับที่ระบุไว้ หรือมีขนาดใหญ่เกินไป กรุณาอัพโหลดใหม่อีกครั้ง',
+                style: TextStyle(
+                  color: BaseColors.textPrimary,
+                  fontSize: BaseSizes.fontH4,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+                    child: OutlinedButtonView(
+                      onPressed: () => {
+                        Get.back(),
+                      },
+                      title: 'รับทราบ',
+                      borderColor: BaseColors.btnDisabledPlaceholder,
+                      textStyle: const TextStyle(
+                        color: BaseColors.textPrimary,
+                        fontSize: BaseSizes.fontH4,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
-    if (pickedFile != null) {
-      isIdcardImage.value = false;
-      idCardImage = pickedFile;
-      idCardImagePath.value = pickedFile.path;
+  }
+
+  Future<void> getImageIdCardFromGallery() async {
+    try {
+      final pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
+      if (pickedFile != null) {
+        isIdcardImage.value = false;
+        idCardImage = pickedFile;
+        idCardImagePath.value = pickedFile.path;
+        Get.back();
+        print(pickedFile.path);
+      } else {}
+    } catch (e) {
       Get.back();
-      print(pickedFile.path);
-    } else {}
+      _imagePickerError();
+      _pickImageError.value = e;
+    }
   }
 
   Future<void> getImageIdCardFromCamera() async {
-    final pickedFile = await _imagePicker.pickImage(
-      source: ImageSource.camera,
-    );
-    if (pickedFile != null) {
-      isIdcardImage.value = false;
-      idCardImage = pickedFile;
-      idCardImagePath.value = pickedFile.path;
+    try {
+      final pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.camera,
+      );
+      if (pickedFile != null) {
+        isIdcardImage.value = false;
+        idCardImage = pickedFile;
+        idCardImagePath.value = pickedFile.path;
+        Get.back();
+        print(pickedFile.path);
+      } else {}
+    } catch (e) {
       Get.back();
-      print(pickedFile.path);
-    } else {}
+      _imagePickerError();
+      _pickImageError.value = e;
+    }
   }
 
   Future<void> getImageBookBankFromGallery() async {
-    final pickedFile = await _imagePicker.pickImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedFile != null) {
-      isBookBankImage.value = false;
-      bookBankImage = pickedFile;
-      bookBankImagePath.value = pickedFile.path;
+    try {
+      final pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
+      if (pickedFile != null) {
+        isBookBankImage.value = false;
+        bookBankImage = pickedFile;
+        bookBankImagePath.value = pickedFile.path;
+        Get.back();
+        print(pickedFile.path);
+      } else {}
+    } catch (e) {
       Get.back();
-      print(pickedFile.path);
-    } else {}
+      _imagePickerError();
+      _pickImageError.value = e;
+    }
   }
 
   Future<void> getImageBookBankFromCamera() async {
-    final pickedFile = await _imagePicker.pickImage(
-      source: ImageSource.camera,
-    );
-    if (pickedFile != null) {
-      isBookBankImage.value = false;
-      bookBankImage = pickedFile;
-      bookBankImagePath.value = pickedFile.path;
+    try {
+      final pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.camera,
+      );
+      if (pickedFile != null) {
+        isBookBankImage.value = false;
+        bookBankImage = pickedFile;
+        bookBankImagePath.value = pickedFile.path;
+        Get.back();
+        print(pickedFile.path);
+      } else {}
+    } catch (e) {
       Get.back();
-      print(pickedFile.path);
-    } else {}
+      _imagePickerError();
+      _pickImageError.value = e;
+    }
   }
 }

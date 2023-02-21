@@ -47,5 +47,6 @@ class IconAssets {
   static const userTick = "assets/icons/usertick_icon.png";
   static const attachFile = "assets/icons/attach_file_icon.png";
   static const check = "assets/icons/check_icon.png";
+  static const closeCircle = "assets/icons/closecircle_icon.png";
   IconAssets._();
 }
