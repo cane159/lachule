@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:lachule/core/network/noti_client.dart';
 import 'package:lachule/core/network/qr_client.dart';
 import 'package:lachule/models/app_response.dart';
+import 'package:lachule/models/payment_token.dart';
 import 'package:lachule/models/pushgear_history.dart';
 import 'package:lachule/models/pushgear_response.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
@@ -26,10 +27,7 @@ class QRService {
     );
   }
 
-  Future<PushGearResponse> getPaymentToken({
-    required String userID,
-    required String deviceToken,
-  }) async {
+  Future<PaymentToken> getPaymentToken() async {
     try {
       final response = await _client.post(
         '/payment/4.1/paymentToken',
@@ -37,18 +35,7 @@ class QRService {
           'payload': hs256(),
         },
       );
-      return PushGearResponse.fromJson(response);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<PushgearsHistory> getHistory() async {
-    try {
-      final response = await _client.get(
-        '/push_message/?user=pushgears_dev_1234',
-      );
-      return PushgearsHistory.fromJson(response);
+      return PaymentToken.fromJson(response);
     } catch (e) {
       rethrow;
     }

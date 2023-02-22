@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lachule/bases/base_controller.dart';
 import 'package:lachule/models/cart_item.dart';
+import 'package:lachule/service/qr_service.dart';
 
 class CartController extends BaseController {
+  final QRService _qrService = Get.find();
+
   final formatCurrency = NumberFormat("#,##0.00", "th_TH");
   final ScrollController scrollController = ScrollController();
   final userAddresss = '888 ถ. รัชดาภิเษก ดินแดง เขตดินแดง กรุงเทพมหานคร 10400';
@@ -45,5 +48,10 @@ class CartController extends BaseController {
     } else {
       _cartItem[index].amount.value = _cartItem[index].amount.value - 1;
     }
+  }
+
+  void pressedBuy() async {
+    var response = await _qrService.getPaymentToken();
+    print(response);
   }
 }

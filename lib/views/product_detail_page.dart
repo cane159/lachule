@@ -14,15 +14,13 @@ class ProductDetailPage extends GetView<ProductDetailController> {
   @override
   Widget build(BuildContext context) {
     controller.setBuildContext(context);
-    return Obx(
-      () => Scaffold(
-        backgroundColor: BaseColors.btnInput,
-        appBar: _appbar(),
-        body: SingleChildScrollView(
-          child: _bodyContent(context),
-        ),
-        bottomNavigationBar: _bottomNavBar(),
+    return Scaffold(
+      backgroundColor: BaseColors.btnInput,
+      appBar: _appbar(),
+      body: SingleChildScrollView(
+        child: _bodyContent(context),
       ),
+      bottomNavigationBar: _bottomNavBar(),
     );
   }
 
@@ -263,14 +261,18 @@ class ProductDetailPage extends GetView<ProductDetailController> {
               const Divider(
                 thickness: 1.5,
               ),
-              _descriptionBar(),
-              if (controller.descriptionIndex == 0) ...[
-                _descriptionBody(),
-              ] else if (controller.descriptionIndex == 1) ...[
-                _specificationsBody(),
-              ] else if (controller.descriptionIndex == 2) ...[
-                _howToUseBody(),
-              ]
+              const SizedBox(
+                height: 15,
+              ),
+              _descriptionBody(),
+              // _descriptionBar(),
+              // if (controller.descriptionIndex == 0) ...[
+              //   _descriptionBody(),
+              // ] else if (controller.descriptionIndex == 1) ...[
+              //   _specificationsBody(),
+              // ] else if (controller.descriptionIndex == 2) ...[
+              //   _howToUseBody(),
+              // ]
             ],
           ),
         ),

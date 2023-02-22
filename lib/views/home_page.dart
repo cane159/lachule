@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/controllers/home_controller.dart';
+import 'package:lachule/routes/app_pages.dart';
 import 'package:lachule/widgets/appbar_scaffold.dart';
 import 'package:lachule/widgets/dismissible_keyboard.dart';
 import 'package:lachule/widgets/item_carousel.dart';
@@ -83,30 +84,33 @@ class HomePage extends GetView<HomeController> {
                   .map(
                     (image) => ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        image,
-                        fit: BoxFit.fitWidth,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return const Center(
-                            child: SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                        },
-                        errorBuilder: (context, error, stackTrace) {
-                          return const Center(
-                            child: SizedBox(
-                              height: 50,
-                              width: 50,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 4,
+                      child: GestureDetector(
+                        onTap: () => Get.toNamed(AppRoutes.PROMOTIONDETAIL),
+                        child: Image.network(
+                          image,
+                          fit: BoxFit.fitWidth,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return const Center(
+                              child: SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: CircularProgressIndicator(),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Center(
+                              child: SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 4,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   )
@@ -120,7 +124,7 @@ class HomePage extends GetView<HomeController> {
                 .entries
                 .map(
                   (index) => GestureDetector(
-                    onTap: () => _carouselController.animateToPage(index.key),
+                    //onTap: () => _carouselController.animateToPage(index.key),
                     child: Container(
                       width: 8.0,
                       height: 8.0,
@@ -161,7 +165,7 @@ class HomePage extends GetView<HomeController> {
             header: 'โปรโมชั่น',
             leadingIcon: IconAssets.promotion,
             carouselItem: controller.promotionList,
-            pressItem: () => controller.pressPromotion(),
+            pressItem: () => controller.pressProduct(),
           ),
           ItemCarousel(
             header: 'สินค้าขายดี',
@@ -174,6 +178,7 @@ class HomePage extends GetView<HomeController> {
             header: 'สินค้าแนะนำ',
             leadingIcon: IconAssets.recommend,
             carouselItem: controller.recommendGoodsList,
+            pressItem: () => controller.pressProduct(),
           ),
         ],
       ),

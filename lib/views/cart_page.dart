@@ -377,42 +377,44 @@ class CartPage extends GetView<CartController> {
   }
 
   Widget _bottomNavBar() {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(20),
-      ),
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 22,
-          vertical: 14,
+    return SafeArea(
+      child: ClipRRect(
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(20),
         ),
-        decoration: BoxDecoration(
-          color: BaseColors.white,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 22,
+            vertical: 14,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              spreadRadius: 8,
-              blurRadius: 7,
-              offset: const Offset(0, -1),
+          decoration: BoxDecoration(
+            color: BaseColors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: PrimaryButtonView(
-                onPressed: () => {},
-                title: 'ซื้อสินค้า',
-                prefixIcon: Image.asset(
-                  IconAssets.moneySend,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                spreadRadius: 8,
+                blurRadius: 7,
+                offset: const Offset(0, -1),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: PrimaryButtonView(
+                  onPressed: () => {controller.pressedBuy()},
+                  title: 'ซื้อสินค้า',
+                  prefixIcon: Image.asset(
+                    IconAssets.moneySend,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
