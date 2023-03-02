@@ -4,8 +4,11 @@ import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
 import 'package:lachule/controllers/home_page_view_controller.dart';
+import 'package:lachule/views/all_product_page.dart';
 import 'package:lachule/views/home_page.dart';
 import 'package:lachule/views/notification_page.dart';
+import 'package:lachule/views/setting/setting_page.dart';
+import 'package:lachule/views/transport_page.dart';
 
 class HomePageView extends GetView<HomePageViewController> {
   const HomePageView({super.key});
@@ -22,10 +25,10 @@ class HomePageView extends GetView<HomePageViewController> {
           allowImplicitScrolling: true,
           children: [
             HomePage(),
-            HomePage(),
-            HomePage(),
+            const AllProductPage(),
+            const TranSportPage(),
             const NotificationPage(),
-            HomePage(),
+            const SettingPage(),
           ],
         ),
         bottomNavigationBar: _bottomNavigationBar(),

@@ -16,7 +16,7 @@ class CartController extends BaseController {
         id: '1',
         name: 'นาโน แอคเน่ ครีม จีพีโฟร์จี',
         image:
-            'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1677456000&Signature=AG38gqp9BdjbDlhIwI6~gA0enlIu9qeZJjTJZkvnWvWAr86ZZjJ~rGl9IGWpoXaH5NjrSlZ6BPGsVDt9~qQYdMfGjLgYmm8E4ndqubhEzLBKqgA0TgPsUkdPAvd3vjeg9sEsP-AgwLsWqehQ-V8YwGAAoriN3uD-vqjsSmB6-912ySclQLmpaq8S9xToeIaD7MptAIWgVjJnyZTzIs856T6qziH5NdWtMI3xRlzSmCon1P2h7SIO9xfy9nQ9ze6iCFhNsFf1izprvhsw3BYUvk9S3J04eb5qj7RJvAS2YKueWSlm1kaY5N2JDc8axqbS5HSykt1~aSc6qsht0iGZ0g__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+            'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678060800&Signature=MTG4ZjIx7NiP-Udx4TwMq1HcevUfxBt2Da0An-cME-p~eQFZx8zJ3QqGPJ-eGpcy1d37XS19QUR1X3H-dI8J-95eB8KkJDOO53ebB~MFOKEoYZRCxI0LSHXsRIRWFVjGj095sPhANz5Lv7MmFmkQmarMJabNN9U6vbknWvgtyriPFdPBnz4l-0mb2Lytr6GKm~N-YipHHHDF9EsHyLie51sA4hXE0-IYz2ercXG7nGsHeqKk9GTpiwMj0hbBpc35vNqnBDXf0x2zJNrdDYPBeti-lkBnqTvK3~GuPTEpNHNu27-p1-7KoRDpT4KSylHRlV8djWSIcGfCL97ZEgOSsA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
         amount: 1.obs,
         price: 1600.00.obs,
         point: 30),
@@ -24,7 +24,7 @@ class CartController extends BaseController {
       id: '2',
       name: 'นาโน ซันสกรีน ครีม จีพีโฟร์จี SPF50 PA+++',
       image:
-          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1677456000&Signature=AG38gqp9BdjbDlhIwI6~gA0enlIu9qeZJjTJZkvnWvWAr86ZZjJ~rGl9IGWpoXaH5NjrSlZ6BPGsVDt9~qQYdMfGjLgYmm8E4ndqubhEzLBKqgA0TgPsUkdPAvd3vjeg9sEsP-AgwLsWqehQ-V8YwGAAoriN3uD-vqjsSmB6-912ySclQLmpaq8S9xToeIaD7MptAIWgVjJnyZTzIs856T6qziH5NdWtMI3xRlzSmCon1P2h7SIO9xfy9nQ9ze6iCFhNsFf1izprvhsw3BYUvk9S3J04eb5qj7RJvAS2YKueWSlm1kaY5N2JDc8axqbS5HSykt1~aSc6qsht0iGZ0g__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678060800&Signature=MTG4ZjIx7NiP-Udx4TwMq1HcevUfxBt2Da0An-cME-p~eQFZx8zJ3QqGPJ-eGpcy1d37XS19QUR1X3H-dI8J-95eB8KkJDOO53ebB~MFOKEoYZRCxI0LSHXsRIRWFVjGj095sPhANz5Lv7MmFmkQmarMJabNN9U6vbknWvgtyriPFdPBnz4l-0mb2Lytr6GKm~N-YipHHHDF9EsHyLie51sA4hXE0-IYz2ercXG7nGsHeqKk9GTpiwMj0hbBpc35vNqnBDXf0x2zJNrdDYPBeti-lkBnqTvK3~GuPTEpNHNu27-p1-7KoRDpT4KSylHRlV8djWSIcGfCL97ZEgOSsA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       amount: 2.obs,
       price: 1250.00.obs,
       point: 50,

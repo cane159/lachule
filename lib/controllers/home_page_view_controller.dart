@@ -20,50 +20,70 @@ class HomePageViewController extends BaseController {
       icon: Image.asset(
         IconAssets.home,
         color: BaseColors.bgImageInputDisabled,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
       label: 'หน้าแรก',
       activeIcon: Image.asset(
         IconAssets.homeFill,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
         IconAssets.shop,
         color: BaseColors.bgImageInputDisabled,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
       label: 'สินค้า',
       activeIcon: Image.asset(
         IconAssets.shopFill,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
         IconAssets.transport,
         color: BaseColors.bgImageInputDisabled,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
       label: 'ขนส่ง',
       activeIcon: Image.asset(
         IconAssets.transport,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
         IconAssets.message,
         color: BaseColors.bgImageInputDisabled,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
       label: 'ข้อความ',
       activeIcon: Image.asset(
         IconAssets.messageFill,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
         IconAssets.setting,
         color: BaseColors.bgImageInputDisabled,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
       label: 'ตั้งค่า',
       activeIcon: Image.asset(
         IconAssets.settingFill,
+        width: 24,
+        fit: BoxFit.fitWidth,
       ),
     ),
   ];

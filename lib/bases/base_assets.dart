@@ -27,6 +27,7 @@ class IconAssets {
   static const messageFill = "assets/icons/message_icon_fill.png";
   static const settingFill = "assets/icons/setting_icon_fill.png";
   static const shopFill = "assets/icons/shop_icon_fill.png";
+  static const transportFill = "assets/icons/transport_icon_fill.png";
   static const transport = "assets/icons/transport_icon.png";
   static const colorsWatch = "assets/icons/colorswatch_icon.png";
   static const bagHappy = "assets/icons/baghappy_icon.png";
@@ -48,5 +49,7 @@ class IconAssets {
   static const attachFile = "assets/icons/attach_file_icon.png";
   static const check = "assets/icons/check_icon.png";
   static const closeCircle = "assets/icons/closecircle_icon.png";
+  static const search = "assets/icons/search_icon.png";
+  static const arrowRight = "assets/icons/arrow_right_icon.png";
   IconAssets._();
 }
