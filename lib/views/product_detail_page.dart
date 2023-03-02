@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
@@ -14,15 +15,13 @@ class ProductDetailPage extends GetView<ProductDetailController> {
   @override
   Widget build(BuildContext context) {
     controller.setBuildContext(context);
-    return Obx(
-      () => Scaffold(
-        backgroundColor: BaseColors.btnInput,
-        appBar: _appbar(),
-        body: SingleChildScrollView(
-          child: _bodyContent(context),
-        ),
-        bottomNavigationBar: _bottomNavBar(),
+    return Scaffold(
+      backgroundColor: BaseColors.btnInput,
+      appBar: _appbar(),
+      body: SingleChildScrollView(
+        child: _bodyContent(context),
       ),
+      bottomNavigationBar: _bottomNavBar(),
     );
   }
 
@@ -89,7 +88,78 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           children: [
             Expanded(
               child: OutlinedButtonView(
-                onPressed: () => {},
+                onPressed: () => {
+                  // Get.bottomSheet(
+                  //   Container(
+                  //     padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  //     width: Get.width,
+                  //     decoration: const BoxDecoration(
+                  //       borderRadius: BorderRadius.vertical(
+                  //         top: Radius.circular(20),
+                  //       ),
+                  //       color: BaseColors.white,
+                  //     ),
+                  //     child: Column(
+                  //       mainAxisSize: MainAxisSize.min,
+                  //       children: [
+                  //         Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: [
+                  //             const Text(
+                  //               'จำนวน',
+                  //               style: TextStyle(
+                  //                   color: BaseColors.textPrimary,
+                  //                   fontSize: BaseSizes.fontH4),
+                  //             ),
+                  //             IconButton(
+                  //               onPressed: () => Get.back(),
+                  //               icon: Image.asset(
+                  //                 IconAssets.close,
+                  //                 width: 24,
+                  //                 fit: BoxFit.fitWidth,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         Padding(
+                  //           padding: const EdgeInsets.only(top: 10),
+                  //           child: Row(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             mainAxisSize: MainAxisSize.max,
+                  //             children: <Widget>[
+                  //               IconButton(
+                  //                 onPressed: () =>
+                  //                     {}, // TODO : wait for connect API
+                  //                 icon: Image.asset(
+                  //                   IconAssets.minus,
+                  //                   width: 50,
+                  //                   fit: BoxFit.fitWidth,
+                  //                 ),
+                  //               ),
+                  //               Expanded(
+                  //                 child: SizedBox(
+                  //                   width: 194,
+                  //                   height: 50,
+                  //                   child: _goodsAmountTextField(),
+                  //                 ),
+                  //               ),
+                  //               IconButton(
+                  //                 onPressed: () =>
+                  //                     {}, // TODO : wait for connect API
+                  //                 icon: Image.asset(
+                  //                   IconAssets.plus,
+                  //                   width: 50,
+                  //                   fit: BoxFit.fitWidth,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                },
                 title: 'ใส่ตะกร้าสินค้า',
                 prefixIcon: Image.asset(
                   IconAssets.bagHappy,
@@ -116,6 +186,43 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _goodsAmountTextField() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextField(
+          //initialValue: controller.cartItem[index].amount.value.toString(),
+          // controller: TextEditingController(
+          //   text: controller.cartItem[index].amount.value.toString(),
+          // ),
+          decoration: const InputDecoration(
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: BaseColors.textPrimary),
+            ),
+          ),
+          minLines: 1,
+          maxLines: 1,
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(3),
+          ],
+          textAlign: TextAlign.center,
+          onChanged: (value) => {
+            // if (value == "")
+            //   {controller.changeCartItemAmount(index, 0)}
+            // else
+            //   {controller.changeCartItemAmount(index, int.parse(value))}
+          },
+          style: const TextStyle(
+            color: BaseColors.textPrimary,
+            fontSize: BaseSizes.fontBody1,
+          ),
+        ),
+      ],
     );
   }
 
@@ -190,47 +297,53 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          IconAssets.colorsWatch,
-                          width: 14,
-                          height: 14,
-                          fit: BoxFit.fitWidth,
-                        ),
-                        const SizedBox(
-                          width: 7,
-                        ),
-                        const Text(
-                          'ผลิตภัณฑ์ทำความสะอาด',
-                          style: TextStyle(
-                            color: BaseColors.secondaryRed,
-                            fontSize: 12,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            IconAssets.colorsWatch,
+                            width: 14,
+                            height: 14,
+                            fit: BoxFit.fitWidth,
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            width: 7,
+                          ),
+                          const Text(
+                            'ผลิตภัณฑ์ทำความสะอาด',
+                            style: TextStyle(
+                              color: BaseColors.secondaryRed,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const Divider(
                       thickness: 1.5,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          'ราาคา',
-                          style: TextStyle(
-                            color: BaseColors.tabTitle,
-                            fontSize: BaseSizes.fontH4,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text(
+                            'ราาคา',
+                            style: TextStyle(
+                              color: BaseColors.tabTitle,
+                              fontSize: BaseSizes.fontH4,
+                            ),
                           ),
-                        ),
-                        Text(
-                          'คะแนนสะสม',
-                          style: TextStyle(
-                            color: BaseColors.tabTitle,
-                            fontSize: BaseSizes.fontH4,
+                          Text(
+                            'คะแนนสะสม',
+                            style: TextStyle(
+                              color: BaseColors.tabTitle,
+                              fontSize: BaseSizes.fontH4,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -257,14 +370,18 @@ class ProductDetailPage extends GetView<ProductDetailController> {
               const Divider(
                 thickness: 1.5,
               ),
-              _descriptionBar(),
-              if (controller.descriptionIndex == 0) ...[
-                _descriptionBody(),
-              ] else if (controller.descriptionIndex == 1) ...[
-                _specificationsBody(),
-              ] else if (controller.descriptionIndex == 2) ...[
-                _howToUseBody(),
-              ]
+              const SizedBox(
+                height: 15,
+              ),
+              _descriptionBody(),
+              // _descriptionBar(),
+              // if (controller.descriptionIndex == 0) ...[
+              //   _descriptionBody(),
+              // ] else if (controller.descriptionIndex == 1) ...[
+              //   _specificationsBody(),
+              // ] else if (controller.descriptionIndex == 2) ...[
+              //   _howToUseBody(),
+              // ]
             ],
           ),
         ),
@@ -282,6 +399,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
             style: ElevatedButton.styleFrom(
               backgroundColor: BaseColors.white,
               elevation: 0,
+              padding: EdgeInsets.zero,
             ),
             onPressed: () => controller.pressDescription(0),
             child: Container(
@@ -311,6 +429,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
             style: ElevatedButton.styleFrom(
               backgroundColor: BaseColors.white,
               elevation: 0,
+              padding: EdgeInsets.zero,
             ),
             onPressed: () => controller.pressDescription(1),
             child: Container(
@@ -340,6 +459,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
             style: ElevatedButton.styleFrom(
               backgroundColor: BaseColors.white,
               elevation: 0,
+              padding: EdgeInsets.zero,
             ),
             onPressed: () => controller.pressDescription(2),
             child: Container(
@@ -381,7 +501,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           fontSize: BaseSizes.fontBody1,
           color: BaseColors.textPrimary,
         ),
-        textAlign: TextAlign.justify,
+        textAlign: TextAlign.left,
       ),
     );
   }
@@ -397,7 +517,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           fontSize: BaseSizes.fontBody1,
           color: BaseColors.textPrimary,
         ),
-        textAlign: TextAlign.justify,
+        textAlign: TextAlign.left,
       ),
     );
   }
@@ -413,7 +533,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           fontSize: BaseSizes.fontBody1,
           color: BaseColors.textPrimary,
         ),
-        textAlign: TextAlign.justify,
+        textAlign: TextAlign.left,
       ),
     );
   }

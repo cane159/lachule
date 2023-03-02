@@ -122,11 +122,14 @@ class TermsOfServicePage extends GetView<TermsOfServiceController> {
                     onChanged: (value) => controller.isPressedAccept(value!),
                   ),
                 ),
-                const Text(
-                  'ฉันอ่านข้อตกลง และเงื่อนไขการให้บริการแล้ว',
-                  style: TextStyle(
-                    fontSize: BaseSizes.fontBody1,
-                    color: BaseColors.textPrimary,
+                const Expanded(
+                  child: Text(
+                    'ฉันอ่านข้อตกลง เงื่อนไขการให้บริการ  และนโยบาย (PDPA) แล้ว',
+                    style: TextStyle(
+                      fontSize: BaseSizes.fontBody1,
+                      color: BaseColors.textPrimary,
+                    ),
+                    maxLines: 2,
                   ),
                 ),
               ],
@@ -139,7 +142,7 @@ class TermsOfServicePage extends GetView<TermsOfServiceController> {
                 Expanded(
                   child: PrimaryButtonView(
                     isDisable: !controller.isAccept,
-                    onPressed: () => Get.toNamed(AppRoutes.PDPA),
+                    onPressed: () => Get.toNamed(AppRoutes.REGISTERPAGEVIEW),
                     title: 'ยอมรับ',
                   ),
                 ),

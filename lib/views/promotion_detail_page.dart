@@ -15,11 +15,26 @@ class PromotionDetailPage extends GetView<PromotionDetailController> {
   Widget build(BuildContext context) {
     controller.setBuildContext(context);
     return Scaffold(
-      appBar: _appbar(),
-      body: SingleChildScrollView(
-        child: _bodyContent(context),
+      //appBar: _appbar(),
+      body: Stack(
+        children: [
+          _imageBg(),
+          SafeArea(
+            child: SingleChildScrollView(
+              child: _bodyContent(context),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: _bottomNavBar(),
+    );
+  }
+
+  Widget _imageBg() {
+    return Image.asset(
+      ImageAssets.splashBg,
+      fit: BoxFit.fitWidth,
+      width: double.infinity,
     );
   }
 
@@ -46,9 +61,28 @@ class PromotionDetailPage extends GetView<PromotionDetailController> {
     );
   }
 
+  Widget _gobackButton() {
+    return Padding(
+      padding: const EdgeInsets.all(22.0),
+      child: Row(
+        children: const [
+          GoBackbutton(),
+          Text(
+            'รายละเอียด',
+            style: TextStyle(
+              color: BaseColors.textPrimary,
+              fontSize: 21,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _bodyContent(BuildContext context) {
     return Column(
       children: <Widget>[
+        _gobackButton(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -108,47 +142,47 @@ class PromotionDetailPage extends GetView<PromotionDetailController> {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          IconAssets.clock,
-                          width: 14,
-                          height: 14,
-                          fit: BoxFit.fitWidth,
-                        ),
-                        const SizedBox(
-                          width: 7,
-                        ),
-                        Text(
-                          DateFormat('dd/MM/yyy').format(
-                            DateTime.parse(controller.promotionDetail.endDate),
-                          ),
-                          style: const TextStyle(
-                            color: BaseColors.tabTitle,
-                            fontSize: 12,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Image.asset(
-                          IconAssets.colorsWatch,
-                          width: 14,
-                          height: 14,
-                          fit: BoxFit.fitWidth,
-                        ),
-                        const SizedBox(
-                          width: 7,
-                        ),
-                        const Text(
-                          'โปรโมชั่น',
-                          style: TextStyle(
-                            color: BaseColors.secondaryRed,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Image.asset(
+                    //       IconAssets.clock,
+                    //       width: 14,
+                    //       height: 14,
+                    //       fit: BoxFit.fitWidth,
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 7,
+                    //     ),
+                    //     Text(
+                    //       DateFormat('dd/MM/yyy').format(
+                    //         DateTime.parse(controller.promotionDetail.endDate),
+                    //       ),
+                    //       style: const TextStyle(
+                    //         color: BaseColors.tabTitle,
+                    //         fontSize: 12,
+                    //       ),
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 20,
+                    //     ),
+                    //     Image.asset(
+                    //       IconAssets.colorsWatch,
+                    //       width: 14,
+                    //       height: 14,
+                    //       fit: BoxFit.fitWidth,
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 7,
+                    //     ),
+                    //     const Text(
+                    //       'โปรโมชั่น',
+                    //       style: TextStyle(
+                    //         color: BaseColors.secondaryRed,
+                    //         fontSize: 12,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     const Divider(
                       thickness: 1.5,
                     ),

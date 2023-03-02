@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:lachule/core/network/client.dart';
+import 'package:lachule/core/network/noti_client.dart';
 import 'package:lachule/models/app_response.dart';
 import 'package:lachule/models/pushgear_history.dart';
 import 'package:lachule/models/pushgear_response.dart';
 
 class NotificationService {
-  final Client _client = Get.find();
+  final NotiClient _client = Get.find();
 
   Future<PushGearResponse> createDevice({
     required String userID,

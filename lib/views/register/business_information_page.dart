@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
@@ -71,17 +72,38 @@ class BusinessInformationPage extends GetView<RegisterPageViewController> {
                   isObscure: controller.isReferralCode.value,
                   enabled: !controller.isReferralCode.value,
                   controller.referralCode,
+                  maxLength: 10,
+                  textInputType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
                   labelText: 'รหัสผู้แนะนำ',
-                  hintText: 'หากไม่มีรหัสผู้แนะนำ ระบบจะทำใส่รหัสของบริษัทให้',
                   validator: controller.isReferralCode.value == false
                       ? (value) {
                           if (value == null || value.isEmpty) {
+                            controller.isReferralCodeError.value = true;
                             return 'กรุณากรอกข้อมูล';
                           }
+                          controller.isReferralCodeError.value = false;
                           return null;
                         }
                       : null,
                 ),
+                controller.isReferralCodeError.value == true
+                    ? Container()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.max,
+                        children: const [
+                          Text(
+                            'หากไม่มีรหัสผู้แนะนำ ระบบจะทำใส่รหัสของบริษัทให้',
+                            style: TextStyle(
+                              color: BaseColors.btnDisabledPlaceholder,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
+                      ),
                 AppTextField(
                   controller.referralName,
                   labelText: 'ชื่อผู้แนะนำ',
@@ -92,12 +114,11 @@ class BusinessInformationPage extends GetView<RegisterPageViewController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
-                      controller.onTapped(1, pageViewController),
-                      print(controller.referralCode.text),
-                      // if (controller.isReferralCode.value == true)
-                      //   {controller.onTapped(1, pageViewController)}
-                      // else if (_formKey.currentState!.validate())
-                      //   {controller.onTapped(1, pageViewController)}
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                      if (controller.isReferralCode.value == true)
+                        {controller.onTappedBusiness(1, pageViewController)}
+                      else if (_formKey.currentState!.validate())
+                        {controller.onTappedBusiness(1, pageViewController)}
                     },
                     title: 'ถัดไป',
                   ),

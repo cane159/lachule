@@ -21,19 +21,19 @@ class CartPage extends GetView<CartController> {
         height: Get.height,
         child: DismissibleKeyboard(
           child: Scaffold(
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    _imageBg(),
-                    Column(
+            body: SingleChildScrollView(
+              child: Stack(
+                children: [
+                  _imageBg(),
+                  SafeArea(
+                    child: Column(
                       children: [
                         _gobackButton(),
                         _bottomSheet(context),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             bottomNavigationBar: _bottomNavBar(),
@@ -119,89 +119,92 @@ class CartPage extends GetView<CartController> {
                             const SizedBox(
                               width: 10,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  children: [
-                                    Image.asset(
-                                      IconAssets.colorsWatch,
-                                      height: 14,
-                                      width: 14,
-                                    ),
-                                    const SizedBox(
-                                      width: 7,
-                                    ),
-                                    const Text(
-                                      'ผลิตภัณฑ์ทำความสะอาด',
-                                      style: TextStyle(
-                                        color: BaseColors.secondaryRed,
-                                        fontSize: BaseSizes.fontBody2,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        IconAssets.colorsWatch,
+                                        height: 14,
+                                        width: 14,
                                       ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 225,
-                                  child: Text(
-                                    data.name,
+                                      const SizedBox(
+                                        width: 7,
+                                      ),
+                                      const Text(
+                                        'ผลิตภัณฑ์ทำความสะอาด',
+                                        style: TextStyle(
+                                          color: BaseColors.secondaryRed,
+                                          fontSize: BaseSizes.fontBody2,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 225,
+                                    child: Text(
+                                      data.name,
+                                      style: const TextStyle(
+                                        color: BaseColors.textPrimary,
+                                        fontSize: BaseSizes.fontBody1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    '฿ ${controller.formatCurrency.format(data.price * data.amount.value)}',
                                     style: const TextStyle(
                                       color: BaseColors.textPrimary,
                                       fontSize: BaseSizes.fontBody1,
-                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                ),
-                                Text(
-                                  '฿ ${controller.formatCurrency.format(data.price * data.amount.value)}',
-                                  style: const TextStyle(
-                                    color: BaseColors.textPrimary,
-                                    fontSize: BaseSizes.fontBody1,
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Row(
+                                      children: <Widget>[
+                                        IconButton(
+                                          onPressed: () => controller.cartMinus(
+                                              controller.cartItem.indexOf(
+                                                  data)), // TODO : wait for connect API
+                                          icon: Image.asset(
+                                            IconAssets.minus,
+                                            width: 28,
+                                            fit: BoxFit.fitWidth,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 48,
+                                          width: 44,
+                                          child: _goodsAmountTextField(
+                                              controller.cartItem
+                                                  .indexOf(data)),
+                                        ),
+                                        IconButton(
+                                          onPressed: () => controller.cartPlus(
+                                              controller.cartItem.indexOf(
+                                                  data)), // TODO : wait for connect API
+                                          icon: Image.asset(
+                                            IconAssets.plus,
+                                            width: 28,
+                                            fit: BoxFit.fitWidth,
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: () =>
+                                              {}, // TODO : wait for connect API
+                                          icon: Image.asset(
+                                            IconAssets.trashCan,
+                                            width: 28,
+                                            fit: BoxFit.fitWidth,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Row(
-                                    children: <Widget>[
-                                      IconButton(
-                                        onPressed: () => controller.cartMinus(
-                                            controller.cartItem.indexOf(
-                                                data)), // TODO : wait for connect API
-                                        icon: Image.asset(
-                                          IconAssets.minus,
-                                          width: 28,
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 48,
-                                        width: 44,
-                                        child: _goodsAmountTextField(
-                                            controller.cartItem.indexOf(data)),
-                                      ),
-                                      IconButton(
-                                        onPressed: () => controller.cartPlus(
-                                            controller.cartItem.indexOf(
-                                                data)), // TODO : wait for connect API
-                                        icon: Image.asset(
-                                          IconAssets.plus,
-                                          width: 28,
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () =>
-                                            {}, // TODO : wait for connect API
-                                        icon: Image.asset(
-                                          IconAssets.trashCan,
-                                          width: 28,
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -209,16 +212,19 @@ class CartPage extends GetView<CartController> {
                     )
                     .toList(),
               ),
-              Row(
-                children: const [
-                  Text(
-                    'ที่อยู่การจัดส่งสินค้า',
-                    style: TextStyle(
-                      color: BaseColors.textPrimary,
-                      fontSize: BaseSizes.fontH4,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Row(
+                  children: const [
+                    Text(
+                      'ที่อยู่การจัดส่งสินค้า',
+                      style: TextStyle(
+                        color: BaseColors.textPrimary,
+                        fontSize: BaseSizes.fontH4,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
@@ -253,7 +259,11 @@ class CartPage extends GetView<CartController> {
                             style: TextStyle(
                               color: BaseColors.primaryRed,
                               fontSize: BaseSizes.fontBody1,
+                              decoration: TextDecoration.underline,
                             ),
+                          ),
+                          const SizedBox(
+                            width: 10,
                           ),
                           Image.asset(
                             IconAssets.locationTick,
@@ -367,42 +377,44 @@ class CartPage extends GetView<CartController> {
   }
 
   Widget _bottomNavBar() {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(20),
-      ),
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 22,
-          vertical: 14,
+    return SafeArea(
+      child: ClipRRect(
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(20),
         ),
-        decoration: BoxDecoration(
-          color: BaseColors.white,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 22,
+            vertical: 14,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              spreadRadius: 8,
-              blurRadius: 7,
-              offset: const Offset(0, -1),
+          decoration: BoxDecoration(
+            color: BaseColors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: PrimaryButtonView(
-                onPressed: () => {},
-                title: 'ซื้อสินค้า',
-                prefixIcon: Image.asset(
-                  IconAssets.moneySend,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                spreadRadius: 8,
+                blurRadius: 7,
+                offset: const Offset(0, -1),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: PrimaryButtonView(
+                  onPressed: () => {controller.pressedBuy()},
+                  title: 'ซื้อสินค้า',
+                  prefixIcon: Image.asset(
+                    IconAssets.moneySend,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -14,14 +14,14 @@ class NotificationPage extends GetView<NotificationController> {
   Widget build(BuildContext context) {
     controller.setBuildContext(context);
     return Obx(
-      () => SafeArea(
-        child: SingleChildScrollView(
-          child: Stack(
-            children: <Widget>[
-              _imageBg(),
-              _notiBody(context),
-            ],
-          ),
+      () => SingleChildScrollView(
+        child: Stack(
+          children: <Widget>[
+            _imageBg(),
+            SafeArea(
+              child: _notiBody(context),
+            ),
+          ],
         ),
       ),
     );

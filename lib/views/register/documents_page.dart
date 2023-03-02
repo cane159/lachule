@@ -97,7 +97,7 @@ class DocumentPage extends GetView<RegisterPageViewController> {
                             ),
                             GestureDetector(
                               onTap: () =>
-                                  controller.getImageIdCardFromGallery(),
+                                  {controller.getImageIdCardFromGallery()},
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 10,
@@ -190,17 +190,30 @@ class DocumentPage extends GetView<RegisterPageViewController> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Text(
-                      'อัปโหลดได้เฉพาะไฟล์ jpg/png จำนวน 1 ไฟล์ ขนาดไม่เกิน 10 Mb. ',
-                      style: TextStyle(
-                          color: BaseColors.btnDisabledPlaceholder,
-                          fontSize: 11),
-                    ),
-                  ],
-                ),
+                controller.isIdcardImage.value == false
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            'อัปโหลดได้เฉพาะไฟล์ jpg/png จำนวน 1 ไฟล์ ขนาดไม่เกิน 10 Mb. ',
+                            style: TextStyle(
+                                color: BaseColors.btnDisabledPlaceholder,
+                                fontSize: 11),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Text(
+                            'กรุณาแนบไฟล์',
+                            style: TextStyle(
+                              color: Colors.red[600],
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
                 controller.idCardImagePath.value != ''
                     ? Container(
                         margin: const EdgeInsets.symmetric(vertical: 20),
@@ -413,17 +426,30 @@ class DocumentPage extends GetView<RegisterPageViewController> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Text(
-                      'อัปโหลดได้เฉพาะไฟล์ jpg/png จำนวน 1 ไฟล์ ขนาดไม่เกิน 10 Mb. ',
-                      style: TextStyle(
-                          color: BaseColors.btnDisabledPlaceholder,
-                          fontSize: 11),
-                    ),
-                  ],
-                ),
+                controller.isBookBankImage.value == false
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            'อัปโหลดได้เฉพาะไฟล์ jpg/png จำนวน 1 ไฟล์ ขนาดไม่เกิน 10 Mb. ',
+                            style: TextStyle(
+                                color: BaseColors.btnDisabledPlaceholder,
+                                fontSize: 11),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Text(
+                            'กรุณาแนบไฟล์',
+                            style: TextStyle(
+                              color: Colors.red[600],
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
                 controller.bookBankImagePath.value != ''
                     ? Container(
                         margin: const EdgeInsets.symmetric(vertical: 20),
@@ -499,9 +525,22 @@ class DocumentPage extends GetView<RegisterPageViewController> {
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
-                      controller.onTappedDocumentPage(),
-                      // if (_formKey.currentState!.validate())
-                      //   {controller.onTapped(6, pageViewController)}
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                      if (controller.idCardImagePath.value == '')
+                        {
+                          controller.isIdcardImage.value = true,
+                        }
+                      else if (controller.bookBankImagePath.value == '')
+                        {
+                          controller.isBookBankImage.value = true,
+                        }
+                      else if (controller.idCardImagePath.value != '' &&
+                          controller.bookBankImagePath.value != '')
+                        {
+                          controller.onTappedDocumentPage(),
+                        }
+                      else
+                        {}
                     },
                     title: 'ถัดไป',
                   ),

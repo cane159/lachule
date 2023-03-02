@@ -55,6 +55,7 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                     }
                     return null;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 AppTextField(
                   controller.userHouseVillageOrProject,
@@ -69,38 +70,85 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                     }
                     return null;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 BottomSheetSelectMenu(
+                  margin: const EdgeInsets.only(top: 15),
                   title: 'จัวหวัด',
                   label: 'จังหวัด *',
                   onPressed: (value) => {
+                    controller.isUserHouseProvince.value = false,
                     controller.onSelectBottomSheet(
                         value, controller.userHouseProvince),
                     controller.userHouseDistrict.value = '',
                     controller.userHouseSubDistrict.value = '',
                   },
+                  borderColor: controller.isUserHouseProvince.value == true
+                      ? Colors.red[600]
+                      : BaseColors.textContent,
                   listObject: controller.provinceList,
                   initialValue: controller.userHouseProvince.value,
                 ),
+                controller.isUserHouseProvince.value == true
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'กรุณากรอกข้อมูล',
+                              style: TextStyle(
+                                color: Colors.red[600],
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : Container(),
                 BottomSheetSelectMenu(
+                  margin: const EdgeInsets.only(top: 15),
                   title: 'อำเภอ / เขต',
                   label: 'อำเภอ / เขต *',
                   isDisable:
                       controller.userHouseProvince.value == '' ? true : false,
                   onPressed: (value) => {
+                    controller.isUserHouseDistrict.value = false,
                     controller.onSelectBottomSheet(
                         value, controller.userHouseDistrict),
                     controller.userHouseSubDistrict.value = '',
                   },
+                  borderColor: controller.isUserHouseDistrict.value == true
+                      ? Colors.red[600]
+                      : BaseColors.textContent,
                   listObject: controller.districtList,
                   initialValue: controller.userHouseDistrict.value,
                 ),
+                controller.isUserHouseDistrict.value == true
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'กรุณากรอกข้อมูล',
+                              style: TextStyle(
+                                color: Colors.red[600],
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : Container(),
                 BottomSheetSelectMenu(
+                  margin: const EdgeInsets.only(top: 15),
                   title: 'ตำบล / แขวง',
                   label: 'ตำบล / แขวง *',
                   isDisable:
                       controller.userHouseDistrict.value == '' ? true : false,
                   onPressed: (value) => {
+                    controller.isUserHouseSubDistrict.value = false,
                     controller.onSelectBottomSheet(
                         value, controller.userHouseSubDistrict),
                     controller.userHouseZipCode.text = controller
@@ -108,9 +156,29 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                             .indexWhere((element) => element.id == value)]
                         .zipCode,
                   },
+                  borderColor: controller.isUserHouseSubDistrict.value == true
+                      ? Colors.red[600]
+                      : BaseColors.textContent,
                   listObject: controller.subDistrictList,
                   initialValue: controller.userHouseSubDistrict.value,
                 ),
+                controller.isUserHouseSubDistrict.value == true
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'กรุณากรอกข้อมูล',
+                              style: TextStyle(
+                                color: Colors.red[600],
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : Container(),
                 AppTextField(
                   controller.userHouseZipCode,
                   labelText: 'รหัสไปรษณีย์ *',
@@ -121,15 +189,30 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                     return null;
                   },
                   readOnly: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 20),
                   width: double.infinity,
                   child: PrimaryButtonView(
                     onPressed: () => {
-                      controller.onTapped(4, pageViewController),
-                      // if (_formKey.currentState!.validate())
-                      //   {controller.onTapped(4, pageViewController)}
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                      if (controller.userHouseProvince.value == '')
+                        {
+                          controller.isUserHouseProvince.value = true,
+                        }
+                      else if (controller.userHouseDistrict.value == '')
+                        {
+                          controller.isUserHouseDistrict.value = true,
+                        }
+                      else if (controller.userHouseSubDistrict.value == '')
+                        {
+                          controller.isUserHouseSubDistrict.value = true,
+                        },
+                      if (_formKey.currentState!.validate())
+                        {
+                          controller.onTapped(4, pageViewController),
+                        }
                     },
                     title: 'ถัดไป',
                   ),

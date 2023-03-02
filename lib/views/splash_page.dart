@@ -18,7 +18,6 @@ class SplashPage extends GetWidget<SplashController> {
         height: Get.height,
         child: Stack(
           children: <Widget>[
-            const BackGround(),
             _splashBg(),
             _splashLogo(),
           ],

@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:lachule/bases/base_assets.dart';
+import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_controller.dart';
+import 'package:lachule/bases/base_sizes.dart';
 import 'package:lachule/models/bank.dart';
 import 'package:lachule/models/bank_account_type.dart';
 import 'package:lachule/models/district.dart';
@@ -13,6 +16,7 @@ import 'package:lachule/models/prefix.dart';
 import 'package:lachule/models/province.dart';
 import 'package:lachule/models/sub_district.dart';
 import 'package:lachule/routes/app_pages.dart';
+import 'package:lachule/widgets/button/outline_button.dart';
 
 class RegisterPageViewController extends BaseController {
   // Register page view variable
@@ -205,6 +209,7 @@ class RegisterPageViewController extends BaseController {
   ].obs;
 
   // Business information page varaible
+  final isReferralCodeError = false.obs;
   final isReferralCode = false.obs;
   TextEditingController referralCode = TextEditingController();
   TextEditingController referralName = TextEditingController();
@@ -212,6 +217,8 @@ class RegisterPageViewController extends BaseController {
   // Applicate information variable
   final RxString userPrefix = ''.obs;
   final RxString userGender = ''.obs;
+  final isUserprefix = false.obs;
+  final isUserGender = false.obs;
   TextEditingController userFullName = TextEditingController();
   TextEditingController userBirthDate = TextEditingController();
   TextEditingController userNationality = TextEditingController();
@@ -223,6 +230,8 @@ class RegisterPageViewController extends BaseController {
   // Benefit information variable
   final RxString userBank = ''.obs;
   final RxString userBankAccountType = ''.obs;
+  final isUserBank = false.obs;
+  final isUserBankAccountType = false.obs;
   TextEditingController userBankBranch = TextEditingController();
   TextEditingController userBankAccountNumber = TextEditingController();
   TextEditingController userBankAccountName = TextEditingController();
@@ -231,6 +240,9 @@ class RegisterPageViewController extends BaseController {
   final RxString userHouseProvince = ''.obs;
   final RxString userHouseDistrict = ''.obs;
   final RxString userHouseSubDistrict = ''.obs;
+  final isUserHouseProvince = false.obs;
+  final isUserHouseDistrict = false.obs;
+  final isUserHouseSubDistrict = false.obs;
   TextEditingController userHouseNumber = TextEditingController();
   TextEditingController userHouseVillageOrProject = TextEditingController();
   TextEditingController userHouseAlley = TextEditingController();
@@ -241,16 +253,22 @@ class RegisterPageViewController extends BaseController {
   final RxString userProvince = ''.obs;
   final RxString userDistrict = ''.obs;
   final RxString userSubDistrict = ''.obs;
+  final isUserProvince = false.obs;
+  final isUserDistrict = false.obs;
+  final isUserSubDistrict = false.obs;
   TextEditingController userLiveHouseNumber = TextEditingController();
   TextEditingController userVillageOrProject = TextEditingController();
   TextEditingController userAlley = TextEditingController();
   TextEditingController userZipCode = TextEditingController();
 
   // Document variable
+  late RxObjectMixin _pickImageError;
   XFile? idCardImage;
   final RxString idCardImagePath = ''.obs;
+  final isIdcardImage = false.obs;
   XFile? bookBankImage;
   final RxString bookBankImagePath = ''.obs;
+  final isBookBankImage = false.obs;
 
   // Register page view getter
   int get currentIndex => _currentIndex.value;
@@ -259,6 +277,71 @@ class RegisterPageViewController extends BaseController {
   List<SubDistrictModel> get subDistrictList => _subDistrictList;
 
   void onTapped(int index, PageController pageViewController) {
+    _currentIndex.value = index;
+    pageViewController.jumpToPage(index);
+  }
+
+  void onTappedApplicant(int index, PageController pageViewController) {
+    if (userPrefix.value == '') {
+      isUserprefix.value = true;
+    }
+    if (userGender.value == '') {
+      isUserGender.value = true;
+    } else {
+      isUserprefix.value = false;
+      isUserGender.value = false;
+      _currentIndex.value = index;
+      pageViewController.jumpToPage(index);
+    }
+  }
+
+  void onTappedBenefit(int index, PageController pageViewController) {
+    if (userBank.value == '') {
+      isUserBank.value = true;
+    }
+    if (userBankAccountType.value == '') {
+      isUserBankAccountType.value = true;
+    } else {
+      isUserBank.value = false;
+      isUserBankAccountType.value = false;
+      _currentIndex.value = index;
+      pageViewController.jumpToPage(index);
+    }
+  }
+
+  void onTappedHourseAddress(int index, PageController pageViewController) {
+    if (userHouseProvince.value == '') {
+      isUserHouseProvince.value = true;
+    } else if (userHouseDistrict.value == '') {
+      isUserHouseDistrict.value = true;
+    } else if (userHouseSubDistrict.value == '') {
+      isUserHouseSubDistrict.value = true;
+    } else {
+      isUserHouseProvince.value = false;
+      isUserHouseDistrict.value = false;
+      isUserHouseSubDistrict.value = false;
+      _currentIndex.value = index;
+      pageViewController.jumpToPage(index);
+    }
+  }
+
+  void onTappedUserAddress(int index, PageController pageViewController) {
+    if (userProvince.value == '') {
+      isUserProvince.value = true;
+    } else if (userDistrict.value == '') {
+      isUserDistrict.value = true;
+    } else if (userSubDistrict.value == '') {
+      isUserSubDistrict.value = true;
+    } else {
+      isUserProvince.value = false;
+      isUserDistrict.value = false;
+      isUserSubDistrict.value = false;
+      _currentIndex.value = index;
+      pageViewController.jumpToPage(index);
+    }
+  }
+
+  void onTappedBusiness(int index, PageController pageViewController) {
     _currentIndex.value = index;
     pageViewController.jumpToPage(index);
   }
@@ -285,6 +368,7 @@ class RegisterPageViewController extends BaseController {
       firstDate: DateTime(DateTime.now().year - 100),
       //DateTime.now() - not to allow to choose before today.
       lastDate: DateTime(DateTime.now().year + 1),
+      //locale: const Locale('th', 'TH'),
     );
 
     if (pickedDate != null) {
@@ -326,51 +410,147 @@ class RegisterPageViewController extends BaseController {
     return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + suffixes[i];
   }
 
-  Future<void> getImageIdCardFromGallery() async {
-    final pickedFile = await _imagePicker.pickImage(
-      source: ImageSource.gallery,
+  Future<dynamic> _imagePickerError() {
+    return Get.bottomSheet(
+      Container(
+        padding: const EdgeInsets.fromLTRB(20, 35, 20, 20),
+        width: Get.width,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+          color: BaseColors.white,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              IconAssets.closeCircle,
+              width: 60,
+              fit: BoxFit.fitWidth,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.0),
+              child: Text(
+                'อัปโหลดไม่สำเร็จ',
+                style: TextStyle(
+                  color: BaseColors.falseError,
+                  fontSize: 21,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: Text(
+                'ไฟล์ที่อัพโหลดอาจไม่ตรงกับที่ระบุไว้ หรือมีขนาดใหญ่เกินไป กรุณาอัพโหลดใหม่อีกครั้ง',
+                style: TextStyle(
+                  color: BaseColors.textPrimary,
+                  fontSize: BaseSizes.fontH4,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+                    child: OutlinedButtonView(
+                      onPressed: () => {
+                        Get.back(),
+                      },
+                      title: 'รับทราบ',
+                      borderColor: BaseColors.btnDisabledPlaceholder,
+                      textStyle: const TextStyle(
+                        color: BaseColors.textPrimary,
+                        fontSize: BaseSizes.fontH4,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
-    if (pickedFile != null) {
-      idCardImage = pickedFile;
-      idCardImagePath.value = pickedFile.path;
+  }
+
+  Future<void> getImageIdCardFromGallery() async {
+    try {
+      final pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
+      if (pickedFile != null) {
+        isIdcardImage.value = false;
+        idCardImage = pickedFile;
+        idCardImagePath.value = pickedFile.path;
+        Get.back();
+        print(pickedFile.path);
+      } else {}
+    } catch (e) {
       Get.back();
-      print(pickedFile.path);
-    } else {}
+      _imagePickerError();
+      _pickImageError.value = e;
+    }
   }
 
   Future<void> getImageIdCardFromCamera() async {
-    final pickedFile = await _imagePicker.pickImage(
-      source: ImageSource.camera,
-    );
-    if (pickedFile != null) {
-      idCardImage = pickedFile;
-      idCardImagePath.value = pickedFile.path;
+    try {
+      final pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.camera,
+      );
+      if (pickedFile != null) {
+        isIdcardImage.value = false;
+        idCardImage = pickedFile;
+        idCardImagePath.value = pickedFile.path;
+        Get.back();
+        print(pickedFile.path);
+      } else {}
+    } catch (e) {
       Get.back();
-      print(pickedFile.path);
-    } else {}
+      _imagePickerError();
+      _pickImageError.value = e;
+    }
   }
 
   Future<void> getImageBookBankFromGallery() async {
-    final pickedFile = await _imagePicker.pickImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedFile != null) {
-      bookBankImage = pickedFile;
-      bookBankImagePath.value = pickedFile.path;
+    try {
+      final pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
+      if (pickedFile != null) {
+        isBookBankImage.value = false;
+        bookBankImage = pickedFile;
+        bookBankImagePath.value = pickedFile.path;
+        Get.back();
+        print(pickedFile.path);
+      } else {}
+    } catch (e) {
       Get.back();
-      print(pickedFile.path);
-    } else {}
+      _imagePickerError();
+      _pickImageError.value = e;
+    }
   }
 
   Future<void> getImageBookBankFromCamera() async {
-    final pickedFile = await _imagePicker.pickImage(
-      source: ImageSource.camera,
-    );
-    if (pickedFile != null) {
-      bookBankImage = pickedFile;
-      bookBankImagePath.value = pickedFile.path;
+    try {
+      final pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.camera,
+      );
+      if (pickedFile != null) {
+        isBookBankImage.value = false;
+        bookBankImage = pickedFile;
+        bookBankImagePath.value = pickedFile.path;
+        Get.back();
+        print(pickedFile.path);
+      } else {}
+    } catch (e) {
       Get.back();
-      print(pickedFile.path);
-    } else {}
+      _imagePickerError();
+      _pickImageError.value = e;
+    }
   }
 }

@@ -5,6 +5,7 @@ class ProductDetailModel extends Object {
   final String description;
   final String specifications;
   final String howToUse;
+  final String tag;
   final double price;
   final int point;
   ProductDetailModel({
@@ -14,6 +15,7 @@ class ProductDetailModel extends Object {
     required this.description,
     required this.specifications,
     required this.howToUse,
+    required this.tag,
     required this.price,
     required this.point,
   });
