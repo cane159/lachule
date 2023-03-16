@@ -11,7 +11,6 @@ class AllProductController extends BaseController {
   @override
   void onInit() {
     // TODO: implement onInit
-    _tagIndex.value = _productTag.length;
     super.onInit();
   }
 
