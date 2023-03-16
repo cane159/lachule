@@ -9,6 +9,7 @@ class ImageAssets {
   static const vipCard = "assets/images/vip_card.png";
   static const fadeOutBg = "assets/images/fade_out_bg.png";
   static const successBg = "assets/images/sucess_bg.png";
+  static const h1ForgotPass = "assets/images/h1_forgot_pass.png";
   ImageAssets._();
 }
 
@@ -34,7 +35,7 @@ class IconAssets {
   static const moneySend = "assets/icons/moneysend_icon.png";
   static const clock = "assets/icons/clock.png";
   static const minus = "assets/icons/minus_icon.png";
-  static const plus = "assets/icons/plus_icon.png";
+  static const plusCirlce = "assets/icons/plus_circle_icon.png";
   static const trashCan = "assets/icons/trash_can_icon.png";
   static const locationTick = "assets/icons/locationtick_icon.png";
   static const briefCase = "assets/icons/briefcase_icon.png";
@@ -51,5 +52,15 @@ class IconAssets {
   static const closeCircle = "assets/icons/closecircle_icon.png";
   static const search = "assets/icons/search_icon.png";
   static const arrowRight = "assets/icons/arrow_right_icon.png";
+  static const plus = "assets/icons/plus_icon.png";
+  static const trashRed = "assets/icons/trash_red_icon.png";
+  static const pending = "assets/icons/pending_icon.png";
+  static const delivered = "assets/icons/delivered_icon.png";
+  static const tickCircle = "assets/icons/tick_circle_icon.png";
+  static const clockRed = "assets/icons/clock_red_icon.png";
+  static const userSquare = "assets/icons/usersquare_icon.png";
+  static const securityUser = "assets/icons/securityuser_icon.png";
+  static const gift = "assets/icons/gift_icon.png";
+  static const edit = "assets/icons/edit_icon.png";
   IconAssets._();
 }

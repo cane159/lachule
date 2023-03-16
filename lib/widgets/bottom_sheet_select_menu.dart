@@ -144,26 +144,40 @@ class BottomSheetSelectMenu extends StatelessWidget {
             backgroundColor: BaseColors.white,
             minimumSize: const Size(double.infinity, 50),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                initialValue != ''
-                    ? listObject[listObject.indexWhere(
-                            (element) => element.id == initialValue)]
-                        .name
-                    : label,
+                initialValue != '' ? label : label,
                 style: TextStyle(
                   color: initialValue != ''
-                      ? BaseColors.textPrimary
-                      : BaseColors.btnDisabledPlaceholder,
-                  fontSize: BaseSizes.fontH4,
+                      ? BaseColors.btnDisabledPlaceholder
+                      : Colors.transparent,
+                  fontSize: 12,
                 ),
               ),
-              Image.asset(
-                IconAssets.arrowDown,
-                width: 13.75,
-                fit: BoxFit.fitWidth,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    initialValue != ''
+                        ? listObject[listObject.indexWhere(
+                                (element) => element.id == initialValue)]
+                            .name
+                        : label,
+                    style: TextStyle(
+                      color: initialValue != ''
+                          ? BaseColors.textPrimary
+                          : BaseColors.btnDisabledPlaceholder,
+                      fontSize: BaseSizes.fontH4,
+                    ),
+                  ),
+                  Image.asset(
+                    IconAssets.arrowDown,
+                    width: 13.75,
+                    fit: BoxFit.fitWidth,
+                  ),
+                ],
               ),
             ],
           ),

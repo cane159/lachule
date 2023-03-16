@@ -101,4 +101,8 @@ class HomePageViewController extends BaseController {
   void pressedCart() {
     Get.toNamed(AppRoutes.CART);
   }
+
+  void pressedProfile() {
+    Get.toNamed(AppRoutes.PROFILE);
+  }
 }

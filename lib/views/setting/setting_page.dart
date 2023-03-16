@@ -4,6 +4,8 @@ import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
 import 'package:lachule/controllers/setting/setting_controlelr.dart';
+import 'package:lachule/routes/app_pages.dart';
+import 'package:lachule/widgets/app_main_body.dart';
 import 'package:lachule/widgets/button/outline_button.dart';
 import 'package:lachule/widgets/dismissible_keyboard.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -13,107 +15,66 @@ class SettingPage extends GetView<SettingController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => DismissibleKeyboard(
-        child: Scaffold(
-          backgroundColor: BaseColors.white,
-          body: SingleChildScrollView(
-            child: Stack(
-              children: [
-                _imageBg(),
-                SafeArea(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Row(
-                          children: const [
-                            Text(
-                              'ตั้งค่า',
-                              style: TextStyle(
-                                color: BaseColors.textPrimary,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(23),
-                        decoration: const BoxDecoration(
-                          color: BaseColors.white,
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(17),
-                              decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: BaseColors.borderColor),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  _settingButtom(
-                                    'แก้ไขข้อมูลส่วนตัว',
-                                    () => {},
-                                  ),
-                                  _settingButtom(
-                                    'การแจ้งเตือน',
-                                    () => {},
-                                  ),
-                                  _settingButtom(
-                                    'ภาษา',
-                                    () => {},
-                                  ),
-                                  _settingButtom(
-                                    'ข้อตกลง และเงื่อนไขการให้บริการ',
-                                    () => {},
-                                  ),
-                                  _settingButtom(
-                                    'นโยบาย (PDPA)',
-                                    () => {},
-                                  ),
-                                  _settingButtom(
-                                    'ลบบัญชีผู้ใช้งาน',
-                                    () => {},
-                                  ),
-                                  _appVersion(),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(top: 70),
-                              width: double.infinity,
-                              child: OutlinedButtonView(
-                                onPressed: () => {},
-                                title: 'ออกจากระบบ',
-                                borderColor: BaseColors.btnDisabledPlaceholder,
-                                textStyle: const TextStyle(
-                                  fontSize: BaseSizes.fontH4,
-                                  color: BaseColors.textPrimary,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+    controller.setBuildContext(context);
+    return Obx(() => AppMainBody(
+          isGoBack: false,
+          title: 'ตั้งค่า',
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(17),
+                decoration: BoxDecoration(
+                  border: Border.all(color: BaseColors.borderColor),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(20),
                   ),
                 ),
-              ],
-            ),
+                child: Column(
+                  children: [
+                    _settingButtom(
+                      'แก้ไขข้อมูลส่วนตัว',
+                      () => {Get.toNamed(AppRoutes.PERSONALINFORMATIONSETTING)},
+                    ),
+                    _settingButtom(
+                      'การแจ้งเตือน',
+                      () => {Get.toNamed(AppRoutes.NOTISETTING)},
+                    ),
+                    _settingButtom(
+                      'ภาษา',
+                      () => {Get.toNamed(AppRoutes.LANGUAGESETTING)},
+                    ),
+                    _settingButtom(
+                      'ข้อตกลง และเงื่อนไขการให้บริการ',
+                      () => {},
+                    ),
+                    _settingButtom(
+                      'นโยบาย (PDPA)',
+                      () => {},
+                    ),
+                    _settingButtom(
+                      'ลบบัญชีผู้ใช้งาน',
+                      () => {Get.toNamed(AppRoutes.DELETEUSER)},
+                    ),
+                    _appVersion(),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(top: 70),
+                width: double.infinity,
+                child: OutlinedButtonView(
+                  onPressed: () => {},
+                  title: 'ออกจากระบบ',
+                  borderColor: BaseColors.btnDisabledPlaceholder,
+                  textStyle: const TextStyle(
+                    fontSize: BaseSizes.fontH4,
+                    color: BaseColors.textPrimary,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   Widget _imageBg() {

@@ -199,7 +199,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           //   text: controller.cartItem[index].amount.value.toString(),
           // ),
           decoration: const InputDecoration(
-            enabledBorder: const UnderlineInputBorder(
+            enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: BaseColors.textPrimary),
             ),
           ),
