@@ -50,12 +50,19 @@ class HomePageView extends GetView<HomePageViewController> {
           icon: Image.asset(
             IconAssets.bagHappy,
             width: 24,
-            height: 24,
             fit: BoxFit.fitWidth,
             color: BaseColors.white,
           ),
         ),
-        Image.asset(ImageAssets.userAppbar),
+        IconButton(
+          onPressed: () => controller.pressedProfile(),
+          icon: Image.asset(
+            IconAssets.userSquare,
+            width: 24,
+            fit: BoxFit.fitWidth,
+            color: BaseColors.white,
+          ),
+        ),
       ],
       title: Row(
         children: [

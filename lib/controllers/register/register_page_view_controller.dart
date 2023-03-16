@@ -347,7 +347,10 @@ class RegisterPageViewController extends BaseController {
   }
 
   void onTappedDocumentPage() {
-    Get.toNamed(AppRoutes.REGISTEROTP);
+    Get.toNamed(
+      AppRoutes.REGISTEROTP,
+      arguments: 'register',
+    );
   }
 
   void pressReferralCode(bool value) {

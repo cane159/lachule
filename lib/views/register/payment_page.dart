@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
-import 'package:lachule/controllers/register/otp_page_controller.dart';
+import 'package:lachule/controllers/register/register_otp_controller.dart';
 import 'package:lachule/controllers/register/payment_controller.dart';
 import 'package:lachule/controllers/register/register_page_view_controller.dart';
 import 'package:lachule/routes/app_pages.dart';

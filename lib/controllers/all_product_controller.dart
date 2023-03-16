@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:lachule/bases/base_controller.dart';
 import 'package:lachule/models/product_detail_model.dart';
+import 'package:lachule/models/product_tag.dart';
 
 class AllProductController extends BaseController {
-  final List<ProductDetailModel> _allProduct = [
+  final formatCurrency = NumberFormat("#,##0.00", "th_TH");
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  final RxList<ProductDetailModel> _allProduct = [
     ProductDetailModel(
       id: '1',
       title: 'นาโน แอคเน่ ครีม จีพีโฟร์จี',
       image:
-          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678665600&Signature=bOnfp6HGvXnuBviXlpLiMyDtJaWIgFKAvZjNHinxYt-HIQhU8Vol5xVoCUOELWaODBWLJ82tCl4HYmTf8TNjuaGi0WiHX7Sg2-9tBqHIRC-9YYergpbv0h0c9df2g~4DMxaNZ682MdPjNDXlPP1b1vPIaVU-GW031SVxBy14wd3hxB5d4cr5QwIUO5RolqXhhY-1vxoX95xXCVgWAcUzuzvytodnP0gRc4usjl3qH6FALY~8iEFRq1BCGJ9nlg7sE1kHaYzUl3UCY-XXDW70sq10c287ixse~TLiXC47BdkhoaRtGy9DkYIA3xCaJKAd1SUuqAwX7t6b283RawKAaw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1679270400&Signature=Glch7f2gAHzWoGXouDXpZIfSBDMH6Ygk1dR5gv8SaIv3CcvO3d-6cJCrljofzIo5ng3MjTbwrKWuJruT1eu1AhlNs8tX5B6alg5N1Jdt~zgDeKq5SPg-3nJIQW66cshHrs1HDvmieqkNzPhhhm-EPInxX3fGGJ-DRXNI3IL6XGsolagJ7WbOmpszgfdG0M8ldA6aT3TsYklkWizjZMkON-Ji3Ku9HtoaxLc9smr~xLLTMhwwU0GdypJ97x1BYzIdR-W6LwVww87seXIdZeep2EpEgBUeg3oSx2Sm~UHoaQEXmOfpRGNwpQiE5ApH8HrdIhnXYTHpDiKKZfUIG4VcOA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       description: '',
       specifications: '',
       howToUse: '',
@@ -21,7 +31,7 @@ class AllProductController extends BaseController {
       id: '2',
       title: 'นาโน แอคเน่ ครีม',
       image:
-          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678665600&Signature=bOnfp6HGvXnuBviXlpLiMyDtJaWIgFKAvZjNHinxYt-HIQhU8Vol5xVoCUOELWaODBWLJ82tCl4HYmTf8TNjuaGi0WiHX7Sg2-9tBqHIRC-9YYergpbv0h0c9df2g~4DMxaNZ682MdPjNDXlPP1b1vPIaVU-GW031SVxBy14wd3hxB5d4cr5QwIUO5RolqXhhY-1vxoX95xXCVgWAcUzuzvytodnP0gRc4usjl3qH6FALY~8iEFRq1BCGJ9nlg7sE1kHaYzUl3UCY-XXDW70sq10c287ixse~TLiXC47BdkhoaRtGy9DkYIA3xCaJKAd1SUuqAwX7t6b283RawKAaw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1679270400&Signature=Glch7f2gAHzWoGXouDXpZIfSBDMH6Ygk1dR5gv8SaIv3CcvO3d-6cJCrljofzIo5ng3MjTbwrKWuJruT1eu1AhlNs8tX5B6alg5N1Jdt~zgDeKq5SPg-3nJIQW66cshHrs1HDvmieqkNzPhhhm-EPInxX3fGGJ-DRXNI3IL6XGsolagJ7WbOmpszgfdG0M8ldA6aT3TsYklkWizjZMkON-Ji3Ku9HtoaxLc9smr~xLLTMhwwU0GdypJ97x1BYzIdR-W6LwVww87seXIdZeep2EpEgBUeg3oSx2Sm~UHoaQEXmOfpRGNwpQiE5ApH8HrdIhnXYTHpDiKKZfUIG4VcOA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       description: '',
       specifications: '',
       howToUse: '',
@@ -33,7 +43,7 @@ class AllProductController extends BaseController {
       id: '3',
       title: 'นาโน แอคเน่ ครีม จีพีโฟร์จี',
       image:
-          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678665600&Signature=bOnfp6HGvXnuBviXlpLiMyDtJaWIgFKAvZjNHinxYt-HIQhU8Vol5xVoCUOELWaODBWLJ82tCl4HYmTf8TNjuaGi0WiHX7Sg2-9tBqHIRC-9YYergpbv0h0c9df2g~4DMxaNZ682MdPjNDXlPP1b1vPIaVU-GW031SVxBy14wd3hxB5d4cr5QwIUO5RolqXhhY-1vxoX95xXCVgWAcUzuzvytodnP0gRc4usjl3qH6FALY~8iEFRq1BCGJ9nlg7sE1kHaYzUl3UCY-XXDW70sq10c287ixse~TLiXC47BdkhoaRtGy9DkYIA3xCaJKAd1SUuqAwX7t6b283RawKAaw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1679270400&Signature=Glch7f2gAHzWoGXouDXpZIfSBDMH6Ygk1dR5gv8SaIv3CcvO3d-6cJCrljofzIo5ng3MjTbwrKWuJruT1eu1AhlNs8tX5B6alg5N1Jdt~zgDeKq5SPg-3nJIQW66cshHrs1HDvmieqkNzPhhhm-EPInxX3fGGJ-DRXNI3IL6XGsolagJ7WbOmpszgfdG0M8ldA6aT3TsYklkWizjZMkON-Ji3Ku9HtoaxLc9smr~xLLTMhwwU0GdypJ97x1BYzIdR-W6LwVww87seXIdZeep2EpEgBUeg3oSx2Sm~UHoaQEXmOfpRGNwpQiE5ApH8HrdIhnXYTHpDiKKZfUIG4VcOA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       description: '',
       specifications: '',
       howToUse: '',
@@ -45,7 +55,7 @@ class AllProductController extends BaseController {
       id: '4',
       title: 'นาโน แอคเน่ ครีม จีพีโฟร์จี',
       image:
-          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678665600&Signature=bOnfp6HGvXnuBviXlpLiMyDtJaWIgFKAvZjNHinxYt-HIQhU8Vol5xVoCUOELWaODBWLJ82tCl4HYmTf8TNjuaGi0WiHX7Sg2-9tBqHIRC-9YYergpbv0h0c9df2g~4DMxaNZ682MdPjNDXlPP1b1vPIaVU-GW031SVxBy14wd3hxB5d4cr5QwIUO5RolqXhhY-1vxoX95xXCVgWAcUzuzvytodnP0gRc4usjl3qH6FALY~8iEFRq1BCGJ9nlg7sE1kHaYzUl3UCY-XXDW70sq10c287ixse~TLiXC47BdkhoaRtGy9DkYIA3xCaJKAd1SUuqAwX7t6b283RawKAaw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1679270400&Signature=Glch7f2gAHzWoGXouDXpZIfSBDMH6Ygk1dR5gv8SaIv3CcvO3d-6cJCrljofzIo5ng3MjTbwrKWuJruT1eu1AhlNs8tX5B6alg5N1Jdt~zgDeKq5SPg-3nJIQW66cshHrs1HDvmieqkNzPhhhm-EPInxX3fGGJ-DRXNI3IL6XGsolagJ7WbOmpszgfdG0M8ldA6aT3TsYklkWizjZMkON-Ji3Ku9HtoaxLc9smr~xLLTMhwwU0GdypJ97x1BYzIdR-W6LwVww87seXIdZeep2EpEgBUeg3oSx2Sm~UHoaQEXmOfpRGNwpQiE5ApH8HrdIhnXYTHpDiKKZfUIG4VcOA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       description: '',
       specifications: '',
       howToUse: '',
@@ -57,7 +67,7 @@ class AllProductController extends BaseController {
       id: '5',
       title: 'นาโน แอคเน่ ครีม จีพีโฟร์จี',
       image:
-          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678665600&Signature=bOnfp6HGvXnuBviXlpLiMyDtJaWIgFKAvZjNHinxYt-HIQhU8Vol5xVoCUOELWaODBWLJ82tCl4HYmTf8TNjuaGi0WiHX7Sg2-9tBqHIRC-9YYergpbv0h0c9df2g~4DMxaNZ682MdPjNDXlPP1b1vPIaVU-GW031SVxBy14wd3hxB5d4cr5QwIUO5RolqXhhY-1vxoX95xXCVgWAcUzuzvytodnP0gRc4usjl3qH6FALY~8iEFRq1BCGJ9nlg7sE1kHaYzUl3UCY-XXDW70sq10c287ixse~TLiXC47BdkhoaRtGy9DkYIA3xCaJKAd1SUuqAwX7t6b283RawKAaw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1679270400&Signature=Glch7f2gAHzWoGXouDXpZIfSBDMH6Ygk1dR5gv8SaIv3CcvO3d-6cJCrljofzIo5ng3MjTbwrKWuJruT1eu1AhlNs8tX5B6alg5N1Jdt~zgDeKq5SPg-3nJIQW66cshHrs1HDvmieqkNzPhhhm-EPInxX3fGGJ-DRXNI3IL6XGsolagJ7WbOmpszgfdG0M8ldA6aT3TsYklkWizjZMkON-Ji3Ku9HtoaxLc9smr~xLLTMhwwU0GdypJ97x1BYzIdR-W6LwVww87seXIdZeep2EpEgBUeg3oSx2Sm~UHoaQEXmOfpRGNwpQiE5ApH8HrdIhnXYTHpDiKKZfUIG4VcOA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       description: '',
       specifications: '',
       howToUse: '',
@@ -69,7 +79,7 @@ class AllProductController extends BaseController {
       id: '6',
       title: 'นาโน แอคเน่ ครีม',
       image:
-          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678665600&Signature=bOnfp6HGvXnuBviXlpLiMyDtJaWIgFKAvZjNHinxYt-HIQhU8Vol5xVoCUOELWaODBWLJ82tCl4HYmTf8TNjuaGi0WiHX7Sg2-9tBqHIRC-9YYergpbv0h0c9df2g~4DMxaNZ682MdPjNDXlPP1b1vPIaVU-GW031SVxBy14wd3hxB5d4cr5QwIUO5RolqXhhY-1vxoX95xXCVgWAcUzuzvytodnP0gRc4usjl3qH6FALY~8iEFRq1BCGJ9nlg7sE1kHaYzUl3UCY-XXDW70sq10c287ixse~TLiXC47BdkhoaRtGy9DkYIA3xCaJKAd1SUuqAwX7t6b283RawKAaw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1679270400&Signature=Glch7f2gAHzWoGXouDXpZIfSBDMH6Ygk1dR5gv8SaIv3CcvO3d-6cJCrljofzIo5ng3MjTbwrKWuJruT1eu1AhlNs8tX5B6alg5N1Jdt~zgDeKq5SPg-3nJIQW66cshHrs1HDvmieqkNzPhhhm-EPInxX3fGGJ-DRXNI3IL6XGsolagJ7WbOmpszgfdG0M8ldA6aT3TsYklkWizjZMkON-Ji3Ku9HtoaxLc9smr~xLLTMhwwU0GdypJ97x1BYzIdR-W6LwVww87seXIdZeep2EpEgBUeg3oSx2Sm~UHoaQEXmOfpRGNwpQiE5ApH8HrdIhnXYTHpDiKKZfUIG4VcOA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       description: '',
       specifications: '',
       howToUse: '',
@@ -81,7 +91,7 @@ class AllProductController extends BaseController {
       id: '7',
       title: 'นาโน แอคเน่ ครีม จีพีโฟร์จี',
       image:
-          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678665600&Signature=bOnfp6HGvXnuBviXlpLiMyDtJaWIgFKAvZjNHinxYt-HIQhU8Vol5xVoCUOELWaODBWLJ82tCl4HYmTf8TNjuaGi0WiHX7Sg2-9tBqHIRC-9YYergpbv0h0c9df2g~4DMxaNZ682MdPjNDXlPP1b1vPIaVU-GW031SVxBy14wd3hxB5d4cr5QwIUO5RolqXhhY-1vxoX95xXCVgWAcUzuzvytodnP0gRc4usjl3qH6FALY~8iEFRq1BCGJ9nlg7sE1kHaYzUl3UCY-XXDW70sq10c287ixse~TLiXC47BdkhoaRtGy9DkYIA3xCaJKAd1SUuqAwX7t6b283RawKAaw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1679270400&Signature=Glch7f2gAHzWoGXouDXpZIfSBDMH6Ygk1dR5gv8SaIv3CcvO3d-6cJCrljofzIo5ng3MjTbwrKWuJruT1eu1AhlNs8tX5B6alg5N1Jdt~zgDeKq5SPg-3nJIQW66cshHrs1HDvmieqkNzPhhhm-EPInxX3fGGJ-DRXNI3IL6XGsolagJ7WbOmpszgfdG0M8ldA6aT3TsYklkWizjZMkON-Ji3Ku9HtoaxLc9smr~xLLTMhwwU0GdypJ97x1BYzIdR-W6LwVww87seXIdZeep2EpEgBUeg3oSx2Sm~UHoaQEXmOfpRGNwpQiE5ApH8HrdIhnXYTHpDiKKZfUIG4VcOA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       description: '',
       specifications: '',
       howToUse: '',
@@ -93,7 +103,7 @@ class AllProductController extends BaseController {
       id: '8',
       title: 'นาโน แอคเน่ ครีม จีพีโฟร์จี',
       image:
-          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1678665600&Signature=bOnfp6HGvXnuBviXlpLiMyDtJaWIgFKAvZjNHinxYt-HIQhU8Vol5xVoCUOELWaODBWLJ82tCl4HYmTf8TNjuaGi0WiHX7Sg2-9tBqHIRC-9YYergpbv0h0c9df2g~4DMxaNZ682MdPjNDXlPP1b1vPIaVU-GW031SVxBy14wd3hxB5d4cr5QwIUO5RolqXhhY-1vxoX95xXCVgWAcUzuzvytodnP0gRc4usjl3qH6FALY~8iEFRq1BCGJ9nlg7sE1kHaYzUl3UCY-XXDW70sq10c287ixse~TLiXC47BdkhoaRtGy9DkYIA3xCaJKAd1SUuqAwX7t6b283RawKAaw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+          'https://s3-alpha-sig.figma.com/img/3882/55bc/dafa8fbfd8ac49059021da6fe48915a5?Expires=1679270400&Signature=Glch7f2gAHzWoGXouDXpZIfSBDMH6Ygk1dR5gv8SaIv3CcvO3d-6cJCrljofzIo5ng3MjTbwrKWuJruT1eu1AhlNs8tX5B6alg5N1Jdt~zgDeKq5SPg-3nJIQW66cshHrs1HDvmieqkNzPhhhm-EPInxX3fGGJ-DRXNI3IL6XGsolagJ7WbOmpszgfdG0M8ldA6aT3TsYklkWizjZMkON-Ji3Ku9HtoaxLc9smr~xLLTMhwwU0GdypJ97x1BYzIdR-W6LwVww87seXIdZeep2EpEgBUeg3oSx2Sm~UHoaQEXmOfpRGNwpQiE5ApH8HrdIhnXYTHpDiKKZfUIG4VcOA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
       description: '',
       specifications: '',
       howToUse: '',
@@ -101,9 +111,36 @@ class AllProductController extends BaseController {
       price: 1399,
       point: 50,
     ),
-  ];
+  ].obs;
+
+  final RxList<ProductTagModel> _productTag = [
+    ProductTagModel(
+      id: '1',
+      name: 'ทั้งหมด',
+    ),
+    ProductTagModel(
+      id: '2',
+      name: 'ผลิตภัณฑ์ทำความสะอาด',
+    ),
+    ProductTagModel(
+      id: '3',
+      name: 'ผลิตภัณฑ์บำรุงผิวหน้า',
+    ),
+  ].obs;
+
+  final _tagIndex = 0.obs;
 
   // Getter
 
   List<ProductDetailModel> get allProduct => _allProduct;
+  List<ProductTagModel> get productTag => _productTag;
+  int get tagIndex => _tagIndex.value;
+
+  void pressedTagButton(int index) {
+    _tagIndex.value = index;
+  }
+
+  String priceIntl(var price) {
+    return formatCurrency.format(price);
+  }
 }

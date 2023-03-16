@@ -82,6 +82,7 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                         value, controller.userHouseProvince),
                     controller.userHouseDistrict.value = '',
                     controller.userHouseSubDistrict.value = '',
+                    controller.userHouseZipCode.text = '',
                   },
                   borderColor: controller.isUserHouseProvince.value == true
                       ? Colors.red[600]
@@ -117,6 +118,7 @@ class HouseAddressPage extends GetView<RegisterPageViewController> {
                     controller.onSelectBottomSheet(
                         value, controller.userHouseDistrict),
                     controller.userHouseSubDistrict.value = '',
+                    controller.userHouseZipCode.text = '',
                   },
                   borderColor: controller.isUserHouseDistrict.value == true
                       ? Colors.red[600]

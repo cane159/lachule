@@ -53,7 +53,7 @@ class HomePageViewController extends BaseController {
       ),
       label: 'ขนส่ง',
       activeIcon: Image.asset(
-        IconAssets.transport,
+        IconAssets.transportFill,
         width: 24,
         fit: BoxFit.fitWidth,
       ),
@@ -100,5 +100,9 @@ class HomePageViewController extends BaseController {
 
   void pressedCart() {
     Get.toNamed(AppRoutes.CART);
+  }
+
+  void pressedProfile() {
+    Get.toNamed(AppRoutes.PROFILE);
   }
 }

@@ -186,7 +186,7 @@ class CartPage extends GetView<CartController> {
                                               controller.cartItem.indexOf(
                                                   data)), // TODO : wait for connect API
                                           icon: Image.asset(
-                                            IconAssets.plus,
+                                            IconAssets.plusCirlce,
                                             width: 28,
                                             fit: BoxFit.fitWidth,
                                           ),

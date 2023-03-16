@@ -19,19 +19,22 @@ class HomePage extends GetView<HomeController> {
     controller.setBuildContext(context);
     return Obx(
       () => DismissibleKeyboard(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Stack(
-              children: [
-                _imageBg(),
-                _appbarBg(),
-                Column(
-                  children: <Widget>[
-                    _imageCarousel(context),
-                    _goodsSection(),
-                  ],
-                ),
-              ],
+        child: Container(
+          color: BaseColors.primaryRed,
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Stack(
+                children: [
+                  _imageBg(),
+                  _appbarBg(),
+                  Column(
+                    children: <Widget>[
+                      _imageCarousel(context),
+                      _goodsSection(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

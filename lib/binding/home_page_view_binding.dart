@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:lachule/controllers/all_product_controller.dart';
 import 'package:lachule/controllers/home_controller.dart';
 import 'package:lachule/controllers/home_page_view_controller.dart';
 import 'package:lachule/controllers/notification_controller.dart';
 import 'package:lachule/controllers/setting/setting_controlelr.dart';
+import 'package:lachule/controllers/transport_controller.dart';
 
 class HomePageViewBinding extends Bindings {
   @override
@@ -12,5 +14,7 @@ class HomePageViewBinding extends Bindings {
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => NotificationController());
     Get.lazyPut(() => SettingController());
+    Get.lazyPut(() => AllProductController());
+    Get.lazyPut(() => TransportController());
   }
 }

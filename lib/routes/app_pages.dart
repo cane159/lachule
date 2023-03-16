@@ -7,16 +7,27 @@ import 'package:lachule/binding/home_binding.dart';
 import 'package:lachule/binding/home_page_view_binding.dart';
 import 'package:lachule/binding/login_binding.dart';
 import 'package:lachule/binding/notification_binding.dart';
-import 'package:lachule/binding/otp_page_binding.dart';
+import 'package:lachule/binding/register_otp_binding.dart';
 import 'package:lachule/binding/payment_binding.dart';
 import 'package:lachule/binding/payment_gateway_binding.dart';
 import 'package:lachule/binding/pdpa_binding.dart';
 import 'package:lachule/binding/product_detail_binding.dart';
+import 'package:lachule/binding/profile_binding.dart';
 import 'package:lachule/binding/promotion_detail_binding.dart';
 import 'package:lachule/binding/register_page_view_biinding.dart';
+import 'package:lachule/binding/setting/address_setting_binding.dart';
+import 'package:lachule/binding/setting/benefit_setting_binding.dart';
+import 'package:lachule/binding/setting/delete_user_binding.dart';
+import 'package:lachule/binding/setting/language_setting_binding.dart';
+import 'package:lachule/binding/setting/noti_setting_binding.dart';
+import 'package:lachule/binding/setting/personal_information_setting_binding.dart';
+import 'package:lachule/binding/setting/user_address_edit_binding.dart';
+import 'package:lachule/binding/setting/user_setting_binding.dart';
 import 'package:lachule/binding/splash_binding.dart';
 import 'package:lachule/binding/success_binding.dart';
 import 'package:lachule/binding/terms_of_service_binding.dart';
+import 'package:lachule/binding/transport_detail_binding.dart';
+import 'package:lachule/binding/webview_binding.dart';
 import 'package:lachule/views/cart_page.dart';
 import 'package:lachule/views/first_menu_page.dart';
 import 'package:lachule/views/home_page.dart';
@@ -24,16 +35,29 @@ import 'package:lachule/views/home_page_view.dart';
 import 'package:lachule/views/login_page.dart';
 import 'package:lachule/views/notification_page.dart';
 import 'package:lachule/views/product_detail_page.dart';
+import 'package:lachule/views/profile_page.dart';
 import 'package:lachule/views/promotion_detail_page.dart';
 import 'package:lachule/views/register/detail_privilege_page.dart';
-import 'package:lachule/views/register/otp_page.dart';
+import 'package:lachule/views/register/register_otp_page.dart';
 import 'package:lachule/views/register/payment_gateway_page.dart';
 import 'package:lachule/views/register/payment_page.dart';
 import 'package:lachule/views/register/pdpa_page.dart';
 import 'package:lachule/views/register/register_page_view.dart';
 import 'package:lachule/views/register/success.dart';
 import 'package:lachule/views/register/terms_of_service_page.dart';
+import 'package:lachule/views/setting/address_setting_page.dart';
+import 'package:lachule/views/setting/benefit_setting_page.dart';
+import 'package:lachule/views/setting/delete_user_page.dart';
+import 'package:lachule/views/setting/language_setting_page.dart';
+import 'package:lachule/views/setting/noti_setting_page.dart';
+import 'package:lachule/views/setting/personal_information_setting_page.dart';
+import 'package:lachule/views/setting/user_address_edit_page.dart';
+import 'package:lachule/views/setting/user_setting_page.dart';
 import 'package:lachule/views/splash_page.dart';
+import 'package:lachule/views/transport_detail_page.dart';
+import 'package:lachule/views/webwview_page.dart';
+import 'package:lachule/widgets/otp/otp_binding.dart';
+import 'package:lachule/widgets/otp/otp_page.dart';
 part 'app_routes.dart';
 
 class AppPages {
@@ -121,8 +145,8 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.REGISTEROTP,
-      page: () => OTPPage(),
-      binding: OTPPageBinding(),
+      page: () => RegisterOtpPage(),
+      binding: RegisterOtpBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -141,6 +165,78 @@ class AppPages {
       name: AppRoutes.REGISTERSUCCESS,
       page: () => const SuccessPage(),
       binding: SuccessBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.LANGUAGESETTING,
+      page: () => const LanguageSettingPage(),
+      binding: LanguageSettingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.PERSONALINFORMATIONSETTING,
+      page: () => const PersonalInformationSettingPage(),
+      binding: PersonalInformationSettingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.USERSETTING,
+      page: () => const UserSettingPage(),
+      binding: UserSettingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.ADDRESSSETTING,
+      page: () => const AddressSettingPage(),
+      binding: AddressSettingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.USERADDRESSEDIT,
+      page: () => const UserAddressEditPage(),
+      binding: UserAddressEditBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.BENEFITSETTING,
+      page: () => const BenefitSettingPage(),
+      binding: BenefitSettingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.DELETEUSER,
+      page: () => const DeleteUserPage(),
+      binding: DeleteUserBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.NOTISETTING,
+      page: () => const NotiSettingPage(),
+      binding: NotiSettingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.TRANSPORTDETAIL,
+      page: () => const TransportDetailPage(),
+      binding: TransportDetailBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.WEBVIEW,
+      page: () => const WebviewPae(),
+      binding: WebviewBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.PROFILE,
+      page: () => const ProfilePage(),
+      binding: ProfileBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.OTP,
+      page: () => OtpPage(),
+      binding: OtpBinding(),
       transition: Transition.fadeIn,
     ),
   ];
