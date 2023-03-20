@@ -14,8 +14,10 @@ class OtpController extends BaseController {
     if (Get.arguments['page'] == 'profile') {
       _fromPage.value = Get.arguments['page'];
       _userPhoneNumber.value = Get.arguments['phoneNumber'];
-    }
-    if (Get.arguments['page'] == 'setting') {
+    } else if (Get.arguments['page'] == 'setting') {
+      _fromPage.value = Get.arguments['page'];
+      _userPhoneNumber.value = Get.arguments['phoneNumber'];
+    } else if (Get.arguments['page'] == 'forget_password') {
       _fromPage.value = Get.arguments['page'];
       _userPhoneNumber.value = Get.arguments['phoneNumber'];
     }
@@ -83,7 +85,7 @@ class OtpController extends BaseController {
       }
     }
     // if page from setting
-    if (_fromPage.value == 'setting') {
+    else if (_fromPage.value == 'setting') {
       if (otp == testOTP && remainSeconds != 0) {
         _isOtpError.value = false;
         Get.bottomSheet(
@@ -92,6 +94,53 @@ class OtpController extends BaseController {
               Get.offNamedUntil(
                 AppRoutes.PERSONALINFORMATIONSETTING,
                 ModalRoute.withName('/home_page_view'),
+              ),
+            },
+            title: 'แก้ไขข้อมูลเรียบร้อยแล้ว',
+            buttonTextOutline: 'รับทราบ',
+            buttonTextStyleOutline: const TextStyle(
+              color: BaseColors.textPrimary,
+              fontSize: BaseSizes.fontH4,
+            ),
+          ),
+        );
+      } else if (otp != testOTP) {
+        _isOtpError.value = true;
+      } else {
+        _isOtpError.value = true;
+      }
+    } else if (_fromPage.value == 'forget_password') {
+      if (otp == testOTP && remainSeconds != 0) {
+        _isOtpError.value = false;
+        Get.bottomSheet(
+          AlertView(
+            onPressedOutline: () => {
+              Get.offNamedUntil(
+                AppRoutes.LOGIN,
+                ModalRoute.withName('/first_menu'),
+              ),
+            },
+            title: 'แก้ไขข้อมูลเรียบร้อยแล้ว',
+            buttonTextOutline: 'รับทราบ',
+            buttonTextStyleOutline: const TextStyle(
+              color: BaseColors.textPrimary,
+              fontSize: BaseSizes.fontH4,
+            ),
+          ),
+        );
+      } else if (otp != testOTP) {
+        _isOtpError.value = true;
+      } else {
+        _isOtpError.value = true;
+      }
+    } else {
+      if (otp == testOTP && remainSeconds != 0) {
+        _isOtpError.value = false;
+        Get.bottomSheet(
+          AlertView(
+            onPressedOutline: () => {
+              Get.offAllNamed(
+                AppRoutes.FIRSTMENU,
               ),
             },
             title: 'แก้ไขข้อมูลเรียบร้อยแล้ว',

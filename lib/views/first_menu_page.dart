@@ -133,7 +133,7 @@ class FirstMenuPage extends GetWidget<FirstMenuController> {
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
         child: OutlinedButtonView(
-          onPressed: () => Get.toNamed(AppRoutes.LOGIN),
+          onPressed: () => controller.pressedSkip(),
           title: 'ข้าม',
           textStyle: const TextStyle(
             fontSize: BaseSizes.fontH4,

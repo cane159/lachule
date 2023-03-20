@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
-import 'package:lachule/controllers/terms_of_service_controller.dart';
+import 'package:lachule/controllers/register/terms_of_service_controller.dart';
 import 'package:lachule/routes/app_pages.dart';
 import 'package:lachule/widgets/app_check_box.dart';
 import 'package:lachule/widgets/button/button_theme_helper.dart';
 import 'package:lachule/widgets/button/go_back_button.dart';
 import 'package:lachule/widgets/button/primary_button.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TermsOfServicePage extends GetView<TermsOfServiceController> {
   const TermsOfServicePage({super.key});
@@ -19,28 +20,31 @@ class TermsOfServicePage extends GetView<TermsOfServiceController> {
     return Obx(
       () => Scaffold(
         appBar: _appbar(),
-        body: Stack(
-          children: [
-            _imageBg(),
-            SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(28.0),
-                    child: Text(
-                      '${controller.detail} \n ${controller.detail}',
-                      style: const TextStyle(
-                        color: BaseColors.textPrimary,
-                        fontSize: BaseSizes.fontBody1,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        body: WebViewWidget(
+          controller: controller.webviewController,
         ),
+        // Stack(
+        //   children: [
+        //     _imageBg(),
+        //     SingleChildScrollView(
+        //       child: Column(
+        //         children: <Widget>[
+        //           Padding(
+        //             padding: const EdgeInsets.all(28.0),
+        //             child: Text(
+        //               '${controller.detail} \n ${controller.detail}',
+        //               style: const TextStyle(
+        //                 color: BaseColors.textPrimary,
+        //                 fontSize: BaseSizes.fontBody1,
+        //               ),
+        //               textAlign: TextAlign.left,
+        //             ),
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ],
+        // ),
         bottomNavigationBar: _bottomNavBar(),
       ),
     );

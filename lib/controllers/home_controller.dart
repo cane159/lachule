@@ -1,24 +1,46 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lachule/bases/base_assets.dart';
+import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_controller.dart';
+import 'package:lachule/bases/base_sizes.dart';
 import 'package:lachule/models/best_sell_goods_model.dart';
 import 'package:lachule/models/promotion_model.dart';
 import 'package:lachule/models/recommend_goods_medel.dart';
 import 'package:lachule/routes/app_pages.dart';
+import 'package:lachule/storage/app_prefs.dart';
+import 'package:lachule/widgets/app_check_box.dart';
+import 'package:lachule/widgets/button/primary_button.dart';
 
 class HomeController extends BaseController {
   @override
   void onInit() {
     // TODO: implement onInit
+    _userRole.value = _appPrefs.userRole.value!;
 
-    Future.delayed(const Duration(milliseconds: 100), () {
-      stopLoad();
-    });
     super.onInit();
   }
+
+  @override
+  void onReady() async {
+    // TODO: implement onReady
+    await Future.delayed(const Duration(milliseconds: 100), () {
+      stopLoad();
+    });
+    if (_userRole.value == 'guest') {
+      showPopup();
+    }
+    print(_userRole.value);
+    super.onReady();
+  }
+
+  final AppPrefs _appPrefs = Get.find();
 
   RxInt currentCarousel = 0.obs;
   String userFirstName = 'ดวงเดือน';
   String userLastName = 'ลัทธิพงศ์';
+  final RxString _userRole = ''.obs;
+  final _isCheckBox = false.obs;
 
   // List
 
@@ -253,6 +275,7 @@ class HomeController extends BaseController {
   List<PromotionModel> get promotionList => _promotionList;
   List<BestSellGoodsModel> get bestSellGoodsList => _bestSellGoodsList;
   List<RecommendGoodsModel> get recommendGoodsList => _recommendGoodsList;
+  String get userRole => _userRole.value;
 
   void pressProduct() {
     Get.toNamed(AppRoutes.PRODUCTDETAIL);
@@ -260,5 +283,122 @@ class HomeController extends BaseController {
 
   void pressPromotion() {
     Get.toNamed(AppRoutes.PROMOTIONDETAIL);
+  }
+
+  Future<void> showPopup() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Obx(
+          () => AlertDialog(
+            insetPadding:
+                const EdgeInsets.symmetric(horizontal: 22.0, vertical: 24.0),
+            titlePadding: EdgeInsets.zero,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () => Get.back(),
+                  icon: Image.asset(
+                    IconAssets.close,
+                    width: 24,
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+              ],
+            ),
+            contentPadding: EdgeInsets.zero,
+            contentTextStyle: const TextStyle(
+              color: BaseColors.textPrimary,
+              fontSize: 21,
+              fontWeight: FontWeight.bold,
+            ),
+            content: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(
+                  ImageAssets.splashBg,
+                  fit: BoxFit.fitWidth,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      ImageAssets.vipCard,
+                      width: 170,
+                      fit: BoxFit.fitWidth,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: const TextSpan(
+                          text: 'รับส่วนลดสินค้าของเราทันที ',
+                          style: TextStyle(
+                            color: BaseColors.textPrimary,
+                            fontSize: 21,
+                            fontFamily: 'NotoSansThai',
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: '20%',
+                              style: TextStyle(
+                                color: BaseColors.primaryRed,
+                                fontSize: 21,
+                                fontFamily: 'NotoSansThai',
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' เพียงแค่สมัครสมาชิก',
+                              style: TextStyle(
+                                color: BaseColors.textPrimary,
+                                fontSize: 21,
+                                fontFamily: 'NotoSansThai',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      child: PrimaryButtonView(
+                        onPressed: () => {},
+                        title: 'สมัครสมาชิก',
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            actionsAlignment: MainAxisAlignment.start,
+            actionsPadding: const EdgeInsets.all(20),
+            actions: [
+              AppCheckBox(
+                value: _isCheckBox.value,
+                onChanged: (value) => onTapCheckBox(value ?? false),
+                fillColor: _isCheckBox.value == false
+                    ? MaterialStateProperty.all(BaseColors.textContent)
+                    : MaterialStateProperty.all(BaseColors.actived),
+              ),
+              const Text(
+                'ไม่ต้องแสดงกล่องข้อความนี้อีก',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: BaseSizes.fontBody1,
+                  fontFamily: 'NotoSansThai',
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void onTapCheckBox(bool value) {
+    _isCheckBox.value = value;
   }
 }

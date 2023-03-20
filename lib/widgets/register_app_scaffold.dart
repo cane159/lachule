@@ -40,7 +40,12 @@ class RegisterAppScaffold extends StatelessWidget {
                             child: Row(
                               children: [
                                 initialPage == 1
-                                    ? const GoBackbutton()
+                                    ? IconButton(
+                                        onPressed: onGoBack,
+                                        icon: const Icon(
+                                            Icons.arrow_back_ios_new_rounded),
+                                        color: BaseColors.textPrimary,
+                                      )
                                     : IconButton(
                                         onPressed: onGoBack,
                                         icon: const Icon(

@@ -1,5 +1,6 @@
-
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_controller.dart';
 import 'package:get/get.dart';
 import 'package:lachule/models/address_setting.dart';
@@ -231,5 +232,54 @@ class ProfileController extends BaseController {
 
   String connectUserAddressData(int addressIndex) {
     return '${userAddress[addressIndex].houseNumber} ${userAddress[addressIndex].village} ${userAddress[addressIndex].alley} ${provinceList[provinceList.indexWhere((element) => element.id == userAddress[addressIndex].provinceId)].name} ${districtList[districtList.indexWhere((element) => element.id == userAddress[addressIndex].districtId)].name} ${subDistrictList[subDistrictList.indexWhere((element) => element.id == userAddress[addressIndex].subDistrictId)].name} ${subDistrictList[subDistrictList.indexWhere((element) => element.id == userAddress[addressIndex].subDistrictId)].zipCode}';
+  }
+
+  Future<void> onPressedGift() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          insetPadding:
+              const EdgeInsets.symmetric(horizontal: 22.0, vertical: 24.0),
+          titlePadding: EdgeInsets.zero,
+          contentPadding: EdgeInsets.zero,
+          actionsPadding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Stack(
+              children: [
+                Image.asset(
+                  ImageAssets.giftCard,
+                  width: 340,
+                  height: 340,
+                  fit: BoxFit.fitWidth,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        onPressed: () => Get.back(),
+                        icon: Image.asset(
+                          IconAssets.close,
+                          width: 24,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

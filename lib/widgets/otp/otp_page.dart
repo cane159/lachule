@@ -49,7 +49,7 @@ class OtpPage extends GetView<OtpController> {
                         ),
                       ),
                       const SizedBox(
-                        height: 100,
+                        height: 250,
                       ),
                       Container(
                         width: double.infinity,

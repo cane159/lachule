@@ -1,5 +1,8 @@
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lachule/bases/base_controller.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TermsOfServiceController extends BaseController {
   final RxBool _isAccept = false.obs;
@@ -12,4 +15,9 @@ class TermsOfServiceController extends BaseController {
   void isPressedAccept(bool value) {
     _isAccept.value = value;
   }
+
+  WebViewController webviewController = WebViewController()
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(const Color(0x00000000))
+    ..loadRequest(Uri.parse('https://lachuleonline.net/member/img_dialog.php'));
 }

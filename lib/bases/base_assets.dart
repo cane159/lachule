@@ -10,6 +10,8 @@ class ImageAssets {
   static const fadeOutBg = "assets/images/fade_out_bg.png";
   static const successBg = "assets/images/sucess_bg.png";
   static const h1ForgotPass = "assets/images/h1_forgot_pass.png";
+  static const defaultImage = "assets/images/default_image.png";
+  static const giftCard = "assets/images/gift_card.png";
   ImageAssets._();
 }
 
@@ -62,5 +64,6 @@ class IconAssets {
   static const securityUser = "assets/icons/securityuser_icon.png";
   static const gift = "assets/icons/gift_icon.png";
   static const edit = "assets/icons/edit_icon.png";
+  static const mobile = "assets/icons/mobile_icon.png";
   IconAssets._();
 }

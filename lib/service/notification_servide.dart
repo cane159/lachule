@@ -13,7 +13,7 @@ class NotificationService {
   }) async {
     try {
       final response = await _client.post(
-        '/application_user/$userID/add_device/',
+        'http://test.push-gears-mk2.appspot.com/application_user/$userID/add_device/',
         data: {
           'app_id': '36f2b310-5f15-11ed-81ad-5fded184eaa2-0A4lB0TT1pyGJuMe',
           'app_secret':
@@ -31,7 +31,7 @@ class NotificationService {
   Future<PushgearsHistory> getHistory() async {
     try {
       final response = await _client.get(
-        '/push_message/?user=pushgears_dev_1234',
+        'http://test.push-gears-mk2.appspot.com/push_message/?user=pushgears_dev_1234',
       );
       return PushgearsHistory.fromJson(response);
     } catch (e) {

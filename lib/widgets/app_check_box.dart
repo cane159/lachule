@@ -6,10 +6,14 @@ class AppCheckBox extends StatelessWidget {
     super.key,
     required this.value,
     this.onChanged,
+    this.checkColor,
+    this.fillColor,
   });
 
   final bool value;
   final Function(bool?)? onChanged;
+  final Color? checkColor;
+  final MaterialStateProperty<Color?>? fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +24,8 @@ class AppCheckBox extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
         ),
-        checkColor: Colors.white,
-        fillColor: MaterialStateProperty.all(BaseColors.actived),
+        checkColor: checkColor ?? Colors.white,
+        fillColor: fillColor ?? MaterialStateProperty.all(BaseColors.actived),
         value: value,
         onChanged: onChanged,
       ),

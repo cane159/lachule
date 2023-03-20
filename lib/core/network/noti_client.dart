@@ -25,7 +25,9 @@ class NotiClient {
 
     // set options
     _dio.options = BaseOptions(
-      baseUrl: "http://test.push-gears-mk2.appspot.com/",
+      // Dev
+      baseUrl: "http://61.19.246.202/~lachuleth1",
+      //baseUrl: "http://test.push-gears-mk2.appspot.com/",
       connectTimeout: CONNECT_TIMEOUT,
       receiveTimeout: RECEIVE_TIMEOUT,
     );

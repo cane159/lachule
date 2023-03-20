@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
@@ -12,7 +13,8 @@ import 'package:lachule/widgets/dismissible_keyboard.dart';
 import 'package:lachule/widgets/text_field/app_text_field.dart';
 
 class LoginPage extends GetWidget<LoginController> {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +22,21 @@ class LoginPage extends GetWidget<LoginController> {
     return DismissibleKeyboard(
       child: SafeArea(
         child: Scaffold(
-          body: SizedBox(
-            height: Get.height,
-            width: Get.width,
-            child: Stack(
-              children: <Widget>[
-                const BackGround(
-                  color: BaseColors.bgPrimary,
-                ),
-                _loginBg(),
-                const GoBackbutton(),
-                _bottomSheet(),
-              ],
+          body: Form(
+            key: _formKey,
+            child: SizedBox(
+              height: Get.height,
+              width: Get.width,
+              child: Stack(
+                children: <Widget>[
+                  const BackGround(
+                    color: BaseColors.bgPrimary,
+                  ),
+                  _loginBg(),
+                  const GoBackbutton(),
+                  _bottomSheet(),
+                ],
+              ),
             ),
           ),
         ),
@@ -95,12 +100,28 @@ class LoginPage extends GetWidget<LoginController> {
                     controller.usernameController,
                     labelText: 'หมายเลขสมาชิก',
                     prefixIcon: Image.asset(IconAssets.person),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'กรุณากรอกข้อมูล';
+                      }
+                      return null;
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    textInputType: TextInputType.emailAddress,
                   ),
                   AppTextField(
                     controller.passwordController,
-                    labelText: 'หมายเลขสมาชิก',
+                    labelText: 'รหัสผ่าน',
                     prefixIcon: Image.asset(IconAssets.lock),
                     canObscure: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'กรุณากรอกข้อมูล';
+                      }
+                      return null;
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    textInputType: TextInputType.visiblePassword,
                   ),
                   _forgetPasswordButton(),
                   const SizedBox(
@@ -127,7 +148,7 @@ class LoginPage extends GetWidget<LoginController> {
               fontSize: BaseSizes.fontH5,
             ),
           ),
-          onPressed: () => {},
+          onPressed: () => {Get.toNamed(AppRoutes.FORGETPASSWORD)},
           child: const Text(
             'ลืมรหัสผ่าน',
             style: TextStyle(
@@ -144,7 +165,13 @@ class LoginPage extends GetWidget<LoginController> {
     return SizedBox(
       width: double.infinity,
       child: PrimaryButtonView(
-        onPressed: () => controller.pressLogin(),
+        onPressed: () => {
+          FocusManager.instance.primaryFocus?.unfocus(),
+          if (_formKey.currentState!.validate())
+            {
+              controller.pressLogin(),
+            },
+        },
         title: 'เข้าสู่ระบบ',
         textStyle: const TextStyle(
           fontSize: BaseSizes.fontH4,

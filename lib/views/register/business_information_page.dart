@@ -23,6 +23,7 @@ class BusinessInformationPage extends GetView<RegisterPageViewController> {
       () => DismissibleKeyboard(
         child: RegisterAppScaffold(
           initialPage: 1,
+          onGoBack: () => Get.back(),
           child: Form(
             key: _formKey,
             child: Column(

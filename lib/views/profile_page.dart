@@ -21,7 +21,9 @@ class ProfilePage extends GetView<ProfileController> {
         title: 'โปรไฟล์',
         action: [
           IconButton(
-            onPressed: () => {},
+            onPressed: () => {
+              controller.onPressedGift(),
+            },
             icon: Image.asset(
               IconAssets.gift,
               width: 24,

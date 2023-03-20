@@ -33,4 +33,6 @@ abstract class AppRoutes {
   static const String WEBVIEW = '/webview';
   static const String PROFILE = '/profile';
   static const String OTP = '/otp';
+  static const String FORGETPASSWORD = '/forget_password';
+  static const String SETTINGTERMSOFSERVICE = '/setting_terms_of_service';
 }

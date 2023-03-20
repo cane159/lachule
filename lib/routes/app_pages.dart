@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lachule/binding/cart_binding.dart';
 import 'package:lachule/binding/detail_privilege_binding.dart';
 import 'package:lachule/binding/first_menu_binding.dart';
+import 'package:lachule/binding/forget_password_binding.dart';
 import 'package:lachule/binding/home_binding.dart';
 import 'package:lachule/binding/home_page_view_binding.dart';
 import 'package:lachule/binding/login_binding.dart';
@@ -21,6 +22,7 @@ import 'package:lachule/binding/setting/delete_user_binding.dart';
 import 'package:lachule/binding/setting/language_setting_binding.dart';
 import 'package:lachule/binding/setting/noti_setting_binding.dart';
 import 'package:lachule/binding/setting/personal_information_setting_binding.dart';
+import 'package:lachule/binding/setting/setting_terms_of_service_binding.dart';
 import 'package:lachule/binding/setting/user_address_edit_binding.dart';
 import 'package:lachule/binding/setting/user_setting_binding.dart';
 import 'package:lachule/binding/splash_binding.dart';
@@ -30,6 +32,7 @@ import 'package:lachule/binding/transport_detail_binding.dart';
 import 'package:lachule/binding/webview_binding.dart';
 import 'package:lachule/views/cart_page.dart';
 import 'package:lachule/views/first_menu_page.dart';
+import 'package:lachule/views/forget_password_page.dart';
 import 'package:lachule/views/home_page.dart';
 import 'package:lachule/views/home_page_view.dart';
 import 'package:lachule/views/login_page.dart';
@@ -51,6 +54,7 @@ import 'package:lachule/views/setting/delete_user_page.dart';
 import 'package:lachule/views/setting/language_setting_page.dart';
 import 'package:lachule/views/setting/noti_setting_page.dart';
 import 'package:lachule/views/setting/personal_information_setting_page.dart';
+import 'package:lachule/views/setting/setting_terms_of_service_page.dart';
 import 'package:lachule/views/setting/user_address_edit_page.dart';
 import 'package:lachule/views/setting/user_setting_page.dart';
 import 'package:lachule/views/splash_page.dart';
@@ -79,7 +83,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.LOGIN,
-      page: () => const LoginPage(),
+      page: () => LoginPage(),
       binding: LoginBinding(),
       transition: Transition.fadeIn,
     ),
@@ -237,6 +241,18 @@ class AppPages {
       name: AppRoutes.OTP,
       page: () => OtpPage(),
       binding: OtpBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.FORGETPASSWORD,
+      page: () => ForgetPasswordPage(),
+      binding: ForgetPasswordBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.SETTINGTERMSOFSERVICE,
+      page: () => const SettingTermsOfServicePage(),
+      binding: SettingTermsOfServiceBinding(),
       transition: Transition.fadeIn,
     ),
   ];

@@ -45,11 +45,7 @@ class SettingPage extends GetView<SettingController> {
                     ),
                     _settingButtom(
                       'ข้อตกลง และเงื่อนไขการให้บริการ',
-                      () => {},
-                    ),
-                    _settingButtom(
-                      'นโยบาย (PDPA)',
-                      () => {},
+                      () => {Get.toNamed(AppRoutes.SETTINGTERMSOFSERVICE)},
                     ),
                     _settingButtom(
                       'ลบบัญชีผู้ใช้งาน',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lachule/bases/base_assets.dart';
 import 'package:lachule/bases/base_colors.dart';
 import 'package:lachule/bases/base_sizes.dart';
 
@@ -132,8 +133,16 @@ class _AppTextFieldState extends State<AppTextField> {
                       if (widget.canObscure != null) ...[
                         const SizedBox(width: 16),
                         widget.isObscure == true
-                            ? const Icon(Icons.visibility)
-                            : const Icon(Icons.visibility_off),
+                            ? Image.asset(
+                                IconAssets.eye,
+                                width: 22,
+                                fit: BoxFit.fitWidth,
+                              )
+                            : Image.asset(
+                                IconAssets.eye,
+                                width: 22,
+                                fit: BoxFit.fitWidth,
+                              ),
                       ],
                       const SizedBox(width: 16)
                     ],

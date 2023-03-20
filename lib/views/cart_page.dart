@@ -115,6 +115,30 @@ class CartPage extends GetView<CartController> {
                               data.image,
                               width: 100,
                               fit: BoxFit.fitWidth,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
+                                return const Center(
+                                  child: SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 4,
+                                    ),
+                                  ),
+                                );
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return Center(
+                                  child: Image.asset(
+                                    ImageAssets.defaultImage,
+                                    height: 100,
+                                    fit: BoxFit.fitHeight,
+                                  ),
+                                );
+                              },
                             ),
                             const SizedBox(
                               width: 10,
